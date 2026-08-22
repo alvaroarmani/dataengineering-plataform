@@ -1,0 +1,52 @@
+{
+  "_comentario": "Fonte de progresso do curso, espelhada pelo dashboard. O estado interativo (streak, módulos concluídos) vive no localStorage do navegador; edite aqui para versionar seu avanço (build-in-public). Marque status: 'nao-iniciado' | 'em-andamento' | 'concluido'.",
+  "meta_diaria_min": 30,
+  "eixos": [
+    {
+      "id": 1,
+      "nome": "Fundamentos",
+      "modulos": [
+        {"id": "M01", "nome": "Fundamentos de Eng. de Dados", "ch": 30, "status": "nao-iniciado"},
+        {"id": "M02", "nome": "Linux, Git e Ambiente", "ch": 20, "status": "nao-iniciado"},
+        {"id": "M03", "nome": "Python para Eng. de Dados", "ch": 60, "status": "nao-iniciado"},
+        {"id": "M04", "nome": "SQL e Bancos Relacionais", "ch": 45, "status": "nao-iniciado"}
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Data Warehousing e Modelagem",
+      "modulos": [
+        {"id": "M05", "nome": "Modelagem Dimensional", "ch": 40, "status": "nao-iniciado"},
+        {"id": "M06", "nome": "Data Warehousing + BigQuery", "ch": 40, "status": "nao-iniciado"},
+        {"id": "M07", "nome": "Transformação com dbt", "ch": 30, "status": "nao-iniciado"}
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Pipelines e Orquestração",
+      "modulos": [
+        {"id": "M08", "nome": "Ingestão e Integração", "ch": 30, "status": "nao-iniciado"},
+        {"id": "M09", "nome": "Orquestração com Airflow", "ch": 40, "status": "nao-iniciado"},
+        {"id": "M10", "nome": "Docker avançado", "ch": 25, "status": "nao-iniciado"}
+      ]
+    },
+    {
+      "id": 4,
+      "nome": "Escala, Qualidade e Governança",
+      "modulos": [
+        {"id": "M11", "nome": "Spark + Lakehouse", "ch": 40, "status": "nao-iniciado"},
+        {"id": "M12", "nome": "Qualidade e Observabilidade", "ch": 25, "status": "nao-iniciado"},
+        {"id": "M13", "nome": "DataOps, CI/CD e IaC", "ch": 25, "status": "nao-iniciado"},
+        {"id": "M14", "nome": "Governança, Segurança e LGPD", "ch": 20, "status": "nao-iniciado"}
+      ]
+    },
+    {
+      "id": 5,
+      "nome": "Carreira e Integração",
+      "modulos": [
+        {"id": "M15", "nome": "Carreira, Portfólio e Entrevistas", "ch": 20, "status": "nao-iniciado"},
+        {"id": "TCC", "nome": "TCC — Data Warehouse completo", "ch": 60, "status": "nao-iniciado"}
+      ]
+    }
+  ]
+}

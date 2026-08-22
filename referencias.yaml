@@ -1,0 +1,177 @@
+# Registro canônico de fontes do curso (fonte única de citações).
+# Toda citação nas páginas de teoria referencia uma CHAVE daqui, marcada num
+# comentário HTML na linha de referência:  <!-- @chave -->
+# O linter (scripts/verificar-conteudo.py) rejeita citações com chave fora deste arquivo,
+# combatendo citação inventada.
+#
+# Campos: autor, titulo, edicao, ano, tipo (livro|paper|doc|artigo), acesso (aberto|pago),
+#         url (quando aplicável), idioma, caps (capítulos/seções tipicamente usados).
+
+livros:
+  reis2022:
+    autor: "Joe Reis; Matt Housley"
+    titulo: "Fundamentals of Data Engineering"
+    edicao: "1ª"
+    ano: 2022
+    tipo: livro
+    acesso: pago
+    idioma: en
+    caps: "1 (o que é a área), 2 (ciclo de vida + undercurrents), 6 (armazenamento), 8 (queries/serving)"
+
+  kimball2013:
+    autor: "Ralph Kimball; Margy Ross"
+    titulo: "The Data Warehouse Toolkit"
+    edicao: "3ª"
+    ano: 2013
+    tipo: livro
+    acesso: pago
+    idioma: en
+    caps: "Introdução, 1–2 (modelagem dimensional), SCDs"
+
+  kleppmann2017:
+    autor: "Martin Kleppmann"
+    titulo: "Designing Data-Intensive Applications"
+    edicao: "1ª"
+    ano: 2017
+    tipo: livro
+    acesso: pago
+    idioma: en
+    caps: "1 (confiabilidade/escalabilidade), 3 (storage: row vs column), 10 (batch), 11 (streams)"
+
+  densmore2021:
+    autor: "James Densmore"
+    titulo: "Data Pipelines Pocket Reference"
+    edicao: "1ª"
+    ano: 2021
+    tipo: livro
+    acesso: pago
+    idioma: en
+    caps: "ETL/ELT, ingestão, padrões de pipeline"
+
+  mckinney2022:
+    autor: "Wes McKinney"
+    titulo: "Python for Data Analysis"
+    edicao: "3ª"
+    ano: 2022
+    tipo: livro
+    acesso: aberto   # 3ª edição disponível online gratuitamente (wesmckinney.com/book)
+    url: "https://wesmckinney.com/book/"
+    idioma: en
+    caps: "pandas: estruturas, groupby, joins"
+
+  ramalho2022:
+    autor: "Luciano Ramalho"
+    titulo: "Fluent Python"
+    edicao: "2ª"
+    ano: 2022
+    tipo: livro
+    acesso: pago
+    idioma: en
+    caps: "modelo de dados, funções, orientação a objetos idiomática"
+
+  tanimura2021:
+    autor: "Cathy Tanimura"
+    titulo: "SQL for Data Analysis"
+    edicao: "1ª"
+    ano: 2021
+    tipo: livro
+    acesso: pago
+    idioma: en
+    caps: "agregações, window functions, análise temporal"
+
+papers_artigos:
+  rogati2017:
+    autor: "Monica Rogati"
+    titulo: "The AI Hierarchy of Needs"
+    ano: 2017
+    tipo: artigo
+    acesso: aberto
+    url: "https://hackernoon.com/the-ai-hierarchy-of-needs-18f111fcc007"
+    idioma: en
+
+  dehghani2020:
+    autor: "Zhamak Dehghani"
+    titulo: "Data Mesh Principles and Logical Architecture"
+    ano: 2020
+    tipo: artigo
+    acesso: aberto
+    url: "https://martinfowler.com/articles/data-mesh-principles.html"
+    idioma: en
+
+  beauchemin2017:
+    autor: "Maxime Beauchemin"
+    titulo: "The Rise of the Data Engineer"
+    ano: 2017
+    tipo: artigo
+    acesso: aberto
+    url: "https://www.freecodecamp.org/news/the-rise-of-the-data-engineer-91be18f1e603/"
+    idioma: en
+
+  beauchemin2018:
+    autor: "Maxime Beauchemin"
+    titulo: "Functional Data Engineering — a modern paradigm for batch data processing"
+    ano: 2018
+    tipo: artigo
+    acesso: aberto
+    url: "https://maximebeauchemin.medium.com/functional-data-engineering-a-modern-paradigm-for-batch-data-processing-2327ec32c42a"
+    idioma: en
+
+  dean2004:
+    autor: "Jeffrey Dean; Sanjay Ghemawat"
+    titulo: "MapReduce: Simplified Data Processing on Large Clusters"
+    ano: 2004
+    tipo: paper
+    acesso: aberto
+    url: "https://research.google/pubs/pub62/"
+    idioma: en
+
+  armbrust2020:
+    autor: "Michael Armbrust et al."
+    titulo: "Delta Lake: High-Performance ACID Table Storage over Cloud Object Stores"
+    ano: 2020
+    tipo: paper
+    acesso: aberto
+    idioma: en
+
+  chacon2014:
+    autor: "Scott Chacon; Ben Straub"
+    titulo: "Pro Git"
+    edicao: "2ª"
+    ano: 2014
+    tipo: livro
+    acesso: aberto   # leitura gratuita em git-scm.com/book
+    url: "https://git-scm.com/book/pt-br/v2"
+    idioma: pt/en
+    caps: "1 (fundamentos), 2 (básico), 3 (branches)"
+
+  mit-missing-semester:
+    autor: "MIT (Anish Athalye et al.)"
+    titulo: "The Missing Semester of Your CS Education"
+    ano: 2020
+    tipo: artigo
+    acesso: aberto
+    url: "https://missing.csail.mit.edu/"
+    idioma: en
+
+  sweigart-atbs:
+    autor: "Al Sweigart"
+    titulo: "Automate the Boring Stuff with Python"
+    edicao: "2ª"
+    ano: 2019
+    tipo: livro
+    acesso: aberto   # leitura gratuita em automatetheboringstuff.com
+    url: "https://automatetheboringstuff.com/"
+    idioma: en
+    caps: "estruturas de dados, funções, arquivos"
+
+docs_oficiais:
+  docs-python:   { titulo: "Python — Documentação oficial", tipo: doc, acesso: aberto, url: "https://docs.python.org/3/", idioma: en }
+  docs-pandas:   { titulo: "pandas — Documentação oficial", tipo: doc, acesso: aberto, url: "https://pandas.pydata.org/docs/", idioma: en }
+  docs-duckdb:   { titulo: "DuckDB — Documentação oficial", tipo: doc, acesso: aberto, url: "https://duckdb.org/docs/", idioma: en }
+  docs-postgres: { titulo: "PostgreSQL — Documentação oficial", tipo: doc, acesso: aberto, url: "https://www.postgresql.org/docs/", idioma: en }
+  docs-dbt:      { titulo: "dbt — Documentação oficial", tipo: doc, acesso: aberto, url: "https://docs.getdbt.com/", idioma: en }
+  docs-airflow:  { titulo: "Apache Airflow — Documentação oficial", tipo: doc, acesso: aberto, url: "https://airflow.apache.org/docs/", idioma: en }
+  docs-spark:    { titulo: "Apache Spark — Documentação oficial", tipo: doc, acesso: aberto, url: "https://spark.apache.org/docs/latest/", idioma: en }
+  docs-bigquery: { titulo: "BigQuery — Documentação oficial", tipo: doc, acesso: aberto, url: "https://cloud.google.com/bigquery/docs", idioma: en }
+  docs-docker:   { titulo: "Docker — Documentação oficial", tipo: doc, acesso: aberto, url: "https://docs.docker.com/", idioma: en }
+  docs-git:      { titulo: "Git — Documentação oficial (Reference)", tipo: doc, acesso: aberto, url: "https://git-scm.com/docs", idioma: en }

@@ -1,0 +1,81 @@
+/* ==========================================================================
+   Tema "plataforma de estudos" — polish visual + camada de engajamento.
+   ========================================================================== */
+
+:root {
+  --de-verde: #1f8a4c;
+  --de-verde-esc: #166b3a;
+}
+
+/* ---- Hero da home ---- */
+.hero-sub {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  opacity: .9;
+  margin: .2rem 0 1.4rem;
+}
+
+/* ---- Cards do sphinx-design com cara de LMS ---- */
+.sd-card {
+  border-radius: 14px !important;
+  border: 1px solid var(--pst-color-border, #e0e0e0) !important;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.sd-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.10);
+}
+.sd-card-title { font-weight: 700; }
+
+/* Cards que são links ganham destaque de "ação" */
+a.sd-card:hover { border-color: var(--de-verde) !important; }
+
+/* ==========================================================================
+   Engajamento (dashboard)
+   ========================================================================== */
+
+.de-cards { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0 1.5rem; }
+.de-card {
+  flex: 1 1 170px; border: 1px solid var(--pst-color-border, #d0d0d0);
+  border-radius: 14px; padding: 1.1rem; text-align: center;
+  background: var(--pst-color-surface, #f7f7f7);
+}
+.de-card-t { font-size: .8rem; opacity: .8; text-transform: uppercase; letter-spacing: .04em; }
+.de-card-v { font-size: 1.7rem; font-weight: 800; margin: .25rem 0; color: var(--de-verde); }
+.de-card-s { font-size: .75rem; opacity: .7; }
+
+/* Barra de progresso geral */
+.de-barra {
+  height: 12px; border-radius: 999px; background: rgba(31,138,76,.15);
+  overflow: hidden; margin: .3rem 0 1.2rem;
+}
+.de-barra > span {
+  display: block; height: 100%; background: var(--de-verde);
+  border-radius: 999px; transition: width .4s ease;
+}
+
+/* Mapa vivo */
+.de-mapa { margin: 1rem 0; }
+.de-eixo { margin-bottom: .9rem; }
+.de-eixo h4 { margin: .4rem 0; }
+.de-mods { display: flex; flex-wrap: wrap; gap: .45rem; }
+.de-mod {
+  cursor: pointer; border: 1px solid #bbb; border-radius: 10px;
+  padding: .4rem .7rem; font-size: .85rem; background: transparent;
+  transition: all .15s ease;
+}
+.de-mod:hover { border-color: var(--de-verde); transform: translateY(-1px); }
+.de-mod.on { background: var(--de-verde); color: #fff; border-color: var(--de-verde); }
+.de-hint { font-size: .8rem; opacity: .7; }
+
+/* Badges */
+.de-badges { display: flex; flex-wrap: wrap; gap: .5rem; margin: .5rem 0 1rem; }
+.de-badge {
+  display: inline-block; padding: .35rem .8rem; border-radius: 999px;
+  background: #ffe9b3; color: #5a4300; font-size: .82rem; font-weight: 600;
+}
+
+@media (prefers-color-scheme: dark) {
+  .de-badge { background: #4a3c12; color: #ffe9b3; }
+  .de-card { background: rgba(255,255,255,.03); }
+}

@@ -1,0 +1,53 @@
+# Bancada de trabalho do curso — ambiente principal de engenharia.
+# Sobe: JupyterLab (Python + libs), Postgres, MinIO (S3 local). DuckDB roda dentro do Jupyter.
+# Uso:
+#   cp .env.example .env
+#   docker compose up -d
+#   Jupyter:  http://localhost:8888   (token no .env)
+#   MinIO:    http://localhost:9001   (console)
+# Versões pinadas para reprodutibilidade (ver ADR 0004).
+
+services:
+  jupyter:
+    image: quay.io/jupyter/scipy-notebook:2024-11-25
+    container_name: de-jupyter
+    ports:
+      - "8888:8888"
+    environment:
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN:-engdados}
+    volumes:
+      - ../:/home/jovyan/curso        # o repo do curso montado no Jupyter
+    command: >
+      start-notebook.py
+      --NotebookApp.token=${JUPYTER_TOKEN:-engdados}
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16.4
+    container_name: de-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-curso}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-curso}
+      POSTGRES_DB: ${POSTGRES_DB:-curso}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio:RELEASE.2024-10-13T13-34-11Z
+    container_name: de-minio
+    ports:
+      - "9000:9000"   # API S3
+      - "9001:9001"   # console web
+    environment:
+      MINIO_ROOT_USER: ${MINIO_USER:-minio}
+      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD:-minio12345}
+    command: server /data --console-address ":9001"
+    volumes:
+      - miniodata:/data
+
+volumes:
+  pgdata:
+  miniodata:

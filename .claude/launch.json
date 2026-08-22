@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "plataforma",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "plataforma", "run", "dev"],
+      "port": 4321
+    },
+    {
+      "name": "curso-site",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8000", "--directory", "_build/html"],
+      "port": 8000
+    }
+  ]
+}

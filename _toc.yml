@@ -1,0 +1,93 @@
+# Sumário/navegação = a matriz curricular viva.
+# Docs: https://jupyterbook.org/en/stable/structure/toc.html
+format: jb-book
+root: intro
+
+parts:
+  - caption: Começe por aqui
+    chapters:
+      - file: dashboard
+      - file: arquitetura-do-curso
+      - file: metodo-de-aprendizado
+      - file: plano-de-estudos
+      - file: progresso
+      - file: diario
+
+  - caption: Projeto Pedagógico (PPC)
+    chapters:
+      - file: ppc/apresentacao
+      - file: ppc/justificativa-e-objetivos
+      - file: ppc/perfil-do-egresso-e-competencias
+      - file: ppc/matriz-curricular
+      - file: ppc/metodologia-e-avaliacao
+      - file: ppc/regulamento-do-tcc
+      - file: ppc/bibliografia-geral
+      - file: ppc/infraestrutura-e-ambiente
+      - file: ppc/mapa-competencias-vagas
+
+  - caption: "Eixo 1 — Fundamentos"
+    chapters:
+      - file: modulos/01-fundamentos-eng-dados/index
+        sections:
+          - file: modulos/01-fundamentos-eng-dados/teoria-01-o-que-e-engenharia-de-dados
+          - file: modulos/01-fundamentos-eng-dados/lab-01-primeiro-contato-dados
+          - file: modulos/01-fundamentos-eng-dados/exercicio-01
+          - file: modulos/01-fundamentos-eng-dados/recursos
+          - file: modulos/01-fundamentos-eng-dados/flashcards
+      - file: modulos/02-linux-git-ambiente/index
+        sections:
+          - file: modulos/02-linux-git-ambiente/teoria-01-terminal-git-containers
+          - file: modulos/02-linux-git-ambiente/lab-01-montando-a-bancada
+          - file: modulos/02-linux-git-ambiente/exercicio-01
+          - file: modulos/02-linux-git-ambiente/recursos
+          - file: modulos/02-linux-git-ambiente/flashcards
+      - file: modulos/03-python-eng-dados/index
+        sections:
+          - file: modulos/03-python-eng-dados/teoria-01-python-fundamentos
+          - file: modulos/03-python-eng-dados/lab-01-python-para-dados
+          - file: modulos/03-python-eng-dados/exercicio-01
+          - file: modulos/03-python-eng-dados/teoria-02-funcoes-poo-modulos
+          - file: modulos/03-python-eng-dados/lab-02-funcoes-e-classes
+          - file: modulos/03-python-eng-dados/exercicio-02
+          - file: modulos/03-python-eng-dados/teoria-03-erros-logging-typing
+          - file: modulos/03-python-eng-dados/lab-03-erros-e-logging
+          - file: modulos/03-python-eng-dados/exercicio-03
+          - file: modulos/03-python-eng-dados/recursos
+          - file: modulos/03-python-eng-dados/flashcards
+      - file: modulos/04-sql-bancos-relacionais/index
+
+  - caption: "Eixo 2 — Data Warehousing e Modelagem"
+    chapters:
+      - file: modulos/05-modelagem-dimensional/index
+      - file: modulos/06-data-warehousing-bigquery/index
+      - file: modulos/07-transformacao-dbt/index
+
+  - caption: "Eixo 3 — Pipelines e Orquestração"
+    chapters:
+      - file: modulos/08-ingestao-integracao/index
+      - file: modulos/09-orquestracao-airflow/index
+      - file: modulos/10-docker-avancado/index
+
+  - caption: "Eixo 4 — Escala, Qualidade e Governança"
+    chapters:
+      - file: modulos/11-spark-lakehouse/index
+      - file: modulos/12-qualidade-observabilidade/index
+      - file: modulos/13-dataops-cicd-iac/index
+      - file: modulos/14-governanca-seguranca-lgpd/index
+
+  - caption: "Eixo 5 — Carreira e Integração"
+    chapters:
+      - file: modulos/15-carreira-portfolio-entrevistas/index
+      - file: tcc/especificacao-dw
+
+  - caption: Projetos integradores
+    chapters:
+      - file: projetos/eixo-1-fundamentos/index
+      - file: projetos/eixo-2-datawarehousing/index
+      - file: projetos/eixo-3-pipelines/index
+      - file: projetos/eixo-4-escala-governanca/index
+
+  - caption: Referência
+    chapters:
+      - file: datasets/README
+      - file: ambiente/README

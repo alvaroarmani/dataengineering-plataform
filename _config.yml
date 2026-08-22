@@ -1,0 +1,63 @@
+# Configuração do Jupyter Book — Pós em Engenharia de Dados
+# Docs: https://jupyterbook.org/en/stable/customize/config.html
+title: "Especialização em Engenharia de Dados"
+author: "Programa autodirigido (build-in-public)"
+logo: _static/logo.svg
+copyright: "2026"
+
+# Só executa notebooks marcados; não quebra o build se um notebook falhar.
+execute:
+  execute_notebooks: "off"
+
+# CSS/JS customizados registrados via config do Sphinx (arquivos ficam em _static/,
+# copiados automaticamente). Paths relativos a _static/.
+sphinx:
+  config:
+    html_show_copyright: false
+    html_css_files:
+      - custom.css
+    html_js_files:
+      - engajamento.js
+    # Notebooks do curso embarcados na instância JupyterLite (rodam no navegador).
+    jupyterlite_contents:
+      - "modulos/**/*.ipynb"
+  extra_extensions:
+    - sphinxcontrib.mermaid
+    - jupyterlite_sphinx
+
+# Arquivos .md que NÃO são páginas do curso (docs de repo, templates, ADRs).
+exclude_patterns:
+  - README.md
+  - ARCHITECTURE.md
+  - CONTRIBUTING.md
+  - CHANGELOG.md
+  - docs/**
+  - templates/**
+  - .claude/**
+  - "**/exercicio-*/**"
+  - _build/**
+  - .venv/**
+  - "**/.venv/**"
+  - "**/site-packages/**"
+  - plataforma/**
+  - "**/node_modules/**"
+
+html:
+  use_issues_button: false
+  use_repository_button: true
+  use_edit_page_button: false
+
+# Repositório (ajuste o usuário/URL quando publicar).
+repository:
+  url: https://github.com/SEU-USUARIO/dataengineering
+  branch: main
+
+# Parsing MyST — habilita recursos usados nas páginas de teoria.
+parse:
+  myst_enable_extensions:
+    - colon_fence
+    - deflist
+    - dollarmath
+    - linkify
+    - substitution
+    - tasklist

@@ -1,0 +1,40 @@
+# Build do Jupyter Book
+_build/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Ambiente
+ambiente/.env
+
+# Dados baixados (datasets reais ficam fora do git; ver datasets/README.md)
+datasets/data/
+*.parquet
+*.csv
+!datasets/**/exemplo*.csv
+
+# Plataforma (Astro) — comentários só em linha própria (inline quebra o padrão!)
+# lite/, content/aulas e curso.json são gerados pelo sync/build
+plataforma/node_modules/
+plataforma/dist/
+plataforma/.astro/
+plataforma/public/lite/
+plataforma/src/content/aulas/
+plataforma/src/data/curso.json
+
+# Plataforma Next.js (web/) — tudo gerado
+web/node_modules/
+web/.next/
+web/out/
+web/public/lite/
+web/src/content/
+web/src/data/curso.json
+
+# SO
+.DS_Store
+Thumbs.db
