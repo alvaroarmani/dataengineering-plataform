@@ -2,6 +2,12 @@
 
 > A competência mais usada no dia a dia: SQL do básico ao avançado, com PostgreSQL.
 
+## Perguntas essenciais
+Ao final deste módulo, você saberá responder:
+1. Como estruturar e consultar dados num banco relacional (PK/FK, SELECT, JOIN)?
+2. Como resumir dados com `GROUP BY`, subqueries, CTEs e **window functions**?
+3. Por que uma query é lenta — e como índices e o plano de execução ajudam?
+
 ## Identificação
 - **Eixo:** 1 — Fundamentos
 - **Carga horária:** 45h
@@ -23,12 +29,13 @@ subqueries e CTEs. Funções de janela (window functions). Índices e noções d
 4. **Compreender** transações/ACID e o papel do NoSQL.
 
 ## Plano de aulas (unidades)
-1. Modelo relacional e SELECT/filtros.
-2. JOINs e agregações.
-3. Subqueries e CTEs.
-4. Window functions.
-5. Índices e performance.
-6. Transações, ACID e NoSQL (visão geral).
+
+**Unidade 1 — Modelo relacional e SELECT**
+1. **Teoria:** [Modelo relacional e o SELECT](teoria-01-modelo-relacional-select.md)
+2. **Lab:** [SQL no navegador (DuckDB)](lab-01-sql-no-navegador.ipynb)
+3. **Exercício:** [Suas primeiras queries](exercicio-01.md)
+
+_Próximas unidades (em construção): JOINs e agregações · subqueries e CTEs · window functions · índices e performance · transações/ACID e NoSQL._
 
 ## Metodologia e avaliação
 **Maestria:** bateria de desafios SQL (autocorrigidos) + quiz ≥ 80%. SQL entra também nos

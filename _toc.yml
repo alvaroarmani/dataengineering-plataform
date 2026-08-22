@@ -64,6 +64,12 @@ parts:
           - file: modulos/03-python-eng-dados/recursos
           - file: modulos/03-python-eng-dados/flashcards
       - file: modulos/04-sql-bancos-relacionais/index
+        sections:
+          - file: modulos/04-sql-bancos-relacionais/teoria-01-modelo-relacional-select
+          - file: modulos/04-sql-bancos-relacionais/lab-01-sql-no-navegador
+          - file: modulos/04-sql-bancos-relacionais/exercicio-01
+          - file: modulos/04-sql-bancos-relacionais/recursos
+          - file: modulos/04-sql-bancos-relacionais/flashcards
 
   - caption: "Eixo 2 — Data Warehousing e Modelagem"
     chapters:
