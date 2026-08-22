@@ -88,7 +88,11 @@ Histórico de entregas do curso, por fase. Formato inspirado em [Keep a Changelo
   - U3 — erros, logging e type hints: teoria (try/except específico, quarentena, logging, hints) + lab (quarentena + logging) + exercício `pytest` (`converter_valores`, validado).
   - U4 — pandas: teoria (Series/DataFrame, loc/iloc, máscaras, groupby, merge, NaN) + lab interativo + exercício `pytest` (`receita_por_categoria`, validado).
   - U5 — APIs e formatos (Parquet): teoria (REST/JSON, paginação, rate limit, auth, incremental, CSV×Parquet) + lab (JSON→DataFrame) + exercício `pytest` (`achatar_pedidos`, validado).
+  - U6 — testes com pytest e boas práticas: teoria (assert, parametrize, fixtures, casos de borda, estrutura de projeto) + lab (mentalidade de testes) + exercício `pytest` (`validar_registro`, validado). **M3 completo (6 unidades).**
   - Tudo aparece automaticamente nas plataformas (Astro no main / Next na branch) via o pipeline de conteúdo.
+
+### Progresso do Eixo 1
+- ✅ M1 (Fundamentos) · ✅ M2 (Linux/Git/Docker) · ✅ M3 (Python, 6 unidades) · ⏳ M4 (SQL) + projeto integrador do eixo.
 
 ### Pendente do Eixo 1
 - Módulo 3: demais unidades (funções/POO, erros/typing, pandas, APIs/Parquet, testes).

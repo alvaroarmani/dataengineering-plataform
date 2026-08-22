@@ -58,6 +58,9 @@ parts:
           - file: modulos/03-python-eng-dados/teoria-05-apis-e-formatos
           - file: modulos/03-python-eng-dados/lab-05-da-api-ao-dataframe
           - file: modulos/03-python-eng-dados/exercicio-05
+          - file: modulos/03-python-eng-dados/teoria-06-testes-e-boas-praticas
+          - file: modulos/03-python-eng-dados/lab-06-escrevendo-testes
+          - file: modulos/03-python-eng-dados/exercicio-06
           - file: modulos/03-python-eng-dados/recursos
           - file: modulos/03-python-eng-dados/flashcards
       - file: modulos/04-sql-bancos-relacionais/index

@@ -175,3 +175,4 @@ docs_oficiais:
   docs-bigquery: { titulo: "BigQuery — Documentação oficial", tipo: doc, acesso: aberto, url: "https://cloud.google.com/bigquery/docs", idioma: en }
   docs-docker:   { titulo: "Docker — Documentação oficial", tipo: doc, acesso: aberto, url: "https://docs.docker.com/", idioma: en }
   docs-git:      { titulo: "Git — Documentação oficial (Reference)", tipo: doc, acesso: aberto, url: "https://git-scm.com/docs", idioma: en }
+  docs-pytest:   { titulo: "pytest — Documentação oficial", tipo: doc, acesso: aberto, url: "https://docs.pytest.org/", idioma: en }

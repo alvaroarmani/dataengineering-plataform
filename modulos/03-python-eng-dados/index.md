@@ -56,9 +56,14 @@ ambientes virtuais, type hints, estilo (PEP 8), testes com pytest.
 14. **Lab:** [Da API ao DataFrame](lab-05-da-api-ao-dataframe.ipynb)
 15. **Exercício:** [Achatar JSON de uma API](exercicio-05.md)
 
+**Unidade 6 — Testes com pytest e boas práticas**
+16. **Teoria:** [Testes com pytest e boas práticas](teoria-06-testes-e-boas-praticas.md)
+17. **Lab:** [Escrevendo testes (a mentalidade)](lab-06-escrevendo-testes.ipynb)
+18. **Exercício:** [Validação de registro](exercicio-06.md)
+
 **Revisão:** [Flashcards](flashcards.md)
 
-_Próxima unidade (em construção): testes com pytest e boas práticas._
+✅ **Módulo completo** — 6 unidades. Próximo: [M04 — SQL e Bancos Relacionais](../04-sql-bancos-relacionais/index.md).
 
 ## Metodologia e avaliação
 **Maestria:** série de exercícios `pytest` verdes + um mini-ETL em Python conforme rubrica +

@@ -34,6 +34,11 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** CSV vs Parquet? / **R:** Parquet = colunar, binário, tipado, comprime bem, lê só as colunas necessárias. Melhor para analytics em escala.
 - **P:** Onde guardar dados brutos de ingestão? / **R:** Object storage (S3/GCS/MinIO) em Parquet, particionado por data (camada raw/bronze).
 - **P:** JSON aninhado de API → tabela? / **R:** "Achatar": um dict plano por registro, navegando o aninhamento (ex.: p["cliente"]["nome"]).
+- **P:** O que é um teste em pytest? / **R:** Uma função `test_*` com `assert`; passa se a afirmação for verdadeira. Roda com `pytest -q`.
+- **P:** Para que serve `parametrize`? / **R:** Rodar o mesmo teste com vários pares entrada/esperado, sem repetir código.
+- **P:** O que é uma fixture? / **R:** Uma função que prepara um cenário/dado reutilizável para vários testes.
+- **P:** Por que testar casos de borda? / **R:** Bugs vivem nas bordas (vazio, None, negativos, duplicatas) — o caminho feliz raramente quebra.
+- **P:** Boas práticas de projeto Python? / **R:** venv + requirements pinado, módulos por responsabilidade, nomes claros, funções pequenas/puras, docstrings, segredos fora do git, testes no CI.
 
 ---
 **Revisado em:** 2026-08-21
