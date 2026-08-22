@@ -55,6 +55,16 @@ Histórico de entregas do curso, por fase. Formato inspirado em [Keep a Changelo
 - **Painel** e **Diário** construídos (streak real, diário com localStorage + "copiar tudo"); navegação unificada.
 - ADR 0005 (plataforma em Astro). Conteúdo novo do curso passa a aparecer sozinho após `npm run sync`.
 
+## [Fase 1.6] — Migração Next.js + projeto integrador + docs — 2026-08-22
+
+### Adicionado
+- **Repositório git dedicado** em `dataengineering/` (antes a raiz era a home, sem commits — risco de privacidade). Baseline no `main`; migração na branch **`plataforma-nextjs`**.
+- **Plataforma Next.js** (`web/`, App Router, nosso CSS) reaproveitando conteúdo + pipeline + JupyterLite; render via `react-markdown` + `remark-directive`/`remark-curso`; flashcards e mermaid em React. **Build verificado: 71 páginas estáticas.** Alvo Vercel. (ADR 0006.)
+- **Projeto integrador do Eixo 1** (`projetos/eixo-1-fundamentos/`): enunciado + rubrica + **starter** (dados sujos, `ingest/transform/load`, `main.py`, `consultas.sql`, testes `pytest`) — junta Git+Python+SQL num entregável de portfólio. Transformação validada.
+
+### Alterado
+- **Documentação viva atualizada:** `ARCHITECTURE.md` (plataforma Next + tabela de stack), `README.md` (estado atual, dois front-ends, como rodar), `docs/decisoes/` (ADR 0006). `web/**` e `**/starter/**` excluídos do build do Jupyter Book.
+
 ## [Fase 1.5] — Flashcards interativos + leitura mais leve — 2026-08-22
 
 ### Adicionado

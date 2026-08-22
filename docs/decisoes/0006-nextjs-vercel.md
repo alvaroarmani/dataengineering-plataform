@@ -1,31 +1,37 @@
-# ADR 0006 — Plataforma em Next.js + deploy na Vercel
+# ADR 0006 — Migração da plataforma para Next.js + Vercel
 
-- **Status:** Aceito (branch `plataforma-nextjs`)
+- **Status:** Aceito (em migração)
 - **Data:** 2026-08-22
 
 ## Contexto
 
-A plataforma foi construída em Astro (ADR 0005). O usuário optou por **Next.js** com deploy
-na **Vercel** — familiaridade com React, ecossistema, deploy nativo, e a porta aberta para
-**backend depois** (API routes: progresso sincronizado, login). Feito em **branch separada**
-para preservar a versão Astro (que permanece no `main`).
+A plataforma de estudos foi construída em **Astro** (ADR 0005), estática, publicável no
+GitHub Pages. O usuário decidiu migrar para **Next.js** com deploy na **Vercel** — pela
+familiaridade do ecossistema React/Next, pela integração nativa com a Vercel, e para abrir
+caminho a **backend depois** (API routes: progresso sincronizado, login) que o site estático
+não oferecia. A migração é feita numa **branch** (`plataforma-nextjs`) para preservar o Astro.
+
+**Achado de segurança:** o repositório git estava com raiz na **home** do usuário
+(`C:\Users\alvaro`), sem commits — commitar assim varreria a pasta pessoal. Corrigido com um
+**repositório git dedicado** dentro de `dataengineering/`.
 
 ## Decisão
 
-Reimplementar o front-end em **Next.js (App Router)** em `web/`, **reaproveitando**:
-- o **conteúdo Markdown** do curso (`modulos/**`) — fonte única, intocada;
-- os **plugins** `preprocess-myst.mjs` + `remark-curso.mjs`;
-- a instância **JupyterLite** (gerada pelo Jupyter Book) via iframe;
-- o **design system** (CSS portado para `app/globals.css`).
-
-**Arquitetura do conteúdo:** o `scripts/sync-conteudo.mjs` **compila Markdown → HTML no build**
-(unified: remark-parse + gfm + directive + remark-curso + rehype-raw) e grava `src/data/curso.json`.
-As páginas Next apenas exibem (`dangerouslySetInnerHTML`), e mermaid roda no cliente.
+- **Front-end:** Next.js (App Router) em `web/`, SSG, com o **nosso CSS** portado (sem
+  Tailwind, para preservar o design aprovado). Coexiste com `plataforma/` (Astro) durante a
+  transição; o Astro permanece intacto no `main`.
+- **Conteúdo reaproveitado:** o Markdown do curso, o pipeline de sync, os plugins remark
+  (`remark-directive` + `remark-curso`) e o Jupyter Book (gerador do JupyterLite) são
+  reusados. Render de Markdown via `react-markdown` + os mesmos plugins + `rehype-raw`
+  (para o `<pre class="mermaid">`).
+- **Deploy:** Vercel (Root Directory = `web/`). O deploy em si depende da conta do usuário
+  (Vercel/GitHub) — não automatizável por aqui.
 
 ## Consequências
 
-- ✅ Deploy nativo na Vercel; base para features com backend (progresso real, auth) no futuro.
-- ✅ Paridade com o Astro (Home, Trilha, Módulo, Aula, Painel, Diário, flashcards de virar, tema claro/escuro, JupyterLite).
-- ✅ Conteúdo continua vindo de `modulos/**` — escrever Markdown basta; o sync propaga.
-- ⚠️ Dois front-ends no repo por ora (Astro no `main`, Next na branch). Decidir depois qual manter.
-- ⚠️ O deploy em si exige a conta do usuário (Vercel + GitHub) — não automatizável aqui.
+- ✅ UI/UX em React/Next (skill de mercado), Vercel-native, porta aberta para backend futuro.
+- ✅ Zero retrabalho de conteúdo: mesma fonte `modulos/**` alimenta Astro e Next.
+- ✅ Baseline preservado no `main` (Astro) e migração isolada na branch.
+- ⚠️ **Dois front-ends** temporariamente (Astro + Next) — decidir aposentar o Astro quando o Next atingir paridade total.
+- ⚠️ O Jupyter Book segue como gerador do JupyterLite e como o site de conteúdo "de referência".
+- ⚠️ A instância JupyterLite (~70 MB) é copiada para `web/public/lite` (gerada, fora do git).

@@ -41,7 +41,9 @@ exclude_patterns:
   - "**/site-packages/**"
   - plataforma/**
   - web/**
+  - "**/starter/**"
   - "**/node_modules/**"
+  - "**/.pytest_cache/**"
 
 html:
   use_issues_button: false

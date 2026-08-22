@@ -10,5 +10,6 @@ Cada arquivo registra **uma decisão**: contexto, decisão, consequências. Assi
 | [0003](0003-mvp-first.md) | Execução MVP-first (Eixo 1 completo antes de expandir) |
 | [0004](0004-local-first-bigquery.md) | Local-first + BigQuery como DW cloud |
 | [0005](0005-plataforma-astro.md) | Plataforma de estudos (UI/UX) em Astro |
+| [0006](0006-nextjs-vercel.md) | Migração da plataforma para Next.js + Vercel |
 
 Template para novos ADRs: ver [0001](0001-jupyter-book.md) como referência de formato.
