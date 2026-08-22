@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "web-next",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "web", "run", "dev"],
+      "port": 3000
+    },
+    {
       "name": "plataforma",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "plataforma", "run", "dev"],

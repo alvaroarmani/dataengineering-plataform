@@ -65,6 +65,18 @@ Histórico de entregas do curso, por fase. Formato inspirado em [Keep a Changelo
 - **Tom "médio"** nas 5 teorias (M1, M2, M3×3): emojis pontuais nos títulos de seção (🎯 💡 🔎 ⚠️ 💼 🧠 🎤 🚀 📚) + caixa "✨ Em resumo" antes do quiz.
 - **Template** de teoria e **skill `autoria-modulo`** atualizados com o tom e a **barra de profundidade** (≥2 exercícios/unidade e datasets reais a partir do M4). Linter segue verde (emojis não quebram as seções).
 
+## [branch plataforma-nextjs] — Migração para Next.js + Vercel — 2026-08-22
+
+### Adicionado
+- **Repositório git dedicado** em `dataengineering/` (a raiz antes apontava para a home, sem commits) + baseline Astro no `main`.
+- **App Next.js (App Router) em `web/`** com paridade: Home, Trilha, Módulo, Aula (conteúdo + lab + flashcards de virar), Painel, Diário, tema claro/escuro, JupyterLite embarcado.
+- **Pipeline** que **compila Markdown → HTML no build** (`web/scripts/sync-conteudo.mjs`, reaproveitando `preprocess-myst` + `remark-curso`); mermaid no cliente.
+- ADR 0006 (Next.js + Vercel) e `web/README.md` com passo a passo de deploy.
+
+### Notas
+- Conteúdo do curso continua em `modulos/**` (fonte única) — o sync propaga para o Next.
+- Deploy na Vercel exige a conta do usuário (Vercel/GitHub).
+
 ## [Fase 2 — em andamento] — Eixo 1 (conteúdo)
 
 ### Adicionado

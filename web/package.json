@@ -1,0 +1,29 @@
+{
+  "name": "plataforma-eng-dados-next",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Plataforma de estudos (Next.js) — deploy na Vercel.",
+  "scripts": {
+    "sync": "node scripts/sync-conteudo.mjs",
+    "dev": "node scripts/sync-conteudo.mjs && next dev",
+    "build": "node scripts/sync-conteudo.mjs && next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.2.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "mermaid": "11.4.1"
+  },
+  "devDependencies": {
+    "unified": "11.0.5",
+    "remark-parse": "11.0.0",
+    "remark-gfm": "4.0.0",
+    "remark-directive": "3.0.1",
+    "remark-rehype": "11.1.1",
+    "rehype-raw": "7.0.0",
+    "rehype-stringify": "10.0.1",
+    "unist-util-visit": "5.0.0"
+  }
+}
