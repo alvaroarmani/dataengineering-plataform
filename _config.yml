@@ -40,6 +40,7 @@ exclude_patterns:
   - "**/.venv/**"
   - "**/site-packages/**"
   - plataforma/**
+  - web/**
   - "**/node_modules/**"
 
 html:

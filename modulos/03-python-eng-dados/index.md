@@ -46,9 +46,14 @@ ambientes virtuais, type hints, estilo (PEP 8), testes com pytest.
 8. **Lab:** [Tratando erros e registrando](lab-03-erros-e-logging.ipynb)
 9. **Exercício:** [Quarentena de valores](exercicio-03.md)
 
+**Unidade 4 — pandas**
+10. **Teoria:** [pandas: manipulando dados tabulares](teoria-04-pandas.md)
+11. **Lab:** [pandas na prática](lab-04-pandas-na-pratica.ipynb)
+12. **Exercício:** [Receita por categoria com pandas](exercicio-04.md)
+
 **Revisão:** [Flashcards](flashcards.md)
 
-_Próximas unidades (em construção): pandas, APIs/Parquet, testes com pytest._
+_Próximas unidades (em construção): APIs/Parquet, testes com pytest._
 
 ## Metodologia e avaliação
 **Maestria:** série de exercícios `pytest` verdes + um mini-ETL em Python conforme rubrica +

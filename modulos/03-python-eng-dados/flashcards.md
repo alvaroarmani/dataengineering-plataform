@@ -21,6 +21,13 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** `logging` vs `print`? / **R:** logging tem níveis (DEBUG/INFO/WARNING/ERROR), timestamps e destino configurável; base da observabilidade. print não é controlável em produção.
 - **P:** Type hints são validados em runtime? / **R:** Não; documentam contrato e habilitam ferramentas (mypy) e o editor. Para validar, use mypy/pydantic.
 - **P:** O que é EAFP? / **R:** "Easier to Ask Forgiveness than Permission" — tentar e tratar a exceção, em vez de checar tudo antes (LBYL).
+- **P:** DataFrame vs Series (pandas)? / **R:** DataFrame = tabela (várias colunas); Series = uma coluna (vetor rotulado por índice).
+- **P:** loc vs iloc? / **R:** loc seleciona por rótulo (nome); iloc por posição inteira.
+- **P:** O que é máscara booleana? / **R:** Series de True/False (ex.: df["v"]>50) usada para filtrar linhas — o "WHERE" do pandas.
+- **P:** groupby no pandas? / **R:** Split-apply-combine: divide por grupos, aplica função (sum/mean…), recombina. Ex.: df.groupby("estado")["valor"].sum().
+- **P:** Como juntar duas tabelas? / **R:** df.merge(outro, on="chave", how="left") — como um JOIN de SQL.
+- **P:** Como tratar NaN? / **R:** dropna() remove; fillna(x) preenche. Decida conscientemente; nulos contaminam contas.
+- **P:** Quando pandas não serve? / **R:** Quando os dados não cabem na memória — aí é DuckDB (out-of-core) ou Spark (distribuído).
 
 ---
 **Revisado em:** 2026-08-21

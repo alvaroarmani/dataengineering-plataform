@@ -52,6 +52,9 @@ parts:
           - file: modulos/03-python-eng-dados/teoria-03-erros-logging-typing
           - file: modulos/03-python-eng-dados/lab-03-erros-e-logging
           - file: modulos/03-python-eng-dados/exercicio-03
+          - file: modulos/03-python-eng-dados/teoria-04-pandas
+          - file: modulos/03-python-eng-dados/lab-04-pandas-na-pratica
+          - file: modulos/03-python-eng-dados/exercicio-04
           - file: modulos/03-python-eng-dados/recursos
           - file: modulos/03-python-eng-dados/flashcards
       - file: modulos/04-sql-bancos-relacionais/index
