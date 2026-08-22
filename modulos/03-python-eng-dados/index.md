@@ -51,9 +51,14 @@ ambientes virtuais, type hints, estilo (PEP 8), testes com pytest.
 11. **Lab:** [pandas na prática](lab-04-pandas-na-pratica.ipynb)
 12. **Exercício:** [Receita por categoria com pandas](exercicio-04.md)
 
+**Unidade 5 — APIs e formatos (Parquet)**
+13. **Teoria:** [APIs e formatos: de onde vêm os dados](teoria-05-apis-e-formatos.md)
+14. **Lab:** [Da API ao DataFrame](lab-05-da-api-ao-dataframe.ipynb)
+15. **Exercício:** [Achatar JSON de uma API](exercicio-05.md)
+
 **Revisão:** [Flashcards](flashcards.md)
 
-_Próximas unidades (em construção): APIs/Parquet, testes com pytest._
+_Próxima unidade (em construção): testes com pytest e boas práticas._
 
 ## Metodologia e avaliação
 **Maestria:** série de exercícios `pytest` verdes + um mini-ETL em Python conforme rubrica +

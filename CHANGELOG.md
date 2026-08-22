@@ -87,6 +87,7 @@ Histórico de entregas do curso, por fase. Formato inspirado em [Keep a Changelo
   - U2 — funções, POO e módulos: teoria (funções puras, first-class, classes, dataclasses, módulos) + lab (compor passos + classe) + exercício `pytest` (classe `Pipeline`, validado).
   - U3 — erros, logging e type hints: teoria (try/except específico, quarentena, logging, hints) + lab (quarentena + logging) + exercício `pytest` (`converter_valores`, validado).
   - U4 — pandas: teoria (Series/DataFrame, loc/iloc, máscaras, groupby, merge, NaN) + lab interativo + exercício `pytest` (`receita_por_categoria`, validado).
+  - U5 — APIs e formatos (Parquet): teoria (REST/JSON, paginação, rate limit, auth, incremental, CSV×Parquet) + lab (JSON→DataFrame) + exercício `pytest` (`achatar_pedidos`, validado).
   - Tudo aparece automaticamente nas plataformas (Astro no main / Next na branch) via o pipeline de conteúdo.
 
 ### Pendente do Eixo 1

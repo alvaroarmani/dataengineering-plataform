@@ -28,6 +28,12 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** Como juntar duas tabelas? / **R:** df.merge(outro, on="chave", how="left") — como um JOIN de SQL.
 - **P:** Como tratar NaN? / **R:** dropna() remove; fillna(x) preenche. Decida conscientemente; nulos contaminam contas.
 - **P:** Quando pandas não serve? / **R:** Quando os dados não cabem na memória — aí é DuckDB (out-of-core) ou Spark (distribuído).
+- **P:** O que é paginação de API? / **R:** A API devolve dados em lotes (páginas); é preciso percorrer todas (page=1,2,3…) até acabar, senão pega só parte.
+- **P:** Por que checar `raise_for_status()`? / **R:** Levanta erro se o status HTTP não for 2xx — evita seguir com resposta de erro/vazia.
+- **P:** Ingestão incremental? / **R:** Baixar só o novo/que mudou (ex.: ?desde=data) em vez de reprocessar tudo — mais eficiente e reexecutável.
+- **P:** CSV vs Parquet? / **R:** Parquet = colunar, binário, tipado, comprime bem, lê só as colunas necessárias. Melhor para analytics em escala.
+- **P:** Onde guardar dados brutos de ingestão? / **R:** Object storage (S3/GCS/MinIO) em Parquet, particionado por data (camada raw/bronze).
+- **P:** JSON aninhado de API → tabela? / **R:** "Achatar": um dict plano por registro, navegando o aninhamento (ex.: p["cliente"]["nome"]).
 
 ---
 **Revisado em:** 2026-08-21
