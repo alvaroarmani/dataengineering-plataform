@@ -91,10 +91,10 @@ Histórico de entregas do curso, por fase. Formato inspirado em [Keep a Changelo
   - U6 — testes com pytest e boas práticas: teoria (assert, parametrize, fixtures, casos de borda, estrutura de projeto) + lab (mentalidade de testes) + exercício `pytest` (`validar_registro`, validado). **M3 completo (6 unidades).**
   - Tudo aparece automaticamente nas plataformas (Astro no main / Next na branch) via o pipeline de conteúdo.
 
-- **Módulo 4 — SQL (unidade 1/6):** modelo relacional (PK/FK) + `SELECT`/`WHERE`/`ORDER BY`/`GROUP BY`. Já na **nova barra**: lab SQL interativo no navegador (DuckDB) e exercício com **2 queries** corrigidas por `pytest` (via DuckDB). Fonte nova: `docs-pytest`.
+- **Módulo 4 — SQL COMPLETO (6 unidades):** modelo relacional + SELECT · JOINs e agregações · subqueries e CTEs · window functions · índices/EXPLAIN e performance · transações/ACID/NoSQL. Cada unidade com teoria referenciada, **lab SQL interativo no navegador (DuckDB)** e exercícios corrigidos por `pytest` via DuckDB (2 queries/unidade nas unidades 1–5; lab de transações no ROLLBACK/COMMIT na 6). Fonte nova: `docs-pytest`.
 
-### Progresso do Eixo 1
-- ✅ M1 (Fundamentos) · ✅ M2 (Linux/Git/Docker) · ✅ M3 (Python, 6 unidades) · ⏳ M4 (SQL, 1/6) + projeto integrador do eixo.
+### Progresso do Eixo 1 — CONCLUÍDO (conteúdo)
+- ✅ M1 (Fundamentos) · ✅ M2 (Linux/Git/Docker) · ✅ M3 (Python, 6u) · ✅ M4 (SQL, 6u). Falta só o **projeto integrador do Eixo 1**.
 
 ### Pendente do Eixo 1
 - Módulo 3: demais unidades (funções/POO, erros/typing, pandas, APIs/Parquet, testes).

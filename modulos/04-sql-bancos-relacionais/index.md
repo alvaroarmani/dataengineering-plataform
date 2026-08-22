@@ -31,11 +31,26 @@ subqueries e CTEs. Funções de janela (window functions). Índices e noções d
 ## Plano de aulas (unidades)
 
 **Unidade 1 — Modelo relacional e SELECT**
-1. **Teoria:** [Modelo relacional e o SELECT](teoria-01-modelo-relacional-select.md)
-2. **Lab:** [SQL no navegador (DuckDB)](lab-01-sql-no-navegador.ipynb)
-3. **Exercício:** [Suas primeiras queries](exercicio-01.md)
+1. **Teoria:** [Modelo relacional e o SELECT](teoria-01-modelo-relacional-select.md) · **Lab:** [SQL no navegador](lab-01-sql-no-navegador.ipynb) · **Exercício:** [Primeiras queries](exercicio-01.md)
 
-_Próximas unidades (em construção): JOINs e agregações · subqueries e CTEs · window functions · índices e performance · transações/ACID e NoSQL._
+**Unidade 2 — JOINs e agregações**
+2. **Teoria:** [JOINs e agregações](teoria-02-joins-e-agregacoes.md) · **Lab:** [JOINs](lab-02-joins.ipynb) · **Exercício:** [JOINs](exercicio-02.md)
+
+**Unidade 3 — Subqueries e CTEs**
+3. **Teoria:** [Subqueries e CTEs](teoria-03-subqueries-e-ctes.md) · **Lab:** [Subqueries e CTEs](lab-03-subqueries-ctes.ipynb) · **Exercício:** [Subqueries e CTEs](exercicio-03.md)
+
+**Unidade 4 — Window functions**
+4. **Teoria:** [Window functions](teoria-04-window-functions.md) · **Lab:** [Window functions](lab-04-window-functions.ipynb) · **Exercício:** [Window functions](exercicio-04.md)
+
+**Unidade 5 — Índices e performance**
+5. **Teoria:** [Índices e performance](teoria-05-indices-e-performance.md) · **Lab:** [EXPLAIN e índices](lab-05-explain-e-indices.ipynb) · **Exercício:** [HAVING e "segundo maior"](exercicio-05.md)
+
+**Unidade 6 — Transações, ACID e NoSQL**
+6. **Teoria:** [Transações, ACID e NoSQL](teoria-06-transacoes-acid-nosql.md) · **Lab:** [Transações](lab-06-transacoes.ipynb)
+
+**Revisão:** [Flashcards](flashcards.md)
+
+✅ **Módulo completo** — 6 unidades. Fecha o **Eixo 1** (Fundamentos); a seguir, o projeto integrador do eixo.
 
 ## Metodologia e avaliação
 **Maestria:** bateria de desafios SQL (autocorrigidos) + quiz ≥ 80%. SQL entra também nos

@@ -68,6 +68,20 @@ parts:
           - file: modulos/04-sql-bancos-relacionais/teoria-01-modelo-relacional-select
           - file: modulos/04-sql-bancos-relacionais/lab-01-sql-no-navegador
           - file: modulos/04-sql-bancos-relacionais/exercicio-01
+          - file: modulos/04-sql-bancos-relacionais/teoria-02-joins-e-agregacoes
+          - file: modulos/04-sql-bancos-relacionais/lab-02-joins
+          - file: modulos/04-sql-bancos-relacionais/exercicio-02
+          - file: modulos/04-sql-bancos-relacionais/teoria-03-subqueries-e-ctes
+          - file: modulos/04-sql-bancos-relacionais/lab-03-subqueries-ctes
+          - file: modulos/04-sql-bancos-relacionais/exercicio-03
+          - file: modulos/04-sql-bancos-relacionais/teoria-04-window-functions
+          - file: modulos/04-sql-bancos-relacionais/lab-04-window-functions
+          - file: modulos/04-sql-bancos-relacionais/exercicio-04
+          - file: modulos/04-sql-bancos-relacionais/teoria-05-indices-e-performance
+          - file: modulos/04-sql-bancos-relacionais/lab-05-explain-e-indices
+          - file: modulos/04-sql-bancos-relacionais/exercicio-05
+          - file: modulos/04-sql-bancos-relacionais/teoria-06-transacoes-acid-nosql
+          - file: modulos/04-sql-bancos-relacionais/lab-06-transacoes
           - file: modulos/04-sql-bancos-relacionais/recursos
           - file: modulos/04-sql-bancos-relacionais/flashcards
 
