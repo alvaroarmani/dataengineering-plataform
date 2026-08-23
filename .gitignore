@@ -18,15 +18,15 @@ datasets/data/
 *.csv
 !datasets/**/exemplo*.csv
 
-# Plataforma Next.js (web/)
+# Plataforma Next.js (web/) — NÃO usar comentário inline (quebra o padrão!)
 web/node_modules/
 web/.next/
 web/out/
-web/src/content/           # conteúdo sincronizado (gerado no build via sync)
-web/src/data/curso.json    # índice do curso (gerado no build via sync)
-# O JupyterLite (web/public/lite) é COMMITADO para o deploy na Vercel funcionar
-# (a Vercel não roda o Jupyter Book). Só ignoramos os source maps, que não são
-# necessários em produção e pesam ~48 MB.
+# Conteúdo sincronizado e índice do curso — gerados no build pelo sync
+web/src/content/
+web/src/data/curso.json
+# JupyterLite: COMMITADO (sem .map) para o deploy na Vercel funcionar
+# (a Vercel não roda o Jupyter Book). Os source maps (~48 MB) ficam de fora.
 web/public/lite/**/*.map
 
 # SO
