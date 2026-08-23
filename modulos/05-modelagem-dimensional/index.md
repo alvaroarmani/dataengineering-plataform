@@ -2,6 +2,12 @@
 
 > O coração do Data Warehouse: modelar fatos e dimensões para análise.
 
+## Perguntas essenciais
+Ao final deste módulo, você saberá responder:
+1. Qual a diferença entre fato e dimensão — e como declarar o **grão** correto?
+2. Quando usar star schema vs snowflake, e por que desnormalizar para análise?
+3. Como lidar com atributos que mudam no tempo (SCD) e por que usar surrogate keys?
+
 ## Identificação
 - **Eixo:** 2 — Data Warehousing e Modelagem
 - **Carga horária:** 40h
@@ -24,10 +30,13 @@ processos de negócio.
 4. **Justificar** escolhas de modelagem (star vs snowflake).
 
 ## Plano de aulas (unidades)
-1. Normalização e o porquê da desnormalização analítica.
-2. Fatos, dimensões e grão.
-3. Star schema vs snowflake; surrogate keys.
-4. SCDs (1, 2, 3) na prática.
+
+**Unidade 1 — Fatos, dimensões e grão**
+1. **Teoria:** [Fatos, dimensões e grão](teoria-01-fatos-dimensoes-grao.md)
+2. **Lab:** [Um star schema na prática](lab-01-star-schema.ipynb)
+3. **Exercício:** [Consultando um star schema](exercicio-01.md)
+
+_Próximas unidades (em construção): surrogate keys · SCDs (1, 2, 3) · modelando a partir de um processo de negócio._
 
 ## Metodologia e avaliação
 **Maestria:** projetar e implementar um star schema (Olist) com uma SCD2, conforme rubrica + quiz ≥ 80%.

@@ -88,6 +88,12 @@ parts:
   - caption: "Eixo 2 — Data Warehousing e Modelagem"
     chapters:
       - file: modulos/05-modelagem-dimensional/index
+        sections:
+          - file: modulos/05-modelagem-dimensional/teoria-01-fatos-dimensoes-grao
+          - file: modulos/05-modelagem-dimensional/lab-01-star-schema
+          - file: modulos/05-modelagem-dimensional/exercicio-01
+          - file: modulos/05-modelagem-dimensional/recursos
+          - file: modulos/05-modelagem-dimensional/flashcards
       - file: modulos/06-data-warehousing-bigquery/index
       - file: modulos/07-transformacao-dbt/index
 

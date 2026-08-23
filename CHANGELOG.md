@@ -55,6 +55,10 @@ Histórico de entregas do curso, por fase. Formato inspirado em [Keep a Changelo
 - **Painel** e **Diário** construídos (streak real, diário com localStorage + "copiar tudo"); navegação unificada.
 - ADR 0005 (plataforma em Astro). Conteúdo novo do curso passa a aparecer sozinho após `npm run sync`.
 
+## [Fase 2 — Eixo 2] — em andamento
+
+- **Módulo 5 — Modelagem Dimensional (unidade 1/4):** fatos, dimensões e **grão**, star schema vs snowflake, os 4 passos de Kimball. Teoria conceitual referenciada (Kimball/Reis/Kleppmann) + lab de **star schema no DuckDB** + exercício com 2 queries (fato+dimensões) validado.
+
 ## [Fase 1.6] — Migração Next.js + projeto integrador + docs — 2026-08-22
 
 ### Adicionado
