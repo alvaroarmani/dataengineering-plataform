@@ -62,6 +62,12 @@ function parseCards(md) {
 function mkdirp(p) { fs.mkdirSync(p, { recursive: true }); }
 
 function main() {
+  // Deploy externo (ex.: Vercel com Root Directory = web) não tem acesso a ../modulos.
+  // Nesse caso, usamos o conteúdo já VERSIONADO (src/content + src/data/curso.json).
+  if (!fs.existsSync(MODULOS) || !fs.existsSync(path.join(RAIZ, 'progresso.json'))) {
+    console.log('[sync] fonte ../modulos ausente — usando conteúdo versionado (build externo).');
+    return;
+  }
   const progresso = JSON.parse(fs.readFileSync(path.join(RAIZ, 'progresso.json'), 'utf8'));
   mkdirp(OUT_DATA);
 

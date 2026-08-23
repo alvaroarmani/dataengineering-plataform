@@ -22,9 +22,9 @@ datasets/data/
 web/node_modules/
 web/.next/
 web/out/
-# Conteúdo sincronizado e índice do curso — gerados no build pelo sync
-web/src/content/
-web/src/data/curso.json
+# Conteúdo sincronizado + índice do curso: VERSIONADOS para o deploy (Vercel) funcionar
+# sem acesso a ../modulos. Regenerados localmente pelo sync; commite após mudanças.
+# (por isso NÃO são ignorados)
 # JupyterLite: COMMITADO (sem .map) para o deploy na Vercel funcionar
 # (a Vercel não roda o Jupyter Book). Os source maps (~48 MB) ficam de fora.
 web/public/lite/**/*.map
