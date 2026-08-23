@@ -39,7 +39,6 @@ exclude_patterns:
   - .venv/**
   - "**/.venv/**"
   - "**/site-packages/**"
-  - plataforma/**
   - web/**
   - "**/starter/**"
   - "**/node_modules/**"

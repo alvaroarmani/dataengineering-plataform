@@ -1,6 +1,6 @@
 # ADR 0005 — Plataforma de estudos (UI/UX) em Astro
 
-- **Status:** Aceito
+- **Status:** ⛔ Superado pelo [ADR 0006](0006-nextjs-vercel.md) — a plataforma migrou para Next.js e o Astro (`plataforma/`) foi removido em 2026-08-23. Este ADR fica como registro histórico.
 - **Data:** 2026-08-21
 
 ## Contexto

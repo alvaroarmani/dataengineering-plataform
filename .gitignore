@@ -18,15 +18,6 @@ datasets/data/
 *.csv
 !datasets/**/exemplo*.csv
 
-# Plataforma (Astro) — comentários só em linha própria (inline quebra o padrão!)
-# lite/, content/aulas e curso.json são gerados pelo sync/build
-plataforma/node_modules/
-plataforma/dist/
-plataforma/.astro/
-plataforma/public/lite/
-plataforma/src/content/aulas/
-plataforma/src/data/curso.json
-
 # Plataforma Next.js (web/) — tudo gerado
 web/node_modules/
 web/.next/

@@ -1,7 +1,7 @@
 # ADR 0006 — Migração da plataforma para Next.js + Vercel
 
-- **Status:** Aceito (em migração)
-- **Data:** 2026-08-22
+- **Status:** ✅ Aceito e concluído — Astro removido em 2026-08-23; Next.js é a plataforma oficial (`web/`). Pendente apenas o deploy na Vercel.
+- **Data:** 2026-08-22 (concluído em 2026-08-23)
 
 ## Contexto
 

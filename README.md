@@ -12,16 +12,16 @@ Um curso com teoria, **notebooks interativos** (JupyterLite), **correção autom
 exercícios (**pytest**, inclusive SQL via DuckDB) e uma **bancada Docker** para labs reais.
 16 disciplinas · 5 eixos · ~550h · TCC = um Data Warehouse completo.
 
-**Fonte única, dois front-ends:** o conteúdo vive em Markdown (`modulos/**`); o **Jupyter Book**
-é o motor de conteúdo + gerador do JupyterLite, e a **plataforma de estudos** (UI/UX) existe em
-duas versões — **Astro** (no `main`) e **Next.js** (migração na branch `plataforma-nextjs`, alvo
-Vercel). Ver [`ARCHITECTURE.md`](ARCHITECTURE.md) e [ADR 0006](docs/decisoes/0006-nextjs-vercel.md).
+**Fonte única, uma plataforma:** o conteúdo vive em Markdown (`modulos/**`); o **Jupyter Book**
+é o motor de conteúdo + gerador do JupyterLite, e a **plataforma de estudos** (UI/UX) é o app
+**Next.js** em `web/` (deploy na Vercel). Ver [`ARCHITECTURE.md`](ARCHITECTURE.md) e
+[ADR 0006](docs/decisoes/0006-nextjs-vercel.md). _(A versão anterior em Astro foi aposentada.)_
 
 ## Estado atual (2026-08-22)
 
 - ✅ **Eixo 1 (conteúdo) completo:** M1 Fundamentos · M2 Linux/Git/Docker · M3 Python (6 unidades) · M4 SQL (6 unidades) + **projeto integrador do Eixo 1** (`projetos/eixo-1-fundamentos/`).
-- ✅ Plataforma **Next.js** builda (71 páginas estáticas); pipeline de conteúdo e JupyterLite funcionando.
-- ⏳ Próximo: Eixo 2 (Modelagem/DW/dbt) e aposentar o Astro quando o Next atingir paridade.
+- ✅ **Plataforma Next.js oficial** (Astro removido); build gera ~76 páginas; pipeline de conteúdo e JupyterLite funcionando.
+- ⏳ Em andamento: Eixo 2 (Modelagem/DW/dbt) — M5 iniciado. Próximo: deploy na Vercel.
 
 ## Como rodar
 
@@ -60,8 +60,7 @@ Detalhes em [`ambiente/README.md`](ambiente/README.md).
 | `modulos/` | As 15 disciplinas (ementa + teoria + labs + exercícios) |
 | `projetos/` | Projetos integradores por eixo (Eixo 1 com `starter/` de portfólio) |
 | `tcc/` | Especificação do Data Warehouse (TCC) |
-| `web/` | Plataforma **Next.js** (App Router) — migração/deploy Vercel |
-| `plataforma/` | Plataforma **Astro** (baseline no `main`) |
+| `web/` | Plataforma **Next.js** (App Router) — a plataforma oficial; deploy na Vercel |
 | `referencias.yaml`, `scripts/verificar-conteudo.py` | Registro de fontes + linter de conteúdo |
 | `ambiente/` | Bancada Docker (JupyterLab + Postgres + MinIO) |
 | `datasets/` | Catálogo de datasets reais |

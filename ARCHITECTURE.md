@@ -89,18 +89,19 @@ flowchart LR
 
 Rodar local: `cd plataforma && npm install && npm run dev` (porta 4321).
 
-## Plataforma Next.js — a migração em andamento (`web/`)
+## Plataforma Next.js — a plataforma oficial (`web/`)
 
-Migração do front-end de **Astro → Next.js + Vercel** (ver [ADR 0006](docs/decisoes/0006-nextjs-vercel.md)),
-na branch `plataforma-nextjs`. **Reaproveita o mesmo conteúdo e pipeline:**
+O front-end de estudos é o app **Next.js** em `web/`, com deploy na **Vercel** (ver
+[ADR 0006](docs/decisoes/0006-nextjs-vercel.md)). A versão anterior em Astro foi **removida**.
+**Reaproveita o mesmo conteúdo e pipeline:**
 
 - **Next.js (App Router)** em `web/`, SSG, **nosso CSS** portado (Sora+Manrope, verde, claro/escuro, responsivo).
 - **Mesmo pipeline de conteúdo:** `web/scripts/sync-conteudo.mjs` lê `modulos/**` + `progresso.json` e gera a coleção + `curso.json` (agora com `cards[]` para flashcards).
 - **Render de Markdown:** `react-markdown` + `remark-directive` + `remark-curso` + `rehype-raw`; **mermaid** no cliente; **flashcards** como componente React (modo estudo).
 - **JupyterLite** copiado para `web/public/lite` (iframe nas aulas de lab).
-- **Build:** `cd web && npm run build` → 71 páginas estáticas (verificado). **Deploy:** Vercel (Root Directory = `web/`).
+- **Build:** `cd web && npm run build` → ~76 páginas estáticas (verificado). **Deploy:** Vercel (Root Directory = `web/`).
 
-> **Estado atual:** convivem **dois front-ends** — Jupyter Book (motor de conteúdo + gerador do JupyterLite) e a plataforma (Astro no `main`, Next na branch). Decidir aposentar o Astro quando o Next atingir paridade total.
+> **Papéis atuais:** o **Jupyter Book** permanece como motor de conteúdo e **gerador do JupyterLite** (a instância `lite/` é buildada por ele e copiada para `web/public/lite`); a **plataforma de estudos** é o app **Next.js** (`web/`). O Astro foi aposentado.
 
 ## Stack (resumo)
 
@@ -108,13 +109,12 @@ na branch `plataforma-nextjs`. **Reaproveita o mesmo conteúdo e pipeline:**
 |---|---|
 | Conteúdo (fonte única) | Markdown/MyST em `modulos/**` + `progresso.json` |
 | Motor + JupyterLite | Jupyter Book 1.0.3 (Sphinx) + jupyterlite-sphinx (Pyodide + DuckDB WASM) |
-| Front-end (atual/branch) | Next.js (App Router) + react-markdown + remark-directive/remark-curso |
-| Front-end (baseline/main) | Astro 4.16 |
-| Pipeline | `scripts/sync-conteudo.mjs` (Node) |
+| Front-end (plataforma) | Next.js 14 (App Router) + unified/remark-directive/remark-curso/rehype |
+| Pipeline | `web/scripts/sync-conteudo.mjs` (Node) |
 | Correção | pytest (Python/SQL via DuckDB) |
 | Qualidade | `scripts/verificar-conteudo.py` + `referencias.yaml` |
 | Bancada de labs | Docker Compose: JupyterLab + Postgres 16 + MinIO; DuckDB; BigQuery (cloud) |
-| Deploy | GitHub Pages (JB/Astro) · Vercel (Next) |
+| Deploy | Vercel (plataforma Next) · GitHub Pages (Jupyter Book, opcional) |
 
 ## Decisões
 
