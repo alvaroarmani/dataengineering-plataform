@@ -41,7 +41,12 @@ processos de negócio.
 2. **Lab:** [Surrogate keys na prática](lab-02-surrogate-keys.ipynb)
 3. **Exercício:** [Gerar e usar surrogate keys](exercicio-02.md)
 
-_Próximas unidades (em construção): SCDs (1, 2, 3) · modelando a partir de um processo de negócio._
+**Unidade 3 — Slowly Changing Dimensions (SCD)**
+1. **Teoria:** [SCDs: versionando o histórico](teoria-03-scd.md)
+2. **Lab:** [SCD Tipo 2 na prática](lab-03-scd.ipynb)
+3. **Exercício:** [Consultando uma dimensão SCD2](exercicio-03.md)
+
+_Próxima unidade (em construção): modelando a partir de um processo de negócio (Olist)._
 
 ## Metodologia e avaliação
 **Maestria:** projetar e implementar um star schema (Olist) com uma SCD2, conforme rubrica + quiz ≥ 80%.

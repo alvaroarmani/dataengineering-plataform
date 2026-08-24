@@ -15,6 +15,12 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** Por que o fato referencia a surrogate, não a natural? / **R:** Isola o DW de mudanças na origem, é mais rápida/compacta (inteiro vs string), integra fontes e habilita histórico (SCD2).
 - **P:** O que é surrogate key lookup? / **R:** Ao carregar o fato, juntar os dados (com a chave natural) à dimensão pela chave natural para trocá-la pela surrogate key.
 - **P:** Por que surrogate key é pré-requisito de SCD2? / **R:** No SCD2 a mesma chave natural tem várias versões/linhas; só a surrogate (única por linha) distingue cada versão.
+- **P:** O que é uma Slowly Changing Dimension (SCD)? / **R:** Uma política para tratar mudanças nos atributos de uma dimensão no tempo, preservando (ou não) o histórico conforme o tipo.
+- **P:** SCD Tipo 1 vs Tipo 2? / **R:** Tipo 1 sobrescreve (sem histórico); Tipo 2 insere nova linha e encerra a antiga (histórico completo, com surrogate keys e colunas de vigência).
+- **P:** O que faz o SCD Tipo 3? / **R:** Guarda o valor anterior numa coluna extra (ex.: cidade_atual + cidade_anterior) — histórico limitado a uma mudança.
+- **P:** Colunas típicas de um SCD2? / **R:** valido_de, valido_ate (intervalo de vigência) e uma flag corrente (linha vigente hoje).
+- **P:** Como consultar o point-in-time num SCD2? / **R:** WHERE valido_de <= :data AND :data < valido_ate — retorna a versão vigente naquela data.
+- **P:** Quando usar Tipo 1? / **R:** Para correções de erro, quando não faz sentido preservar o valor antigo (ex.: um CEP digitado errado).
 
 ---
 **Revisado em:** 2026-08-22
