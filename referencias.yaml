@@ -26,7 +26,17 @@ livros:
     tipo: livro
     acesso: pago
     idioma: en
-    caps: "Introdução, 1–2 (modelagem dimensional), SCDs"
+    caps: "Introdução, 1–2 (modelagem dimensional), 5 (SCDs), bus architecture"
+
+  inmon2005:
+    autor: "W. H. Inmon"
+    titulo: "Building the Data Warehouse"
+    edicao: "4ª"
+    ano: 2005
+    tipo: livro
+    acesso: pago
+    idioma: en
+    caps: "abordagem top-down: Enterprise Data Warehouse normalizado (CIF)"
 
   kleppmann2017:
     autor: "Martin Kleppmann"

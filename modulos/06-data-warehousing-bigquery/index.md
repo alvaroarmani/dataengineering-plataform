@@ -24,10 +24,13 @@ outros DWs cloud (Snowflake, Redshift) — conceitual.
 4. **Comparar** BigQuery com outros DWs cloud.
 
 ## Plano de aulas (unidades)
-1. Conceitos e arquiteturas de DW (Inmon vs Kimball).
-2. Colunar, compressão, particionamento e clustering.
-3. Prática no BigQuery (carga + modelagem).
-4. Custos e otimização; panorama de DWs cloud.
+
+**Unidade 1 — Conceitos e arquiteturas de DW (Inmon vs Kimball)**
+1. **Teoria:** [Conceitos e arquiteturas de DW](teoria-01-conceitos-arquiteturas-dw.md)
+2. **Lab:** [Arquitetura em camadas (raw → core → mart)](lab-01-camadas-dw.ipynb)
+3. **Exercício:** [Camadas de um DW: do raw ao mart](exercicio-01.md)
+
+_Próximas unidades (em construção): colunar/compressão/particionamento · prática no BigQuery · custos e otimização._
 
 ## Metodologia e avaliação
 **Maestria:** carregar o star schema no BigQuery com particionamento + consultas otimizadas, conforme rubrica.
