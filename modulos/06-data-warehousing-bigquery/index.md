@@ -30,7 +30,12 @@ outros DWs cloud (Snowflake, Redshift) — conceitual.
 2. **Lab:** [Arquitetura em camadas (raw → core → mart)](lab-01-camadas-dw.ipynb)
 3. **Exercício:** [Camadas de um DW: do raw ao mart](exercicio-01.md)
 
-_Próximas unidades (em construção): colunar/compressão/particionamento · prática no BigQuery · custos e otimização._
+**Unidade 2 — Colunar, compressão, particionamento e clustering**
+1. **Teoria:** [Por que o DW é rápido](teoria-02-colunar-particionamento.md)
+2. **Lab:** [Colunar e particionamento na prática](lab-02-colunar-particionamento.ipynb)
+3. **Exercício:** [Colunar e particionamento](exercicio-02.md)
+
+_Próximas unidades (em construção): prática no BigQuery · custos e otimização._
 
 ## Metodologia e avaliação
 **Maestria:** carregar o star schema no BigQuery com particionamento + consultas otimizadas, conforme rubrica.
