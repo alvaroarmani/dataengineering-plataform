@@ -18,7 +18,7 @@ export default function Trilha() {
               {eixo.modulos.map((mod) => {
                 const temTeoria = mod.unidades.some((u) => u.tipo === 'teoria');
                 return (
-                  <Link key={mod.pasta} href={`/modulo/${mod.pasta}`} className="card" style={{ padding: '14px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--ink)' }}>
+                  <Link key={mod.pasta} href={`/modulo/${mod.pasta}`} className="card card-link" style={{ padding: '14px 18px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--ink)', gap: 12 }}>
                     <div>
                       <div style={{ fontFamily: 'var(--sora)', fontWeight: 600, fontSize: 16 }}>{mod.id} · {mod.nome}</div>
                       <div className="muted" style={{ fontSize: 13 }}>{mod.ch}h · {mod.unidades.length} unidades</div>

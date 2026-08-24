@@ -39,7 +39,7 @@ export default function Aula({ params }) {
           </Link>
           <div className="muted" style={{ fontSize: 13, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>Eixo {eixo.id} · {mod.id} <span style={{ opacity: .5 }}>/</span> <span style={{ color: 'var(--ink)', fontWeight: 600 }}>{ROTULO[u.tipo] || u.tipo}</span></div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 9, width: 170 }}>
+        <div className="lesson-progress" style={{ display: 'flex', alignItems: 'center', gap: 9, width: 170 }}>
           <div className="bar" style={{ flexGrow: 1, background: 'var(--border)' }}><span style={{ width: pct + '%' }} /></div>
           <span className="muted" style={{ fontSize: 12, fontWeight: 600 }}>{pos}/{total}</span>
         </div>

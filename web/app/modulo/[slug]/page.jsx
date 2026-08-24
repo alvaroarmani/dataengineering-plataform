@@ -41,14 +41,14 @@ export default function Modulo({ params }) {
         )}
       </div>
 
-      <div className="grid" style={{ gridTemplateColumns: '1fr 320px', gap: 28, alignItems: 'start' }}>
+      <div className="grid grid-modulo">
         <div className="prosa" dangerouslySetInnerHTML={{ __html: mod.indexHtml || '<p class="muted">Ementa em preparação.</p>' }} />
 
-        <aside className="card" style={{ padding: 8, position: 'sticky', top: 90 }}>
+        <aside className="card side-toc" style={{ padding: 8, position: 'sticky', top: 90 }}>
           <div className="lbl" style={{ padding: '12px 12px 6px' }}>Conteúdo do módulo</div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {mod.unidades.map((u) => (
-              <Link key={u.base} href={`/aula/${mod.pasta}/${u.base}`} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 12px', borderRadius: 10, color: 'var(--ink)' }}>
+              <Link key={u.base} href={`/aula/${mod.pasta}/${u.base}`} className="side-link" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 12px', borderRadius: 10, color: 'var(--ink)' }}>
                 <span style={{ width: 28, height: 28, borderRadius: 8, background: 'var(--green-t)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green-d)" strokeWidth="2"><path d={ICON[u.tipo] || ICON.recursos} /></svg>
                 </span>

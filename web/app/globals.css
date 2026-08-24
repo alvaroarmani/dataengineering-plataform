@@ -28,19 +28,28 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--man);line-height:1.5}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--man);line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 h1,h2,h3,h4{font-family:var(--sora);margin:0;letter-spacing:-0.01em}
 a{color:var(--green-d);text-decoration:none} a:hover{color:var(--green)}
 img{max-width:100%}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 
+/* Foco de teclado visível e consistente (acessibilidade) */
+:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:6px}
+a:focus-visible,button:focus-visible,summary:focus-visible,[role=button]:focus-visible,textarea:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}}
+
 /* Botões */
-.btn{font-family:var(--man);font-weight:600;border-radius:10px;padding:12px 18px;border:1px solid transparent;cursor:pointer;font-size:15px;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none}
-.btn-p{background:var(--green);color:#fff} .btn-p:hover{background:var(--green-d);color:#fff}
-.btn-s{background:transparent;color:var(--ink);border-color:var(--border)} .btn-s:hover{border-color:var(--green)}
+.btn{font-family:var(--man);font-weight:600;border-radius:10px;padding:12px 18px;border:1px solid transparent;cursor:pointer;font-size:15px;display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;transition:background .15s ease,border-color .15s ease,transform .08s ease,box-shadow .15s ease}
+.btn:active{transform:translateY(1px)}
+.btn-p{background:var(--green);color:#fff} .btn-p:hover{background:var(--green-d);color:#fff;box-shadow:var(--shadow)}
+.btn-s{background:transparent;color:var(--ink);border-color:var(--border)} .btn-s:hover{border-color:var(--green);color:var(--ink)}
 
 /* Cartões e utilitários */
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px}
+/* Cartão clicável: elevação sutil no hover */
+.card-link{transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.card-link:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--green)}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--green-t);color:var(--green-d)}
 .lbl{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
 .bar{height:8px;border-radius:999px;background:var(--green-t);overflow:hidden}
@@ -50,21 +59,47 @@ img{max-width:100%}
 /* Nav */
 .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--border);background:var(--card);position:sticky;top:0;z-index:20}
 .nav-links{display:flex;gap:24px;font-weight:600;font-size:15px}
-.nav-links a{color:var(--muted)} .nav-links a.active{color:var(--green-d)}
-.icon-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.nav-links a{color:var(--muted);position:relative;padding:4px 0;transition:color .15s ease}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.active{color:var(--green-d)}
+.nav-links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;background:var(--green)}
+.icon-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .15s ease,background .15s ease}
+.icon-btn:hover{border-color:var(--green)}
 .avatar{width:38px;height:38px;border-radius:999px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:var(--sora)}
+/* Menu mobile (hambúrguer) */
+.nav-burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--ink);cursor:pointer;align-items:center;justify-content:center}
+.nav-sheet{display:none}
+@media (max-width:900px){
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .nav-sheet{display:block;position:fixed;top:73px;left:0;right:0;z-index:19;background:var(--card);border-bottom:1px solid var(--border);box-shadow:var(--shadow);animation:sheet-in .18s ease}
+  .nav-sheet a{display:flex;align-items:center;gap:12px;padding:15px 24px;font-weight:600;font-size:16px;color:var(--ink);border-top:1px solid var(--border)}
+  .nav-sheet a:first-child{border-top:0}
+  .nav-sheet a.active{color:var(--green-d);background:var(--green-t)}
+}
+@keyframes sheet-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 
 /* Grids */
 .grid{display:grid;gap:18px}
 .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .grid-hero{grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}
-@media (max-width:900px){ .grid-3{grid-template-columns:1fr} .grid-hero{grid-template-columns:1fr} .nav-links{display:none} }
+.grid-2{grid-template-columns:1fr 1fr}
+.grid-modulo{grid-template-columns:1fr 320px;gap:28px;align-items:start}
+.grid-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid-painel{grid-template-columns:1.6fr 1fr}
+@media (max-width:900px){ .grid-3{grid-template-columns:1fr} .grid-hero{grid-template-columns:1fr} .grid-modulo{grid-template-columns:1fr} .grid-painel{grid-template-columns:1fr} }
+@media (max-width:680px){ .grid-2{grid-template-columns:1fr} .grid-stats{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
+/* Sidebar de conteúdo do módulo */
+.side-link{transition:background .12s ease}
+.side-link:hover{background:var(--green-t)}
+@media (max-width:900px){ .side-toc{position:static!important} }
 
 /* ===== Conteúdo renderizado (prosa) ===== */
 .prosa{font-size:16.5px;line-height:1.7;color:var(--ink)}
 .prosa h1{font-size:30px;margin:0 0 6px}
 .prosa h2{font-size:23px;margin:34px 0 10px;padding-top:6px}
-.prosa h2::after{content:"";display:block;width:44px;height:3px;border-radius:3px;background:var(--green-t);margin-top:8px}
+.prosa h2::after{content:"";display:block;width:40px;height:3px;border-radius:3px;background:var(--green);margin-top:8px}
 .prosa h3{font-size:19px;margin:26px 0 8px}
 .prosa p{margin:0 0 14px}
 .prosa > p:first-of-type{font-size:1.12em;line-height:1.65}
@@ -143,3 +178,18 @@ img{max-width:100%}
 .nb-frame{flex:1;width:100%;border:0;background:#fff;min-height:70vh}
 .only-sm{display:none}
 @media (max-width:860px){ .hide-sm{display:none} .only-sm{display:inline} }
+
+/* Refinos responsivos de leitura/aula no celular */
+@media (max-width:640px){
+  .wrap{padding:0 18px}
+  .lesson-body{padding:22px 16px}
+  .lesson-top{padding:10px 14px}
+  .lesson-bottom{padding:12px 14px}
+  .prosa{font-size:16px}
+  .prosa h1{font-size:26px}
+  .prosa h2{font-size:21px;margin-top:28px}
+  .prosa h3{font-size:18px}
+  .prosa pre{padding:14px;font-size:13px}
+}
+/* A barra de progresso da aula não precisa de largura fixa no celular */
+@media (max-width:560px){ .lesson-progress{width:120px!important} }

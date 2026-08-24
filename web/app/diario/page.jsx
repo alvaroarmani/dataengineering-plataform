@@ -44,7 +44,7 @@ export default function Diario() {
       <form className="card" onSubmit={add} style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 14 }}>
         {ta('f1', 'O que estudei / construí hoje?')}
         {ta('f2', 'O que eu ensinaria disso? (teste de Feynman)')}
-        <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+        <div className="grid grid-2" style={{ gap: 14 }}>
           {ta('f3', 'Onde travei / dúvida')}
           {ta('f4', 'Próximo passo')}
         </div>

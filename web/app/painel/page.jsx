@@ -48,14 +48,14 @@ export default function Painel() {
         <span className="muted" style={{ fontSize: 14 }}>{hoje}</span>
       </div>
 
-      <div className="grid" style={{ gridTemplateColumns: 'repeat(4,minmax(0,1fr))', marginBottom: 22 }}>
+      <div className="grid grid-stats" style={{ marginBottom: 22 }}>
         {stat(streak, 'dias de streak', 'var(--gold)')}
         {stat(pct + '%', 'progresso total')}
         {stat(north, 'p/ estar pronto p/ vagas')}
         {stat(1, 'projeto no GitHub')}
       </div>
 
-      <div className="grid" style={{ gridTemplateColumns: '1.6fr 1fr' }}>
+      <div className="grid grid-painel">
         <div className="grid" style={{ gap: 20 }}>
           <div className="card" style={{ padding: 20 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}><h3 style={{ fontSize: 17 }}>Mapa do curso</h3><span className="muted" style={{ fontSize: 13 }}>1 / 16 módulos</span></div>
