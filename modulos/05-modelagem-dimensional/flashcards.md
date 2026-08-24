@@ -21,6 +21,10 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** Colunas típicas de um SCD2? / **R:** valido_de, valido_ate (intervalo de vigência) e uma flag corrente (linha vigente hoje).
 - **P:** Como consultar o point-in-time num SCD2? / **R:** WHERE valido_de <= :data AND :data < valido_ate — retorna a versão vigente naquela data.
 - **P:** Quando usar Tipo 1? / **R:** Para correções de erro, quando não faz sentido preservar o valor antigo (ex.: um CEP digitado errado).
+- **P:** Por que modelar o processo de negócio, não um relatório? / **R:** Modelar o processo (ex.: vendas) gera um star reutilizável para muitas perguntas; um relatório específico produz solução frágil.
+- **P:** No Olist, qual grão escolher e por quê? / **R:** 1 item de pedido (o mais fino): preserva preço/frete por produto e permite agregar para o nível de pedido; o contrário seria impossível.
+- **P:** O que é uma métrica aditiva? / **R:** Uma métrica que pode ser somada em qualquer dimensão (ex.: price, freight_value) — a mais simples de usar em agregações.
+- **P:** Grão fino vs grão grosso? / **R:** Grão fino guarda mais detalhe e é mais flexível (sempre dá para agregar para cima); grão grosso descarta informação irrecuperável.
 
 ---
 **Revisado em:** 2026-08-22
