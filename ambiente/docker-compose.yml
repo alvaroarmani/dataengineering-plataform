@@ -1,11 +1,20 @@
-# Bancada de trabalho do curso — ambiente principal de engenharia.
-# Sobe: JupyterLab (Python + libs), Postgres, MinIO (S3 local). DuckDB roda dentro do Jupyter.
-# Uso:
+# Bancada de trabalho do curso — ambiente principal de engenharia (track "ferramentas reais").
+# Base (sempre): JupyterLab (Python + libs), Postgres, MinIO (S3 local). DuckDB roda no Jupyter.
+# Serviços por PROFILE (sobe só o que o módulo pede):
+#   dbt      -> M07 (transformação)         : docker compose --profile dbt run --rm dbt <cmd>
+#   airflow  -> M09 (orquestração)          : docker compose --profile airflow up -d
+#   spark    -> M11 (larga escala)          : docker compose --profile spark up -d
+# Uso base:
 #   cp .env.example .env
-#   docker compose up -d
-#   Jupyter:  http://localhost:8888   (token no .env)
-#   MinIO:    http://localhost:9001   (console)
-# Versões pinadas para reprodutibilidade (ver ADR 0004).
+#   docker compose up -d                     # jupyter + postgres + minio
+#   Jupyter: http://localhost:8888  ·  MinIO: http://localhost:9001  ·  Airflow: http://localhost:8080
+# Versões pinadas para reprodutibilidade (ver ADR 0004 e 0007).
+
+x-airflow-env: &airflow-env
+  AIRFLOW__CORE__EXECUTOR: LocalExecutor
+  AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+  AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER:-curso}:${POSTGRES_PASSWORD:-curso}@postgres:5432/${POSTGRES_DB:-curso}
+  AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
 
 services:
   jupyter:
@@ -34,6 +43,11 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-curso}
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-curso}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   minio:
     image: minio/minio:RELEASE.2024-10-13T13-34-11Z
@@ -48,6 +62,58 @@ services:
     volumes:
       - miniodata:/data
 
+  # --- dbt (M07): CLI sob demanda. Ex.: docker compose --profile dbt run --rm dbt build ---
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-postgres:1.8.2
+    container_name: de-dbt
+    profiles: ["dbt"]
+    environment:
+      DBT_PROFILES_DIR: /work/.dbt
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: ${POSTGRES_USER:-curso}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-curso}
+      POSTGRES_DB: ${POSTGRES_DB:-curso}
+    volumes:
+      - ../:/work
+    working_dir: /work
+    depends_on:
+      postgres:
+        condition: service_healthy
+    entrypoint: ["dbt"]
+
+  # --- Airflow (M09): standalone (LocalExecutor sobre o Postgres da bancada) ---
+  airflow:
+    image: apache/airflow:2.10.3-python3.12
+    container_name: de-airflow
+    profiles: ["airflow"]
+    ports:
+      - "8080:8080"
+    environment:
+      <<: *airflow-env
+      _AIRFLOW_WWW_USER_USERNAME: ${AIRFLOW_USER:-admin}
+      _AIRFLOW_WWW_USER_PASSWORD: ${AIRFLOW_PASSWORD:-admin}
+    volumes:
+      - ../modulos/09-orquestracao-airflow/dags:/opt/airflow/dags
+      - airflow-logs:/opt/airflow/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: standalone
+
+  # --- Spark (M11): master + worker single-node para PySpark/Lakehouse ---
+  spark:
+    image: bitnami/spark:3.5.3
+    container_name: de-spark
+    profiles: ["spark"]
+    ports:
+      - "8081:8080"   # UI do master
+      - "7077:7077"   # submit
+    environment:
+      SPARK_MODE: master
+    volumes:
+      - ../:/work
+
 volumes:
   pgdata:
   miniodata:
+  airflow-logs:

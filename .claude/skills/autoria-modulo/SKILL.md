@@ -49,7 +49,30 @@ Toda teoria é ancorada em fontes — e o linter `scripts/verificar-conteudo.py`
 ## Profundidade por unidade (a partir do M4)
 
 - **≥2 exercícios `pytest` por unidade** (não 1) — fluência exige repetição.
+- Nas unidades **query-pesadas** (SQL, modelagem, dbt): adicione um **drill set** — pasta
+  `drills/` com **um** `pytest` cobrindo 8–12 tarefas curtas (mais reps, correção única).
 - **Datasets reais** nos labs/exercícios quando o tópico permitir (NYC Taxi, Olist) — ver `datasets/`.
+
+## Dual-track de prática (browser vs ferramentas reais)
+
+Cada unidade escolhe o track certo — e o **rótulo "Onde roda" tem de bater com a realidade**
+(nada de chamar de BigQuery o que é DuckDB):
+
+- **Track browser (fundamentos, M1–M5):** Python/pandas/SQL-DuckDB no JupyterLite. Correção por
+  `verificar()` (browser) e/ou `pytest` local. Zero-install.
+- **Track real (ferramentas, M6+):** roda na **bancada Docker** (`ambiente/docker-compose.yml`,
+  profiles `dbt`/`airflow`/`spark`) + **BigQuery free-tier**, com **datasets reais**. Correção
+  automática de verdade:
+  - **Postgres/SQL:** `pytest` com a fixture `pg` (ver `templates/template-exercicio-ferramenta/`) —
+    fixtures em tabela temporária, asserts no resultado, rollback ao fim.
+  - **dbt:** aluno completa modelos em `projeto-dbt/models/`; grader = `dbt build` + `dbt test`
+    (unique/not_null/relationships) + `pytest` conferindo as tabelas.
+  - **Airflow:** aluno escreve DAG em `dags/`; grader = `airflow dags test <dag> <data>` + `pytest`
+    de estrutura (sem erro de import, dependências, idempotência).
+  - **Docker:** grader = `docker compose up --wait` + healthcheck + asserts de alcance.
+  - **BigQuery (cloud):** onde local, `pytest`/dbt; onde exige credencial do aluno, **walkthrough
+    guiado + `verificar()` self-check** (não autenticamos a conta dele por nós).
+- Fora da bancada, os testes do track real fazem **skip** (não falham) — ver `conftest.py` do template.
 
 ## Fluxo para criar um módulo
 
@@ -65,10 +88,11 @@ Toda teoria é ancorada em fontes — e o linter `scripts/verificar-conteudo.py`
 Estrutura: problema motivador → conceito com o *porquê* → exemplo → "erros comuns" →
 "o que o mercado espera" → quiz de recall → Q&A estilo entrevista → referências datadas.
 
-### Lab (.ipynb)
-Primeira célula (markdown) declara **onde roda**: `Browser (JupyterLite)` ou
-`Bancada Docker`. Fundamentos de Python/pandas/SQL-DuckDB → browser. Qualquer coisa com
-Postgres/Airflow/dbt/Spark/MinIO/rede → Docker.
+### Lab (.ipynb ou .md guiado)
+Primeira célula/linha declara **onde roda**: `🟢 Browser (JupyterLite)` ou `🐳 Bancada Docker`.
+Fundamentos de Python/pandas/SQL-DuckDB → browser. Qualquer coisa com
+Postgres/Airflow/dbt/Spark/MinIO/rede/cloud → Docker (track real): passo-a-passo + blocos de
+comando, apontando o profile a subir (ex.: `docker compose --profile dbt run --rm dbt build`).
 
 ### Exercício ("faça o pytest passar")
 Pasta `exercicio-NN/` com:
@@ -89,9 +113,10 @@ Para checagem rápida **no browser**, use `verificar(resposta)` com `assert` que
 - [ ] **Referências no registro** (`referencias.yaml`), marcadas com `<!-- @chave -->`; mínimos do tipo atingidos.
 - [ ] `index.md` com **Perguntas essenciais** + critério de maestria; `progresso.md` atualizado.
 - [ ] Tom "médio": emojis pontuais nos títulos + caixa "✨ Em resumo" antes do Quiz.
-- [ ] Lab que roda (declara browser vs Docker).
-- [ ] Exercício com correção automática + hint ladder + solução comentada (**≥2 por unidade a partir do M4**).
-- [ ] Dataset real quando o tópico permitir (a partir do M4).
+- [ ] Lab que roda, com **rótulo "Onde roda" honesto** (browser vs Docker — bate com a realidade).
+- [ ] Exercício com correção automática + hint ladder + solução comentada (**≥2 por unidade a partir do M4**; **drill set** nas unidades query-pesadas).
+- [ ] **Track certo:** ferramenta real (Postgres/dbt/Airflow/Spark/BigQuery) → bancada Docker + grader real (`template-exercicio-ferramenta/`), não DuckDB disfarçado.
+- [ ] Dataset real quando o tópico permitir (a partir do M4; ver `datasets/manifest.yaml`).
 - [ ] Flashcards adicionados.
 - [ ] **`python scripts/verificar-conteudo.py` verde.**
 - [ ] Build sem novos warnings; `CHANGELOG.md` atualizado.

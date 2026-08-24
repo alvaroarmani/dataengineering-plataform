@@ -26,10 +26,30 @@ Para praticar ingestão via API (batch/incremental).
 - **Exemplos:** Banco Central (câmbio/SGS), IBGE, OpenWeather.
 - **Uso:** M08 (ingestão), M09 (Airflow).
 
+## Fluxo reproduzível (scripts)
+
+O manifesto [`manifest.yaml`](manifest.yaml) é a fonte única. Dois scripts:
+
+```bash
+# 1) baixar (URL direta quando existe; ex.: NYC Taxi)
+python datasets/baixar.py            # todos    |    python datasets/baixar.py nyc_taxi
+
+# 2) carregar no Postgres da bancada (schema raw) — precisa da bancada de pé
+cd ambiente && cp .env.example .env && docker compose up -d && cd ..
+pip install psycopg2-binary pyyaml
+python datasets/carregar_postgres.py olist
+```
+
+### Olist (Kaggle exige login)
+O Olist vem do Kaggle (autenticação). Opções:
+1. Baixe o zip manualmente e extraia os CSV para `datasets/data/olist/` (nomes conforme o `manifest.yaml`).
+2. Ou aponte um mirror próprio: `OLIST_URL=<url> python datasets/baixar.py olist`.
+
 ## Convenções
 - Baixe para `datasets/data/` (ignorado pelo git).
-- Cada módulo que usa um dataset traz um script/nota de download reproduzível.
+- Track **browser** (fundamentos): labs usam amostras pequenas embutidas ou `exemplo-*.csv`.
+- Track **real** (M06+): use os datasets completos carregados na bancada (Postgres/MinIO).
 - Para exemplos pequenos versionáveis, use nomes `exemplo-*.csv` (permitidos no `.gitignore`).
 
 ---
-**Revisado em:** 2026-08-20
+**Revisado em:** 2026-08-24

@@ -2,6 +2,18 @@
 
 Histórico de entregas do curso, por fase. Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/).
 
+## [Elevação — Fase A] — Ferramentas reais (dual-track) — 2026-08-24
+
+### Adicionado
+- **Bancada Docker estendida** (`ambiente/docker-compose.yml`): profiles `dbt` (dbt-postgres 1.8.2), `airflow` (2.10.3, standalone/LocalExecutor sobre o Postgres) e `spark` (bitnami 3.5.3); healthcheck no Postgres. `.env.example` com credenciais do Airflow.
+- **Template de exercício "track real"** (`templates/template-exercicio-ferramenta/`): grader `pytest` contra Postgres (fixture `pg`, skip fora da bancada), `solucao.sql`, `enunciado.md`, README.
+- **Datasets reproduzíveis** (`datasets/manifest.yaml`, `baixar.py`, `carregar_postgres.py`): Olist (Kaggle) + NYC Taxi (Parquet). README atualizado.
+- **ADR 0007** (dual-track com ferramentas reais); memória do projeto e plano de elevação.
+
+### Alterado
+- **Skill `autoria-modulo`**: doutrina dual-track (browser vs ferramentas reais), grading real por tipo (Postgres/dbt/Airflow/Docker/BigQuery), fluência (≥2 exercícios/unidade + drill set), rótulos "Onde roda" honestos.
+- **Linter `verificar-conteudo.py`**: checks estruturais **não-bloqueantes** (fluência abaixo da barra; módulo de ferramenta sem grader real) — expõem a dívida de retrofit de M4–M6 sem quebrar o build.
+
 ## [Fase 1] — Esqueleto da plataforma — 2026-08-20
 
 ### Adicionado

@@ -152,6 +152,44 @@ def checar_links(caminho: str) -> list[str]:
     return avisos
 
 
+FERRAMENTAS_REAIS = ("bigquery", "dbt", "airflow", "spark", "docker")
+
+
+def checar_estrutura(avisos_out: list[str]) -> None:
+    """Checks estruturais NÃO-BLOQUEANTES (avisos) da doutrina dual-track / fluência.
+
+    - Fluência: a partir do M4, esperamos >=2 exercícios por unidade (teoria).
+    - Track real: módulos de ferramenta (BigQuery/dbt/Airflow/Spark/Docker) devem ter ao
+      menos um exercício com grader real (exercicio-*/conftest.py), não só DuckDB.
+    """
+    mod_dir = os.path.join(RAIZ, "modulos")
+    if not os.path.isdir(mod_dir):
+        return
+    for nome in sorted(os.listdir(mod_dir)):
+        d = os.path.join(mod_dir, nome)
+        if not (os.path.isdir(d) and re.match(r"^\d\d-", nome)):
+            continue
+        num = int(nome[:2])
+        teorias = glob.glob(os.path.join(d, "teoria-*.md"))
+        if not teorias:
+            continue  # módulo ainda stub — sem cobrança
+        exercicios = glob.glob(os.path.join(d, "exercicio-*.md"))
+        # fluência (a partir do M4): >=2 exercícios por unidade
+        if num >= 4 and len(exercicios) < 2 * len(teorias):
+            avisos_out.append(
+                f"{nome}: fluência abaixo da barra — {len(exercicios)} exercícios para "
+                f"{len(teorias)} unidades (esperado >= {2 * len(teorias)}; ≥2 por unidade)"
+            )
+        # track real: módulos de ferramenta precisam de grader real
+        if any(t in nome for t in FERRAMENTAS_REAIS):
+            tem_grader_real = bool(glob.glob(os.path.join(d, "exercicio-*", "conftest.py")))
+            if not tem_grader_real:
+                avisos_out.append(
+                    f"{nome}: ferramenta real esperada, mas nenhum exercício com grader real "
+                    f"(exercicio-*/conftest.py) — evite DuckDB disfarçado"
+                )
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check-links", action="store_true", help="testa alcance dos URLs (não-bloqueante)")
@@ -192,6 +230,15 @@ def main() -> int:
             print(f"\n❌ {rel}")
             for e in erros:
                 print(f"   - {e}")
+
+    # Checks estruturais (não-bloqueantes) — doutrina dual-track / fluência
+    avisos_estrut: list[str] = []
+    checar_estrutura(avisos_estrut)
+    if avisos_estrut:
+        print("\n— Avisos estruturais (não-bloqueantes) —")
+        for a in avisos_estrut:
+            total_avisos += 1
+            print(f"   ⚠️  {a}")
 
     print("\n" + "=" * 60)
     print(f"Teorias: {len(teorias)} · Índices: {len(indices)} · "
