@@ -36,7 +36,12 @@ processos de negócio.
 2. **Lab:** [Um star schema na prática](lab-01-star-schema.ipynb)
 3. **Exercício:** [Consultando um star schema](exercicio-01.md)
 
-_Próximas unidades (em construção): surrogate keys · SCDs (1, 2, 3) · modelando a partir de um processo de negócio._
+**Unidade 2 — Surrogate keys (chaves substitutas)**
+1. **Teoria:** [Surrogate keys](teoria-02-surrogate-keys.md)
+2. **Lab:** [Surrogate keys na prática](lab-02-surrogate-keys.ipynb)
+3. **Exercício:** [Gerar e usar surrogate keys](exercicio-02.md)
+
+_Próximas unidades (em construção): SCDs (1, 2, 3) · modelando a partir de um processo de negócio._
 
 ## Metodologia e avaliação
 **Maestria:** projetar e implementar um star schema (Olist) com uma SCD2, conforme rubrica + quiz ≥ 80%.
