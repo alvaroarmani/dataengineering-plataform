@@ -6,6 +6,15 @@ import { createClient } from '@supabase/supabase-js';
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// Sem credenciais, o app roda em modo "deslogado" (progresso em localStorage).
-export const supabase = URL && ANON ? createClient(URL, ANON) : null;
+// Site estático (SPA): fluxo implicit + detecção do token no hash da URL do callback.
+export const supabase = URL && ANON
+  ? createClient(URL, ANON, {
+      auth: {
+        flowType: 'implicit',
+        detectSessionInUrl: true,
+        persistSession: true,
+        autoRefreshToken: true,
+      },
+    })
+  : null;
 export const supabaseHabilitado = Boolean(supabase);

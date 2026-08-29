@@ -9,13 +9,19 @@ const K_CONCLUIDAS = 'de_concluidas';
 const K_STREAK = 'de_streak';
 const K_ULTIMA = 'de_last_visit';
 
-// ---- localStorage helpers ----
 const ler = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch { return d; } };
 const grav = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
 function localConcluidas() { try { return new Set(JSON.parse(ler(K_CONCLUIDAS, '[]'))); } catch { return new Set(); } }
 function salvarLocal(set) { grav(K_CONCLUIDAS, JSON.stringify([...set])); }
 
-// streak a partir de uma data ISO (yyyy-mm-dd) da última visita e do valor anterior
+function limparHash() {
+  try {
+    if (typeof window !== 'undefined' && /access_token|error=/.test(window.location.hash)) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  } catch {}
+}
+
 function calcStreak(ultima, anterior) {
   const dia = new Date().toISOString().slice(0, 10);
   if (ultima === dia) return { streak: anterior || 1, dia, mudou: false };
@@ -30,26 +36,6 @@ export default function Plataforma({ children }) {
   const [streak, setStreak] = useState(0);
   const [pronto, setPronto] = useState(false);
 
-  // --- carregar do servidor (logado) ---
-  const carregarServidor = useCallback(async (user) => {
-    const { data } = await supabase.from('progresso_usuario').select('aula_id');
-    const serverSet = new Set((data || []).map((r) => r.aula_id));
-    // migração: se o servidor está vazio e há progresso local, sobe-o
-    const local = localConcluidas();
-    if (serverSet.size === 0 && local.size > 0) {
-      const linhas = [...local].map((aula_id) => ({ user_id: user.id, aula_id }));
-      await supabase.from('progresso_usuario').upsert(linhas);
-      local.forEach((a) => serverSet.add(a));
-    }
-    setConcluidas(serverSet);
-    // streak no perfil
-    const { data: perfil } = await supabase.from('perfil_usuario').select('*').eq('user_id', user.id).maybeSingle();
-    const { streak: s, dia, mudou } = calcStreak(perfil?.ultima_visita || '', perfil?.streak || 0);
-    if (mudou || !perfil) await supabase.from('perfil_usuario').upsert({ user_id: user.id, streak: s, ultima_visita: dia, atualizado_em: new Date().toISOString() });
-    setStreak(s);
-  }, []);
-
-  // --- carregar local (deslogado) ---
   const carregarLocal = useCallback(() => {
     setConcluidas(localConcluidas());
     const { streak: s, dia, mudou } = calcStreak(ler(K_ULTIMA, ''), parseInt(ler(K_STREAK, '0'), 10) || 0);
@@ -57,22 +43,52 @@ export default function Plataforma({ children }) {
     setStreak(s);
   }, []);
 
+  // Carrega do servidor; NUNCA lança (se as tabelas/RLS falharem, cai no local e segue).
+  const carregarServidor = useCallback(async (user) => {
+    setUsuario(user);
+    try {
+      const { data, error } = await supabase.from('progresso_usuario').select('aula_id');
+      if (error) throw error;
+      const serverSet = new Set((data || []).map((r) => r.aula_id));
+      const local = localConcluidas();
+      if (serverSet.size === 0 && local.size > 0) {
+        await supabase.from('progresso_usuario').upsert([...local].map((aula_id) => ({ user_id: user.id, aula_id })));
+        local.forEach((a) => serverSet.add(a));
+      }
+      setConcluidas(serverSet);
+      const { data: perfil } = await supabase.from('perfil_usuario').select('*').eq('user_id', user.id).maybeSingle();
+      const { streak: s, dia, mudou } = calcStreak(perfil?.ultima_visita || '', perfil?.streak || 0);
+      if (mudou || !perfil) await supabase.from('perfil_usuario').upsert({ user_id: user.id, streak: s, ultima_visita: dia, atualizado_em: new Date().toISOString() });
+      setStreak(s);
+    } catch (e) {
+      console.warn('[plataforma] progresso no servidor indisponível, usando local:', e?.message || e);
+      carregarLocal();
+    }
+  }, [carregarLocal]);
+
   useEffect(() => {
     let vivo = true;
     (async () => {
-      if (supabaseHabilitado) {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!vivo) return;
-        if (session?.user) { setUsuario(session.user); await carregarServidor(session.user); }
-        else { carregarLocal(); }
-        supabase.auth.onAuthStateChange(async (_e, sess) => {
-          if (sess?.user) { setUsuario(sess.user); await carregarServidor(sess.user); }
-          else { setUsuario(null); carregarLocal(); }
-        });
-      } else {
+      try {
+        if (supabaseHabilitado) {
+          const { data: { session } } = await supabase.auth.getSession();
+          limparHash();
+          if (!vivo) return;
+          if (session?.user) await carregarServidor(session.user); else carregarLocal();
+          supabase.auth.onAuthStateChange(async (_e, sess) => {
+            limparHash();
+            if (sess?.user) await carregarServidor(sess.user);
+            else { setUsuario(null); carregarLocal(); }
+          });
+        } else {
+          carregarLocal();
+        }
+      } catch (e) {
+        console.warn('[plataforma] init falhou, usando local:', e?.message || e);
         carregarLocal();
+      } finally {
+        if (vivo) setPronto(true);
       }
-      if (vivo) setPronto(true);
     })();
     return () => { vivo = false; };
   }, [carregarServidor, carregarLocal]);
@@ -82,10 +98,11 @@ export default function Plataforma({ children }) {
       const next = new Set(prev);
       const estava = next.has(aulaId);
       if (estava) next.delete(aulaId); else next.add(aulaId);
-      // persiste
       if (usuario && supabaseHabilitado) {
-        if (estava) supabase.from('progresso_usuario').delete().match({ user_id: usuario.id, aula_id: aulaId });
-        else supabase.from('progresso_usuario').upsert({ user_id: usuario.id, aula_id: aulaId });
+        (estava
+          ? supabase.from('progresso_usuario').delete().match({ user_id: usuario.id, aula_id: aulaId })
+          : supabase.from('progresso_usuario').upsert({ user_id: usuario.id, aula_id: aulaId })
+        ).then?.(({ error } = {}) => { if (error) console.warn('[plataforma] salvar progresso:', error.message); });
       } else {
         salvarLocal(next);
       }
