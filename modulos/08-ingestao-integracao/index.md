@@ -24,10 +24,13 @@ streaming e mensageria (Kafka) — conceitual e demo.
 4. **Explicar** o papel de streaming/Kafka.
 
 ## Plano de aulas (unidades)
-1. ETL vs ELT; full vs incremental; CDC.
-2. Ingestão de arquivos e bancos.
-3. Ingestão de APIs (paginação, rate limit, auth).
-4. Formatos de dados; intro a Kafka.
+
+**Unidade 1 — ETL vs ELT, incremental, CDC e idempotência**
+1. **Teoria:** [Ingestão: ETL/ELT, full vs incremental, CDC](teoria-01-etl-elt-incremental-cdc.md)
+2. **Lab:** [Ingestão incremental e idempotente (DuckDB)](lab-01-ingestao-incremental.ipynb)
+3. **Exercícios:** [Upsert idempotente (🐳 Postgres real)](exercicio-01.md) · [Lógica do incremental (🟢)](exercicio-02.md)
+
+_Próximas unidades (em construção): ingestão de arquivos e bancos · ingestão de APIs (paginação, rate limit) · formatos (Parquet/Avro) e intro a Kafka._
 
 ## Metodologia e avaliação
 **Maestria:** implementar ingestão incremental de uma API idempotente, conforme rubrica + quiz ≥ 80%.
