@@ -35,7 +35,17 @@ Paradigma ELT e o papel do dbt. Estrutura de um projeto dbt: `sources`, `models`
 2. **Lab (🐳 dbt real):** [Marts com ref(): montando o star](lab-02-marts-com-ref.md)
 3. **Exercícios:** [Um mart com ref() (🐳 real)](exercicio-03.md) · [Consultando o star (🟢 navegador)](exercicio-04.md)
 
-_Próximas unidades (em construção): testes de dados (unique/not_null/relationships) · snapshots (SCD2), docs, lineage e macros._
+**Unidade 3 — Testes de dados**
+1. **Teoria:** [Testes de dados no dbt](teoria-03-testes-de-dados.md)
+2. **Lab (🐳 dbt real):** [Veja um teste falhar e passar](lab-03-testes-no-dbt.md)
+3. **Exercícios:** [Teste relationships (🐳 real)](exercicio-05.md) · [Testes "por baixo" em Python (🟢)](exercicio-06.md)
+
+**Unidade 4 — Snapshots (SCD2), docs, lineage e macros**
+1. **Teoria:** [Snapshots, docs/lineage e macros](teoria-04-snapshots-docs-macros.md)
+2. **Lab (🐳 dbt real):** [Snapshots (SCD2) e docs/lineage](lab-04-snapshots-e-docs.md)
+3. **Exercícios:** [Lógica de snapshot SCD2 (🟢)](exercicio-07.md) · [Macros (🟢)](exercicio-08.md)
+
+> **Módulo completo.** Projeto dbt real (staging→marts), testes, snapshots (SCD2), docs/lineage e macros — a base do *analytics engineering*.
 
 ## Metodologia e avaliação
 **Maestria:** projeto dbt sobre o star schema com testes passando + `dbt docs`, conforme rubrica.

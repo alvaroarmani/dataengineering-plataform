@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: dim_produto
+    description: "Dimensão de produto."
+    columns:
+      - name: produto_id
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_itens
+    description: "Fato no grão do item."
+    columns:
+      - name: item_id
+        tests:
+          - not_null
+          - unique
+      - name: produto_id
+        # SEU CÓDIGO AQUI: adicione um teste 'relationships' garantindo que todo
+        # produto_id do fato existe em dim_produto (to: ref('dim_produto'), field: produto_id).
+        tests: []
