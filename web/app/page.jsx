@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ContinuarCard from '../components/ContinuarCard.jsx';
 
 const PRIMEIRA_AULA = '/aula/01-fundamentos-eng-dados/teoria-01-o-que-e-engenharia-de-dados';
 
@@ -30,21 +31,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="card" style={{ padding: 22 }}>
-          <div className="lbl">Continue de onde parou</div>
-          <div style={{ display: 'flex', gap: 14, alignItems: 'center', margin: '14px 0' }}>
-            <div style={{ width: 52, height: 52, borderRadius: 12, background: 'var(--green-t)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--green-d)" strokeWidth="2"><path d="M4 4h16v12H4z" /><path d="M8 20h8M12 16v4" /></svg>
-            </div>
-            <div>
-              <div style={{ fontFamily: 'var(--sora)', fontWeight: 600, fontSize: 17 }}>Módulo 1 · Fundamentos</div>
-              <div className="muted" style={{ fontSize: 14 }}>Teoria 01 — O que é Engenharia de Dados</div>
-            </div>
-          </div>
-          <div className="bar" style={{ margin: '6px 0 8px' }}><span style={{ width: '12%' }} /></div>
-          <div className="muted" style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}><span>Eixo 1</span><span>12%</span></div>
-          <Link className="btn btn-p" href={PRIMEIRA_AULA} style={{ width: '100%', justifyContent: 'center', marginTop: 16 }}>Retomar</Link>
-        </div>
+        <ContinuarCard />
       </section>
 
       <section style={{ marginTop: 44 }}>

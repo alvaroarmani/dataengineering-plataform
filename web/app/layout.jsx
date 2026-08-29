@@ -1,5 +1,6 @@
 import './globals.css';
 import Nav from '../components/Nav.jsx';
+import Plataforma from '../components/Plataforma.jsx';
 
 export const metadata = {
   title: 'Especialização em Engenharia de Dados',
@@ -28,8 +29,10 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: temaInit }} />
       </head>
       <body>
-        <Nav />
-        {children}
+        <Plataforma>
+          <Nav />
+          {children}
+        </Plataforma>
       </body>
     </html>
   );

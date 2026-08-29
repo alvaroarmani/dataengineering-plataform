@@ -2,6 +2,7 @@ import Link from 'next/link';
 import curso from '../../../src/data/curso.json';
 import Flashcards from '../../../components/Flashcards.jsx';
 import Mermaid from '../../../components/Mermaid.jsx';
+import BotaoConcluir from '../../../components/BotaoConcluir.jsx';
 
 export function generateStaticParams() {
   const out = [];
@@ -69,6 +70,8 @@ export default function Aula({ params }) {
           <Mermaid />
         </div>
       )}
+
+      <BotaoConcluir aulaId={`${mod.pasta}/${u.base}`} />
 
       <div className="lesson-bottom">
         {prev ? (

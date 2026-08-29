@@ -2,6 +2,16 @@
 
 Histórico de entregas do curso, por fase. Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/).
 
+## [Plataforma] — Mobile + login Google e progresso por usuário — 2026-08-29
+
+### Corrigido
+- **Responsividade mobile de verdade:** `viewport` explícito no Next; tabelas envolvidas em `<div class="tbl-scroll">` (passo rehype no sync) com rolagem confiável; `overflow-x:clip` como rede de segurança. Elimina o "shrink-to-fit" que encolhia tudo (header incluso) no celular.
+
+### Adicionado
+- **Login Google (SSO) + progresso por usuário via Supabase** (client-side, RLS; ADR 0008). Login **opcional**: sem credenciais, roda deslogado (localStorage); ao logar, migra o progresso local.
+- `Plataforma` (context de sessão + progresso, modo duplo), `BotaoConcluir` ("marcar como concluída" na aula), `TocModulo` (barra + checks por unidade), `ContinuarCard` (home dinâmica). Painel com stats reais (streak, %, unidades/módulos concluídos, mapa por eixo).
+- `web/supabase/{schema.sql,README.md}` (tabelas + RLS + guia) e `web/.env.local.example`.
+
 ## [Elevação — Fase A] — Ferramentas reais (dual-track) — 2026-08-24
 
 ### Adicionado

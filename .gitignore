@@ -22,6 +22,7 @@ datasets/data/
 web/node_modules/
 web/.next/
 web/out/
+web/.env*.local
 # Conteúdo sincronizado + índice do curso: VERSIONADOS para o deploy (Vercel) funcionar
 # sem acesso a ../modulos. Regenerados localmente pelo sync; commite após mudanças.
 # (por isso NÃO são ignorados)
