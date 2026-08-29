@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_pedidos
+    description: "Pedidos limpos (staging) a partir de raw_pedidos."
+    columns:
+      - name: pedido_id
+        description: "Chave natural do pedido."
+        tests:
+          - not_null
+          - unique
+      - name: estado
+        description: "UF padronizada em maiúscula."
+        tests:
+          - not_null
+      - name: valor
+        tests:
+          - not_null

@@ -6,7 +6,7 @@
 - **Eixo:** 2 — Data Warehousing e Modelagem
 - **Carga horária:** 30h
 - **Pré-requisitos:** M06
-- **Onde roda:** Bancada Docker + BigQuery/Postgres
+- **Onde roda:** 🐳 Bancada Docker (dbt + Postgres real) — com espelho no navegador (DuckDB) por unidade
 
 ## Ementa
 Paradigma ELT e o papel do dbt. Estrutura de um projeto dbt: `sources`, `models`
@@ -24,10 +24,13 @@ Paradigma ELT e o papel do dbt. Estrutura de um projeto dbt: `sources`, `models`
 4. **Usar** macros/Jinja para reduzir repetição.
 
 ## Plano de aulas (unidades)
-1. ELT e setup do dbt.
-2. Sources, models e materializações.
-3. Testes de dados.
-4. Docs, lineage, macros e boas práticas.
+
+**Unidade 1 — Fundamentos: ELT, sources e staging**
+1. **Teoria:** [dbt: transformação como código](teoria-01-dbt-fundamentos.md)
+2. **Lab (🐳 dbt real):** [dbt na bancada: seu primeiro build](lab-01-dbt-na-bancada.md)
+3. **Exercícios:** [Seu primeiro model dbt (🐳 real)](exercicio-01.md) · [Staging + mart (🟢 navegador)](exercicio-02.md)
+
+_Próximas unidades (em construção): marts dimensionais · testes de dados (unique/not_null/relationships) · snapshots (SCD2), docs, lineage e macros._
 
 ## Metodologia e avaliação
 **Maestria:** projeto dbt sobre o star schema com testes passando + `dbt docs`, conforme rubrica.

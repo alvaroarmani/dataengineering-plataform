@@ -1,0 +1,11 @@
+name: 'curso_m7_ex01'
+version: '1.0.0'
+config-version: 2
+profile: 'curso'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+
+models:
+  curso_m7_ex01:
+    +materialized: view
