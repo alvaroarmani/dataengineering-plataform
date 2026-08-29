@@ -68,29 +68,18 @@ export default function Plataforma({ children }) {
 
   useEffect(() => {
     let vivo = true;
-    (async () => {
+    if (!supabaseHabilitado) { carregarLocal(); setPronto(true); return; }
+    // Padrão robusto: onAuthStateChange dispara INITIAL_SESSION (com a sessão já detectada
+    // do hash) e SIGNED_IN — sem corrida com getSession.
+    const { data: sub } = supabase.auth.onAuthStateChange(async (_evento, sess) => {
+      limparHash();
       try {
-        if (supabaseHabilitado) {
-          const { data: { session } } = await supabase.auth.getSession();
-          limparHash();
-          if (!vivo) return;
-          if (session?.user) await carregarServidor(session.user); else carregarLocal();
-          supabase.auth.onAuthStateChange(async (_e, sess) => {
-            limparHash();
-            if (sess?.user) await carregarServidor(sess.user);
-            else { setUsuario(null); carregarLocal(); }
-          });
-        } else {
-          carregarLocal();
-        }
-      } catch (e) {
-        console.warn('[plataforma] init falhou, usando local:', e?.message || e);
-        carregarLocal();
-      } finally {
-        if (vivo) setPronto(true);
-      }
-    })();
-    return () => { vivo = false; };
+        if (sess?.user) await carregarServidor(sess.user);
+        else { setUsuario(null); carregarLocal(); }
+      } finally { if (vivo) setPronto(true); }
+    });
+    const t = setTimeout(() => { if (vivo) setPronto(true); }, 3000); // rede de segurança
+    return () => { vivo = false; clearTimeout(t); sub?.subscription?.unsubscribe?.(); };
   }, [carregarServidor, carregarLocal]);
 
   const alternarConcluida = useCallback(async (aulaId) => {
