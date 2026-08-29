@@ -15,6 +15,11 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** Particionamento vs clustering? / **R:** Particionamento divide fisicamente a tabela (ex.: por mês); clustering ordena dentro da partição por colunas muito filtradas, permitindo pular blocos por mín/máx. Complementares.
 - **P:** Dois esquemas de compressão colunar? / **R:** Dictionary encoding (valores repetidos → dicionário+códigos) e RLE (sequências → valor+contagem), que brilha com dados ordenados.
 - **P:** No BigQuery, o que reduz custo? / **R:** Ler menos bytes: sem SELECT *, filtrar pela coluna de partição (sem função em cima), particionar por data e clusterizar colunas muito filtradas.
+- **P:** O que significa BigQuery ser "serverless"? / **R:** Você não gerencia servidor; separa armazenamento de computação e aloca recursos por query. Paga armazenamento (GB/mês) + bytes varridos.
+- **P:** Como praticar BigQuery de graça? / **R:** No BigQuery sandbox — cria projeto e consulta sem cartão, com cotas mensais; tabelas expiram em 60 dias.
+- **P:** Para que serve o dry run? / **R:** Estimar os bytes que a query vai varrer (e o custo) ANTES de executar (editor ou `bq query --dry_run`).
+- **P:** LIMIT reduz o custo de uma query BigQuery? / **R:** Não — a varredura acontece antes do LIMIT. O que reduz é ler menos colunas e menos partições.
+- **P:** Como declarar partição e cluster no BigQuery? / **R:** `PARTITION BY DATE_TRUNC(coluna_data, MONTH)` e `CLUSTER BY col1, col2` na criação da tabela.
 
 ---
 **Revisado em:** 2026-08-23

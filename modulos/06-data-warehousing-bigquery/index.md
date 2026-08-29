@@ -35,7 +35,12 @@ outros DWs cloud (Snowflake, Redshift) — conceitual.
 2. **Lab:** [Colunar e particionamento na prática](lab-02-colunar-particionamento.ipynb)
 3. **Exercício:** [Colunar e particionamento](exercicio-02.md)
 
-_Próximas unidades (em construção): prática no BigQuery · custos e otimização._
+**Unidade 3 — BigQuery na prática (ferramenta real, dual-track)**
+1. **Teoria:** [BigQuery: serverless, carga, partição/cluster e custo](teoria-03-pratica-bigquery.md)
+2. **Lab (☁️ cloud):** [BigQuery na prática — walkthrough guiado](lab-03-bigquery-na-pratica.md)
+3. **Exercício (🐳 Postgres real):** [Particionamento no Postgres](exercicio-03.md)
+
+_Próxima unidade (em construção): custos e otimização; panorama de DWs cloud._
 
 ## Metodologia e avaliação
 **Maestria:** carregar o star schema no BigQuery com particionamento + consultas otimizadas, conforme rubrica.
