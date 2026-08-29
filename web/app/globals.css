@@ -27,8 +27,8 @@
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--man);line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--man);line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip}
 h1,h2,h3,h4{font-family:var(--sora);margin:0;letter-spacing:-0.01em}
 a{color:var(--green-d);text-decoration:none} a:hover{color:var(--green)}
 img{max-width:100%}
@@ -96,7 +96,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[role=button]:focus-v
 @media (max-width:900px){ .side-toc{position:static!important} }
 
 /* ===== Conteúdo renderizado (prosa) ===== */
-.prosa{font-size:16.5px;line-height:1.7;color:var(--ink)}
+.prosa{font-size:16.5px;line-height:1.7;color:var(--ink);overflow-wrap:break-word}
 .prosa h1{font-size:30px;margin:0 0 6px}
 .prosa h2{font-size:23px;margin:34px 0 10px;padding-top:6px}
 .prosa h2::after{content:"";display:block;width:40px;height:3px;border-radius:3px;background:var(--green);margin-top:8px}
@@ -111,7 +111,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[role=button]:focus-v
 .prosa code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background:var(--green-t);padding:.1em .35em;border-radius:6px}
 .prosa pre{background:var(--code-bg);color:var(--code-ink);padding:16px 18px;border-radius:12px;overflow:auto;font-size:13.5px;line-height:1.6}
 .prosa pre code{background:none;padding:0;color:inherit}
-.prosa table{border-collapse:collapse;width:100%;margin:0 0 16px;font-size:14.5px;display:block;overflow-x:auto}
+/* Tabelas: o wrapper .tbl-scroll (injetado no sync) rola; a tabela cresce até o conteúdo. */
+.tbl-scroll{overflow-x:auto;max-width:100%;margin:0 0 16px;-webkit-overflow-scrolling:touch}
+.prosa table{border-collapse:collapse;width:max-content;min-width:100%;font-size:14.5px}
 .prosa th,.prosa td{border:1px solid var(--border);padding:8px 12px;text-align:left}
 .prosa th{background:var(--green-t);font-family:var(--sora)}
 .prosa blockquote{margin:0 0 14px;padding:8px 16px;border-left:3px solid var(--green);background:var(--green-t);border-radius:0 8px 8px 0}

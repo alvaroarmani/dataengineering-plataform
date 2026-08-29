@@ -13,8 +13,29 @@ import remarkDirective from 'remark-directive';
 import remarkRehype from 'remark-rehype';
 import rehypeRaw from 'rehype-raw';
 import rehypeStringify from 'rehype-stringify';
+import { visit, SKIP } from 'unist-util-visit';
 import { remarkCurso } from '../src/lib/remark-curso.mjs';
 import { preprocessMyst } from '../src/lib/preprocess-myst.mjs';
+
+// Envolve cada <table> num <div class="tbl-scroll"> para rolagem horizontal confiável no
+// mobile (evita que linhas largas estourem a viewport e disparem o "encaixar por largura").
+function rehypeWrapTables() {
+  return (tree) => {
+    visit(tree, 'element', (node, index, parent) => {
+      if (node.tagName !== 'table' || !parent || typeof index !== 'number') return;
+      const jaEnvolto = parent.tagName === 'div'
+        && [].concat(parent.properties?.className || []).includes('tbl-scroll');
+      if (jaEnvolto) return;
+      parent.children[index] = {
+        type: 'element',
+        tagName: 'div',
+        properties: { className: ['tbl-scroll'] },
+        children: [node],
+      };
+      return [SKIP, index + 1];
+    });
+  };
+}
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 const WEB = path.resolve(__dirname, '..');
@@ -31,6 +52,7 @@ const proc = unified()
   .use(remarkCurso)
   .use(remarkRehype, { allowDangerousHtml: true })
   .use(rehypeRaw)
+  .use(rehypeWrapTables)
   .use(rehypeStringify, { allowDangerousHtml: true });
 
 function mdToHtml(md) {

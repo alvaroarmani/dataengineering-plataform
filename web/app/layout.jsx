@@ -6,6 +6,13 @@ export const metadata = {
   description: 'Programa autodirigido de Engenharia de Dados — teoria, prática e portfólio.',
 };
 
+// Viewport explícito: sem isto, navegadores móveis podem "encaixar por largura" e encolher tudo.
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
 const temaInit = `(function(){try{var t=localStorage.getItem('tema');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
 
 export default function RootLayout({ children }) {
