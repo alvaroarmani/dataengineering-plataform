@@ -20,6 +20,11 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** Para que serve o dry run? / **R:** Estimar os bytes que a query vai varrer (e o custo) ANTES de executar (editor ou `bq query --dry_run`).
 - **P:** LIMIT reduz o custo de uma query BigQuery? / **R:** Não — a varredura acontece antes do LIMIT. O que reduz é ler menos colunas e menos partições.
 - **P:** Como declarar partição e cluster no BigQuery? / **R:** `PARTITION BY DATE_TRUNC(coluna_data, MONTH)` e `CLUSTER BY col1, col2` na criação da tabela.
+- **P:** Quais os dois eixos de custo de um DW cloud? / **R:** Armazenamento (GB/mês) e computação (cobrada por bytes varridos OU por tempo de warehouse).
+- **P:** Bytes varridos vs tempo de compute? / **R:** BigQuery on-demand cobra pelos dados lidos; Snowflake cobra pelos segundos que o warehouse fica ligado, independentemente dos bytes.
+- **P:** Por que uma materialized view/tabela agregada reduz custo? / **R:** Pré-computa uma agregação cara e recorrente uma vez, evitando varrer a tabela grande a cada consulta.
+- **P:** O que BigQuery, Snowflake e Redshift têm em comum? / **R:** Separam armazenamento de computação e cobram por uso; diferem em como cobram compute e no nível de operação.
+- **P:** O que é auto-suspend (Snowflake)? / **R:** Desligar o warehouse ocioso automaticamente para não pagar compute à toa.
 
 ---
 **Revisado em:** 2026-08-23

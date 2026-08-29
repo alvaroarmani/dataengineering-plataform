@@ -40,7 +40,12 @@ outros DWs cloud (Snowflake, Redshift) — conceitual.
 2. **Lab (☁️ cloud):** [BigQuery na prática — walkthrough guiado](lab-03-bigquery-na-pratica.md)
 3. **Exercício (🐳 Postgres real):** [Particionamento no Postgres](exercicio-03.md)
 
-_Próxima unidade (em construção): custos e otimização; panorama de DWs cloud._
+**Unidade 4 — Custos, otimização e panorama de DWs cloud**
+1. **Teoria:** [Custos, otimização e panorama cloud](teoria-04-custos-panorama-cloud.md)
+2. **Lab:** [A calculadora de custo do DW cloud](lab-04-calculadora-custo.ipynb)
+3. **Exercícios:** [Modelo de custo (Python)](exercicio-04.md) · [Consultas cost-aware](exercicio-05.md)
+
+> **Módulo completo.** DW cloud, colunar, particionamento e custo — base direta para o **dbt** (M07) e o TCC.
 
 ## Metodologia e avaliação
 **Maestria:** carregar o star schema no BigQuery com particionamento + consultas otimizadas, conforme rubrica.
