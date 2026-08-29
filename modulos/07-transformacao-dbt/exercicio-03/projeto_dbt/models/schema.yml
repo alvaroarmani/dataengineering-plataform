@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: fct_receita_categoria
+    description: "Receita total por categoria (mart)."
+    columns:
+      - name: categoria
+        tests:
+          - not_null
+          - unique
+      - name: receita
+        tests:
+          - not_null

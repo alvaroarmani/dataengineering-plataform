@@ -30,7 +30,12 @@ Paradigma ELT e o papel do dbt. Estrutura de um projeto dbt: `sources`, `models`
 2. **Lab (🐳 dbt real):** [dbt na bancada: seu primeiro build](lab-01-dbt-na-bancada.md)
 3. **Exercícios:** [Seu primeiro model dbt (🐳 real)](exercicio-01.md) · [Staging + mart (🟢 navegador)](exercicio-02.md)
 
-_Próximas unidades (em construção): marts dimensionais · testes de dados (unique/not_null/relationships) · snapshots (SCD2), docs, lineage e macros._
+**Unidade 2 — Marts dimensionais (ref, camadas, star)**
+1. **Teoria:** [Marts dimensionais com dbt](teoria-02-marts-dimensionais.md)
+2. **Lab (🐳 dbt real):** [Marts com ref(): montando o star](lab-02-marts-com-ref.md)
+3. **Exercícios:** [Um mart com ref() (🐳 real)](exercicio-03.md) · [Consultando o star (🟢 navegador)](exercicio-04.md)
+
+_Próximas unidades (em construção): testes de dados (unique/not_null/relationships) · snapshots (SCD2), docs, lineage e macros._
 
 ## Metodologia e avaliação
 **Maestria:** projeto dbt sobre o star schema com testes passando + `dbt docs`, conforme rubrica.
