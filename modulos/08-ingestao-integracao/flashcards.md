@@ -13,6 +13,11 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** Por que COPY em vez de INSERT para arquivos grandes? / **R:** COPY faz carga em bloco, ordens de grandeza mais rápida que INSERT linha a linha.
 - **P:** Schema-on-write vs schema-on-read? / **R:** On-write define o schema ao gravar (banco relacional); on-read guarda cru e aplica schema na leitura (data lake, mais flexível).
 - **P:** Como deduplicar um arquivo reentregue ficando com a versão mais nova? / **R:** ROW_NUMBER() OVER (PARTITION BY chave ORDER BY carregado_em DESC) e filtrar rn = 1.
+- **P:** Dois estilos de paginação de API? / **R:** Offset/limit (pede por posição; frágil se muda) e cursor/token (segue um next até vir vazio; robusto).
+- **P:** O que é HTTP 429 e como reagir? / **R:** Too Many Requests (estourou o rate limit). Reaja com retry e backoff exponencial (espera crescente + jitter).
+- **P:** Onde guardar a chave de uma API? / **R:** Em variável de ambiente — nunca no código/commit (é segredo).
+- **P:** Como fazer ingestão incremental de uma API? / **R:** Filtro de data (ex.: ?since=) + marca d'água: guarda a última data e pede só o que veio depois.
+- **P:** Por que sempre usar timeout numa requisição? / **R:** Para não pendurar o pipeline se a API não responder — falha rápido e você trata/reintenta.
 
 ---
 **Revisado em:** 2026-08-29
