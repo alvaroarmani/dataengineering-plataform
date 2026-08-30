@@ -24,10 +24,13 @@ dados (XComs) e boas práticas. Idempotência e reprocessamento seguro. Observab
 4. **Subir** o Airflow com Docker.
 
 ## Plano de aulas (unidades)
-1. Orquestração e DAGs; arquitetura do Airflow.
-2. Operators, tasks, sensors, dependências.
-3. Scheduling, backfill e idempotência.
-4. Observabilidade e deploy com Docker.
+
+**Unidade 1 — Orquestração, DAGs e arquitetura do Airflow**
+1. **Teoria:** [Orquestração, DAGs e arquitetura](teoria-01-orquestracao-dags-airflow.md)
+2. **Lab (🐳 Airflow real):** [Airflow na bancada: sua primeira DAG](lab-01-airflow-na-bancada.md)
+3. **Exercícios:** [Ordem topológica (🟢)](exercicio-01.md) · [Detectar ciclo (🟢)](exercicio-02.md)
+
+_Próximas unidades (em construção): operators/sensors/XComs · scheduling, backfill e idempotência · observabilidade e deploy._
 
 ## Metodologia e avaliação
 **Maestria:** DAG idempotente e agendada que reprocessa um dia sem duplicar, conforme rubrica.
