@@ -180,13 +180,23 @@ def checar_estrutura(avisos_out: list[str]) -> None:
                 f"{nome}: fluência abaixo da barra — {len(exercicios)} exercícios para "
                 f"{len(teorias)} unidades (esperado >= {2 * len(teorias)}; ≥2 por unidade)"
             )
-        # track real: módulos de ferramenta precisam de grader real
+        # track real: módulos de ferramenta precisam de prática real —
+        # um grader real (exercicio-*/conftest.py) OU um lab guiado na ferramenta real (🐳).
         if any(t in nome for t in FERRAMENTAS_REAIS):
-            tem_grader_real = bool(glob.glob(os.path.join(d, "exercicio-*", "conftest.py")))
-            if not tem_grader_real:
+            tem_conftest = bool(glob.glob(os.path.join(d, "exercicio-*", "conftest.py")))
+            tem_lab_real = False
+            for lab in glob.glob(os.path.join(d, "lab-*.md")):
+                try:
+                    txt = open(lab, encoding="utf-8").read().lower()
+                except OSError:
+                    continue
+                if "🐳" in txt or "docker compose" in txt or "docker build" in txt or "bancada docker" in txt:
+                    tem_lab_real = True
+                    break
+            if not (tem_conftest or tem_lab_real):
                 avisos_out.append(
-                    f"{nome}: ferramenta real esperada, mas nenhum exercício com grader real "
-                    f"(exercicio-*/conftest.py) — evite DuckDB disfarçado"
+                    f"{nome}: ferramenta real esperada, mas sem grader real (exercicio-*/conftest.py) "
+                    f"nem lab guiado na ferramenta (🐳) — evite DuckDB disfarçado"
                 )
 
 

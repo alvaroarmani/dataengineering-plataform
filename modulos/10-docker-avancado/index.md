@@ -22,9 +22,23 @@ segredos. Boas práticas de reprodutibilidade e deploy local. Introdução a reg
 3. **Gerenciar** variáveis de ambiente e segredos com segurança.
 
 ## Plano de aulas (unidades)
-1. Dockerfile avançado e imagens enxutas.
-2. Redes, volumes e compose multi-serviço.
-3. Env/segredos e reprodutibilidade; registries.
+
+**Unidade 1 — Dockerfile avançado e imagens enxutas**
+1. **Teoria:** [Dockerfile: camadas, cache, imagens enxutas](teoria-01-dockerfile-imagens.md)
+2. **Lab (🐳 Docker real):** [Dockerfile multi-stage e cache](lab-01-dockerfile-multistage.md)
+3. **Exercícios:** [Cache de camadas (🟢)](exercicio-01.md) · [.dockerignore (🟢)](exercicio-02.md)
+
+**Unidade 2 — Redes, volumes e Compose multi-serviço**
+1. **Teoria:** [Redes, volumes e Compose](teoria-02-redes-volumes-compose.md)
+2. **Lab (🐳 Docker real):** [Compose multi-serviço: redes e volumes](lab-02-compose-multiservico.md)
+3. **Exercícios:** [Ordem de subida (🟢)](exercicio-03.md) · [Mapeamento de portas (🟢)](exercicio-04.md)
+
+**Unidade 3 — Env, segredos, reprodutibilidade e registries**
+1. **Teoria:** [Env, segredos e registries](teoria-03-env-segredos-registries.md)
+2. **Lab (🐳 Docker real):** [Env, segredos e registry](lab-03-env-registry.md)
+3. **Exercícios:** [Resolver env ${VAR:-default} (🟢)](exercicio-05.md) · [Parse de imagem (🟢)](exercicio-06.md)
+
+> **Módulo completo.** Fecha o **Eixo 3 (Pipelines e Orquestração)** — ingestão (M8), orquestração (M9) e containers (M10).
 
 ## Metodologia e avaliação
 **Maestria:** conteinerizar um pipeline multi-serviço com compose, conforme rubrica + quiz ≥ 80%.
