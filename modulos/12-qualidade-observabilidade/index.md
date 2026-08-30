@@ -24,10 +24,25 @@ confiabilidade (data downtime).
 4. **Explicar** o conceito de data contract.
 
 ## Plano de aulas (unidades)
-1. Dimensões de qualidade; data contracts.
-2. Testes de dados (dbt + Great Expectations).
-3. Observabilidade: freshness, volume, anomalias.
-4. Monitoramento e alertas.
+
+**Unidade 1 — Dimensões de qualidade e data contracts**
+1. **Teoria:** [Dimensões de qualidade e data contracts](teoria-01-dimensoes-qualidade-contracts.md)
+2. **Exercícios:** [Completude (🟢)](exercicio-01.md) · [Validar contrato (🟢)](exercicio-02.md)
+
+**Unidade 2 — Testes de dados (dbt + Great Expectations)**
+1. **Teoria:** [Testes: dbt e Great Expectations](teoria-02-testes-dbt-ge.md)
+2. **Lab:** [Checagens de qualidade como queries](lab-01-checagens-qualidade.ipynb)
+3. **Exercícios:** [Unicidade: duplicados (🟢)](exercicio-03.md) · [Validade: fora do domínio (🟢)](exercicio-04.md)
+
+**Unidade 3 — Observabilidade: freshness, volume, anomalias**
+1. **Teoria:** [Observabilidade: freshness, volume, anomalias](teoria-03-observabilidade-freshness-anomalias.md)
+2. **Exercícios:** [Freshness/SLA (🟢)](exercicio-05.md) · [Anomalia de volume (🟢)](exercicio-06.md)
+
+**Unidade 4 — Monitoramento e alertas**
+1. **Teoria:** [Monitoramento, alertas e confiabilidade](teoria-04-monitoramento-alertas.md)
+2. **Exercícios:** [Deve alertar? (🟢)](exercicio-07.md) · [Fora da faixa (🟢)](exercicio-08.md)
+
+> **Módulo completo.** Qualidade + observabilidade — a confiança que sustenta todo o resto.
 
 ## Metodologia e avaliação
 **Maestria:** suíte de qualidade sobre um pipeline com alerta em falha, conforme rubrica + quiz ≥ 80%.
