@@ -23,9 +23,21 @@ versionamento de dados e ambientes.
 3. **Explicar** IaC e provisionar um recurso simples com Terraform.
 
 ## Plano de aulas (unidades)
-1. DataOps e fluxos de Git para dados.
-2. CI/CD (GitHub Actions) para dbt/pipelines.
-3. Introdução a Terraform (IaC).
+
+**Unidade 1 — DataOps e fluxos de Git para dados**
+1. **Teoria:** [DataOps e Git para dados](teoria-01-dataops-git.md)
+2. **Exercícios:** [Pode fazer merge? (🟢)](exercicio-01.md) · [Ambiente do branch (🟢)](exercicio-02.md)
+
+**Unidade 2 — CI/CD com GitHub Actions**
+1. **Teoria:** [CI/CD com GitHub Actions](teoria-02-cicd-github-actions.md)
+2. **Artefato real:** [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) — o CI deste repo (linter + build)
+3. **Exercícios:** [Rodar pipeline (🟢)](exercicio-03.md) · [Deve deployar? (🟢)](exercicio-04.md)
+
+**Unidade 3 — Introdução a Terraform (IaC)**
+1. **Teoria:** [Terraform e Infraestrutura como Código](teoria-03-terraform-iac.md)
+2. **Exercícios:** [Plano do Terraform / diff (🟢)](exercicio-05.md) · [Nº de mudanças (🟢)](exercicio-06.md)
+
+> **Módulo completo.** DataOps, CI/CD e IaC — a disciplina que leva dados a produção com segurança.
 
 ## Metodologia e avaliação
 **Maestria:** repositório com CI que roda testes a cada PR, conforme rubrica + quiz ≥ 80%.

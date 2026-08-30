@@ -1,0 +1,37 @@
+# CI do curso (exemplo real do M13 — DataOps/CI-CD).
+# A cada push/PR: (1) linter de conteúdo (referências, seções, fluência) e
+# (2) build da plataforma Next. Barra o merge se algo quebrar (branch protegida).
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  conteudo:
+    name: Linter de conteúdo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Verificar padrão de conteúdo
+        run: python scripts/verificar-conteudo.py
+
+  build-web:
+    name: Build da plataforma (Next)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Instalar deps
+        working-directory: web
+        run: npm ci
+      - name: Build (sync + next build)
+        working-directory: web
+        run: npm run build
