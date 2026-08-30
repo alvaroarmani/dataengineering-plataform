@@ -14,6 +14,10 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** O que é XCom e qual o limite? / **R:** Passar valores pequenos entre tasks (o return do @task vira XCom). Dados grandes vão para storage — passe só a referência.
 - **P:** Como a TaskFlow API infere dependências? / **R:** Pela passagem de valores: somar(extrair()) faz somar depender de extrair, com o retorno vindo por XCom.
 - **P:** Fan-out vs fan-in? / **R:** Fan-out: uma task dispara várias em paralelo (a >> [b,c]); fan-in: várias convergem para uma ([b,c] >> d).
+- **P:** O que é a "data lógica" de uma execução? / **R:** O início do período que a execução cobre (execution/logical date); use-a (ex.: {{ ds }}) para processar exatamente aquele período, de forma determinística.
+- **P:** Catchup vs backfill? / **R:** Catchup roda automaticamente as execuções pendentes ao ligar a DAG; backfill reprocessa datas passadas de propósito.
+- **P:** Dois padrões de idempotência na carga de um dia? / **R:** Overwrite da partição (DELETE do dia + INSERT) e upsert por chave (ON CONFLICT).
+- **P:** Por que idempotência é pré-requisito de backfill? / **R:** Backfill reexecuta datas; sem idempotência, cada reexecução duplicaria os dados do período.
 
 ---
 **Revisado em:** 2026-08-29

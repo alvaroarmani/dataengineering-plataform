@@ -35,7 +35,12 @@ dados (XComs) e boas práticas. Idempotência e reprocessamento seguro. Observab
 2. **Lab (🐳 Airflow real):** [TaskFlow API e XCom](lab-02-taskflow-xcom.md)
 3. **Exercícios:** [XCom entre tasks (🟢)](exercicio-03.md) · [Sensor: poke até liberar (🟢)](exercicio-04.md)
 
-_Próximas unidades (em construção): scheduling, backfill e idempotência · observabilidade e deploy._
+**Unidade 3 — Scheduling, backfill e idempotência**
+1. **Teoria:** [Scheduling, backfill e idempotência](teoria-03-scheduling-backfill-idempotencia.md)
+2. **Lab (🐳 Airflow real):** [Backfill idempotente](lab-03-backfill-idempotente.md)
+3. **Exercícios:** [Carga idempotente do dia (🐳 Postgres real)](exercicio-05.md) · [Overwrite em Python (🟢)](exercicio-06.md)
+
+_Próxima unidade (em construção): observabilidade (logs, retries, alertas) e deploy com Docker._
 
 ## Metodologia e avaliação
 **Maestria:** DAG idempotente e agendada que reprocessa um dia sem duplicar, conforme rubrica.
