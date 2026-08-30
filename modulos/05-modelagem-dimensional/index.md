@@ -34,22 +34,22 @@ processos de negócio.
 **Unidade 1 — Fatos, dimensões e grão**
 1. **Teoria:** [Fatos, dimensões e grão](teoria-01-fatos-dimensoes-grao.md)
 2. **Lab:** [Um star schema na prática](lab-01-star-schema.ipynb)
-3. **Exercício:** [Consultando um star schema](exercicio-01.md)
+3. **Exercícios:** [Consultando um star schema](exercicio-01.md) · [Quantidade e receita no star](exercicio-05.md)
 
 **Unidade 2 — Surrogate keys (chaves substitutas)**
 1. **Teoria:** [Surrogate keys](teoria-02-surrogate-keys.md)
 2. **Lab:** [Surrogate keys na prática](lab-02-surrogate-keys.ipynb)
-3. **Exercício:** [Gerar e usar surrogate keys](exercicio-02.md)
+3. **Exercícios:** [Gerar e usar surrogate keys](exercicio-02.md) · [SK: gerar e usar (2)](exercicio-06.md)
 
 **Unidade 3 — Slowly Changing Dimensions (SCD)**
 1. **Teoria:** [SCDs: versionando o histórico](teoria-03-scd.md)
 2. **Lab:** [SCD Tipo 2 na prática](lab-03-scd.ipynb)
-3. **Exercício:** [Consultando uma dimensão SCD2](exercicio-03.md)
+3. **Exercícios:** [Consultando uma dimensão SCD2](exercicio-03.md) · [SCD2: atual e point-in-time (2)](exercicio-07.md)
 
 **Unidade 4 — Modelando a partir de um processo de negócio (Olist)**
 1. **Teoria:** [Modelando a partir de um processo de negócio](teoria-04-modelando-processo-negocio.md)
 2. **Lab:** [Modelando o Olist: do staging ao star](lab-04-modelar-olist.ipynb)
-3. **Exercício:** [Analisando o star schema do Olist](exercicio-04.md)
+3. **Exercícios:** [Analisando o star schema do Olist](exercicio-04.md) · [Frete e ticket no star](exercicio-08.md)
 
 > **Módulo completo.** A modelagem dimensional aprendida aqui será consolidada no projeto integrador do Eixo 2 e no TCC (Data Warehouse).
 

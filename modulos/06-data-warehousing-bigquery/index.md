@@ -28,17 +28,17 @@ outros DWs cloud (Snowflake, Redshift) — conceitual.
 **Unidade 1 — Conceitos e arquiteturas de DW (Inmon vs Kimball)**
 1. **Teoria:** [Conceitos e arquiteturas de DW](teoria-01-conceitos-arquiteturas-dw.md)
 2. **Lab:** [Arquitetura em camadas (raw → core → mart)](lab-01-camadas-dw.ipynb)
-3. **Exercício:** [Camadas de um DW: do raw ao mart](exercicio-01.md)
+3. **Exercícios:** [Camadas de um DW: do raw ao mart](exercicio-01.md) · [Core e mart (agregações)](exercicio-06.md)
 
 **Unidade 2 — Colunar, compressão, particionamento e clustering**
 1. **Teoria:** [Por que o DW é rápido](teoria-02-colunar-particionamento.md)
 2. **Lab:** [Colunar e particionamento na prática](lab-02-colunar-particionamento.ipynb)
-3. **Exercício:** [Colunar e particionamento](exercicio-02.md)
+3. **Exercícios:** [Colunar e particionamento](exercicio-02.md) · [Filtro por partição e agregação](exercicio-07.md)
 
 **Unidade 3 — BigQuery na prática (ferramenta real, dual-track)**
 1. **Teoria:** [BigQuery: serverless, carga, partição/cluster e custo](teoria-03-pratica-bigquery.md)
 2. **Lab (☁️ cloud):** [BigQuery na prática — walkthrough guiado](lab-03-bigquery-na-pratica.md)
-3. **Exercício (🐳 Postgres real):** [Particionamento no Postgres](exercicio-03.md)
+3. **Exercícios:** [Particionamento no Postgres (🐳 real)](exercicio-03.md) · [Pruning por intervalo de data (🟢)](exercicio-08.md)
 
 **Unidade 4 — Custos, otimização e panorama de DWs cloud**
 1. **Teoria:** [Custos, otimização e panorama cloud](teoria-04-custos-panorama-cloud.md)
