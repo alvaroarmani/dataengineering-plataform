@@ -64,5 +64,9 @@ O TCC recombina tudo: modelagem (M05), DW/BigQuery (M06), dbt (M07), ingestão (
 Airflow (M09), Docker (M10) e qualidade (M12). Use a IA como **banca**: peça arguição
 crítica das suas decisões de arquitetura.
 
+O **Módulo 16** ([`modulos/16-tcc-data-warehouse/`](../modulos/16-tcc-data-warehouse/index.md))
+guia o TCC em 4 etapas (planejamento → modelagem → ingestão/dbt → orquestração/entrega), e há um
+**scaffold pronto** em [`tcc/starter/`](starter/) — copie-o para um novo repositório e preencha os `TODO`.
+
 ---
 **Revisado em:** 2026-08-20

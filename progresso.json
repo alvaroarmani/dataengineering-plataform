@@ -45,7 +45,7 @@
       "nome": "Carreira e Integração",
       "modulos": [
         {"id": "M15", "nome": "Carreira, Portfólio e Entrevistas", "ch": 20, "status": "nao-iniciado"},
-        {"id": "TCC", "nome": "TCC — Data Warehouse completo", "ch": 60, "status": "nao-iniciado"}
+        {"id": "M16", "nome": "TCC — Data Warehouse completo", "ch": 60, "status": "nao-iniciado"}
       ]
     }
   ]

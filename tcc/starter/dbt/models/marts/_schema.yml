@@ -1,0 +1,16 @@
+version: 2
+models:
+  - name: fct_pedidos
+    description: "Fato de vendas no grão de item de pedido."
+    columns:
+      - name: pedido_id
+        tests: [not_null]
+      - name: item_id
+        tests: [not_null]
+      - name: valor
+        # TODO: some accepted_range (>=0) com dbt_utils.
+        tests: [not_null]
+      # TODO: adicione relationships da fato para cada dimensão:
+      # - name: produto_id
+      #   tests:
+      #     - relationships: {to: ref('dim_produto'), field: produto_id}

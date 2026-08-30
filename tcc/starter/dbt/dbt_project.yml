@@ -1,0 +1,13 @@
+# Projeto dbt do TCC. TODO: ajuste o profile em ~/.dbt/profiles.yml apontando para o Postgres.
+name: dw_ecommerce
+version: "1.0.0"
+config-version: 2
+profile: dw_ecommerce
+model-paths: ["models"]
+snapshot-paths: ["snapshots"]
+models:
+  dw_ecommerce:
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table

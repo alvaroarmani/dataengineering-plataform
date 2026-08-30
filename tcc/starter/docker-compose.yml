@@ -1,0 +1,37 @@
+# Stack mínimo do TCC: Postgres (DW) + Airflow. Fixe as versões (reprodutibilidade).
+# TODO: some o serviço dbt (ou rode dbt dentro do Airflow) conforme sua escolha.
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: dw
+      POSTGRES_PASSWORD: dw
+      POSTGRES_DB: dw
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dw"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # airflow-standalone: exemplo simples (1 container) para desenvolvimento.
+  # TODO: substitua pela sua config de Airflow (LocalExecutor, etc.).
+  airflow:
+    image: apache/airflow:2.9.3
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+    ports:
+      - "8080:8080"
+    command: standalone
+
+volumes:
+  pgdata:

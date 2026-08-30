@@ -25,10 +25,20 @@ Professional Data Engineer). Mapa de vagas e como se candidatar.
 4. **Planejar** certificações complementares.
 
 ## Plano de aulas (unidades)
-1. Portfólio e READMEs que convencem.
-2. Currículo e LinkedIn para dados.
-3. Entrevistas: SQL ao vivo, modelagem, system design, comportamental.
-4. Certificações e estratégia de candidatura.
+
+**Unidade 1 — Portfólio, GitHub, currículo e LinkedIn**
+1. **Teoria:** [Portfólio, GitHub, currículo e LinkedIn](teoria-01-portfolio-github-curriculo.md)
+2. **Exercícios:** [README completo? (🟢)](exercicio-01.md) · [Projetos prontos p/ portfólio (🟢)](exercicio-02.md)
+
+**Unidade 2 — Entrevista técnica: SQL ao vivo e modelagem**
+1. **Teoria:** [A entrevista técnica: SQL ao vivo e case de modelagem](teoria-02-entrevista-sql-modelagem.md)
+2. **Exercícios:** [SQL ao vivo — top N por grupo (🟢 DuckDB)](exercicio-03.md) · [Separar fatos e dimensões (🟢)](exercicio-04.md)
+
+**Unidade 3 — System design de pipeline e certificações**
+1. **Teoria:** [System design de pipeline e trilha de certificações](teoria-03-system-design-certificacoes.md)
+2. **Exercícios:** [Batch ou streaming? (🟢)](exercicio-05.md) · [Undercurrents faltando (🟢)](exercicio-06.md)
+
+> **Módulo completo.** Prepara a transição da competência para a oferta de emprego.
 
 ## Metodologia e avaliação
 **Maestria:** portfólio publicado + currículo revisado + um *mock interview* (use a IA como banca).
