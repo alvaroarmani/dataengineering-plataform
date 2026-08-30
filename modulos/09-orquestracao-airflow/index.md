@@ -30,7 +30,12 @@ dados (XComs) e boas práticas. Idempotência e reprocessamento seguro. Observab
 2. **Lab (🐳 Airflow real):** [Airflow na bancada: sua primeira DAG](lab-01-airflow-na-bancada.md)
 3. **Exercícios:** [Ordem topológica (🟢)](exercicio-01.md) · [Detectar ciclo (🟢)](exercicio-02.md)
 
-_Próximas unidades (em construção): operators/sensors/XComs · scheduling, backfill e idempotência · observabilidade e deploy._
+**Unidade 2 — Operators, tasks, sensors e XComs**
+1. **Teoria:** [Operators, sensors e XComs](teoria-02-operators-sensors-xcoms.md)
+2. **Lab (🐳 Airflow real):** [TaskFlow API e XCom](lab-02-taskflow-xcom.md)
+3. **Exercícios:** [XCom entre tasks (🟢)](exercicio-03.md) · [Sensor: poke até liberar (🟢)](exercicio-04.md)
+
+_Próximas unidades (em construção): scheduling, backfill e idempotência · observabilidade e deploy._
 
 ## Metodologia e avaliação
 **Maestria:** DAG idempotente e agendada que reprocessa um dia sem duplicar, conforme rubrica.
