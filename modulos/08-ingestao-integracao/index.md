@@ -30,7 +30,12 @@ streaming e mensageria (Kafka) — conceitual e demo.
 2. **Lab:** [Ingestão incremental e idempotente (DuckDB)](lab-01-ingestao-incremental.ipynb)
 3. **Exercícios:** [Upsert idempotente (🐳 Postgres real)](exercicio-01.md) · [Lógica do incremental (🟢)](exercicio-02.md)
 
-_Próximas unidades (em construção): ingestão de arquivos e bancos · ingestão de APIs (paginação, rate limit) · formatos (Parquet/Avro) e intro a Kafka._
+**Unidade 2 — Ingestão de arquivos e bancos**
+1. **Teoria:** [Arquivos e bancos: landing zone, COPY, dedup](teoria-02-ingestao-arquivos-bancos.md)
+2. **Lab:** [Ingerir um arquivo e deduplicar a reentrega](lab-02-arquivos-dedup.ipynb)
+3. **Exercícios:** [Dedup de reentrega (🐳 Postgres real)](exercicio-03.md) · [Dedup em Python (🟢)](exercicio-04.md)
+
+_Próximas unidades (em construção): ingestão de APIs (paginação, rate limit) · formatos (Parquet/Avro) e intro a Kafka._
 
 ## Metodologia e avaliação
 **Maestria:** implementar ingestão incremental de uma API idempotente, conforme rubrica + quiz ≥ 80%.

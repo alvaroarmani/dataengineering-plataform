@@ -9,6 +9,10 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** Como um upsert garante idempotência? / **R:** `INSERT ... ON CONFLICT (chave) DO UPDATE` insere se novo, atualiza se existe — reexecutar não duplica.
 - **P:** O que é CDC e as duas abordagens? / **R:** Change Data Capture = capturar as mudanças da origem. Por query (updated_at; sem deletes) ou por log (lê o log de transações; pega tudo, ~tempo real).
 - **P:** Por que o incremental por query não pega deletes? / **R:** Ele só vê linhas presentes com updated_at > marca; uma linha apagada some da origem sem aparecer. Precisa de CDC por log ou soft-delete.
+- **P:** O que é uma landing zone? / **R:** Onde o arquivo cru é pousado (MinIO/S3) antes de transformar — imutável, permite reprocessar; a camada raw/bronze com arquivos.
+- **P:** Por que COPY em vez de INSERT para arquivos grandes? / **R:** COPY faz carga em bloco, ordens de grandeza mais rápida que INSERT linha a linha.
+- **P:** Schema-on-write vs schema-on-read? / **R:** On-write define o schema ao gravar (banco relacional); on-read guarda cru e aplica schema na leitura (data lake, mais flexível).
+- **P:** Como deduplicar um arquivo reentregue ficando com a versão mais nova? / **R:** ROW_NUMBER() OVER (PARTITION BY chave ORDER BY carregado_em DESC) e filtrar rn = 1.
 
 ---
 **Revisado em:** 2026-08-29
