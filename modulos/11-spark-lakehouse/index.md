@@ -24,10 +24,25 @@ tabela **Delta/Iceberg** (ACID, time travel). Noções de otimização e custo.
 4. **Discutir** trade-offs de particionamento e custo.
 
 ## Plano de aulas (unidades)
-1. Processamento distribuído; arquitetura do Spark.
-2. PySpark: DataFrames, transformações e ações.
-3. Partições, shuffle e otimização.
-4. Data Lake/Lakehouse; Delta/Iceberg; MinIO.
+
+**Unidade 1 — Processamento distribuído e arquitetura do Spark**
+1. **Teoria:** [Distribuído e arquitetura do Spark](teoria-01-distribuido-arquitetura-spark.md)
+2. **Exercícios:** [Transformação vs ação (🟢)](exercicio-01.md) · [Quando executa — lazy (🟢)](exercicio-02.md)
+
+**Unidade 2 — PySpark: DataFrames, transformações e ações**
+1. **Teoria:** [PySpark: DataFrames](teoria-02-pyspark-dataframes.md)
+2. **Lab (🐳 Spark real):** [PySpark na bancada](lab-01-pyspark-na-bancada.md)
+3. **Exercícios:** [Agregação por categoria (🟢)](exercicio-03.md) · [withColumn imutável (🟢)](exercicio-04.md)
+
+**Unidade 3 — Partições, shuffle e otimização**
+1. **Teoria:** [Partições, shuffle e otimização](teoria-03-particoes-shuffle-otimizacao.md)
+2. **Exercícios:** [Causa shuffle? (🟢)](exercicio-05.md) · [Contar shuffles (🟢)](exercicio-06.md)
+
+**Unidade 4 — Data Lake, Lakehouse e Delta/Iceberg**
+1. **Teoria:** [Lakehouse, Delta/Iceberg e MinIO](teoria-04-lakehouse-delta-minio.md)
+2. **Exercícios:** [Time travel: versão (🟢)](exercicio-07.md) · [Schema enforcement (🟢)](exercicio-08.md)
+
+> **Módulo completo.** Processamento em escala + lakehouse — base para o TCC com dados grandes.
 
 ## Metodologia e avaliação
 **Maestria:** job PySpark que agrega um dataset grande e grava em Delta/MinIO, conforme rubrica.
