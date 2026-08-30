@@ -18,6 +18,11 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** Onde guardar a chave de uma API? / **R:** Em variável de ambiente — nunca no código/commit (é segredo).
 - **P:** Como fazer ingestão incremental de uma API? / **R:** Filtro de data (ex.: ?since=) + marca d'água: guarda a última data e pede só o que veio depois.
 - **P:** Por que sempre usar timeout numa requisição? / **R:** Para não pendurar o pipeline se a API não responder — falha rápido e você trata/reintenta.
+- **P:** Parquet vs CSV? / **R:** Parquet é colunar, binário, comprimido e com schema (ótimo p/ análise/DW); CSV é linha, texto, sem tipos — só p/ interop, ruim p/ volume.
+- **P:** Por que Avro é comum em streaming? / **R:** Linha, binário, guarda o schema junto e suporta evolução de schema — encaixa em mensageria (Kafka).
+- **P:** O que é evolução de schema? / **R:** Mudar o schema no tempo (ex.: campo novo opcional) sem quebrar quem lê o dado antigo.
+- **P:** Batch vs streaming? / **R:** Batch processa lotes periódicos (simples/barato); streaming processa eventos contínuos com baixa latência (fraude, dashboards ao vivo).
+- **P:** O que é o Kafka em uma frase? / **R:** Um log distribuído de mensagens: produtores escrevem em tópicos (partições), consumidores leem por offset e committam até onde leram.
 
 ---
 **Revisado em:** 2026-08-29

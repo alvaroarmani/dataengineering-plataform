@@ -40,7 +40,12 @@ streaming e mensageria (Kafka) — conceitual e demo.
 2. **Lab (🐳 API real):** [Ingerir a API do Banco Central](lab-03-api-banco-central.md)
 3. **Exercícios:** [Paginação (🟢)](exercicio-05.md) · [Retry para rate limit (🟢)](exercicio-06.md)
 
-_Próxima unidade (em construção): formatos de dados (Parquet/Avro) e intro a Kafka._
+**Unidade 4 — Formatos (Parquet/Avro) e intro a Kafka**
+1. **Teoria:** [Formatos de dados e streaming (Kafka)](teoria-04-formatos-kafka.md)
+2. **Lab:** [Parquet na prática](lab-04-parquet.ipynb)
+3. **Exercícios:** [Validar contra um schema (🟢)](exercicio-07.md) · [Consumo por offset — Kafka (🟢)](exercicio-08.md)
+
+> **Módulo completo.** Ingestão confiável (incremental, idempotente, APIs, formatos) — base direta para orquestrar tudo com **Airflow** (M09).
 
 ## Metodologia e avaliação
 **Maestria:** implementar ingestão incremental de uma API idempotente, conforme rubrica + quiz ≥ 80%.
