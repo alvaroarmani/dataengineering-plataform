@@ -18,6 +18,10 @@ Revisão espaçada. Cubra a resposta, responda de memória, confira.
 - **P:** Catchup vs backfill? / **R:** Catchup roda automaticamente as execuções pendentes ao ligar a DAG; backfill reprocessa datas passadas de propósito.
 - **P:** Dois padrões de idempotência na carga de um dia? / **R:** Overwrite da partição (DELETE do dia + INSERT) e upsert por chave (ON CONFLICT).
 - **P:** Por que idempotência é pré-requisito de backfill? / **R:** Backfill reexecuta datas; sem idempotência, cada reexecução duplicaria os dados do período.
+- **P:** O que `retries=2` significa? / **R:** Até 3 tentativas no total (1 + 2 retries), com retry_delay entre elas — e só é seguro com tasks idempotentes.
+- **P:** Como o Airflow avisa de uma falha? / **R:** on_failure_callback (função no failure → Slack/e-mail) e SLAs (aviso se estourar o prazo), além de logs e do estado na UI.
+- **P:** Quais processos compõem um deploy do Airflow? / **R:** Scheduler, webserver (UI), workers/executor e o metadata DB (Postgres) — subindo juntos, tipicamente via Docker/Compose.
+- **P:** Onde guardar segredos de uma DAG? / **R:** Em Connections/Variables do Airflow ou env vars — nunca no código da DAG.
 
 ---
 **Revisado em:** 2026-08-29

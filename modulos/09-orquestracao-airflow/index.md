@@ -40,7 +40,12 @@ dados (XComs) e boas práticas. Idempotência e reprocessamento seguro. Observab
 2. **Lab (🐳 Airflow real):** [Backfill idempotente](lab-03-backfill-idempotente.md)
 3. **Exercícios:** [Carga idempotente do dia (🐳 Postgres real)](exercicio-05.md) · [Overwrite em Python (🟢)](exercicio-06.md)
 
-_Próxima unidade (em construção): observabilidade (logs, retries, alertas) e deploy com Docker._
+**Unidade 4 — Observabilidade e deploy**
+1. **Teoria:** [Observabilidade e deploy do Airflow](teoria-04-observabilidade-deploy.md)
+2. **Lab (🐳 Airflow real):** [Retries e alertas](lab-04-retries-alertas.md)
+3. **Exercícios:** [Retries do Airflow (🟢)](exercicio-07.md) · [Estado do DAG run (🟢)](exercicio-08.md)
+
+> **Módulo completo.** Orquestração real (DAGs, operators, scheduling idempotente, observabilidade) — pronto para o **M10 (Docker avançado)** e o TCC.
 
 ## Metodologia e avaliação
 **Maestria:** DAG idempotente e agendada que reprocessa um dia sem duplicar, conforme rubrica.
