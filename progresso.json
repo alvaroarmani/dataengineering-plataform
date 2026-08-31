@@ -27,7 +27,8 @@
       "modulos": [
         {"id": "M08", "nome": "Ingestão e Integração", "ch": 30, "status": "nao-iniciado"},
         {"id": "M09", "nome": "Orquestração com Airflow", "ch": 40, "status": "nao-iniciado"},
-        {"id": "M10", "nome": "Docker avançado", "ch": 25, "status": "nao-iniciado"}
+        {"id": "M10", "nome": "Docker avançado", "ch": 25, "status": "nao-iniciado"},
+        {"id": "M17", "nome": "Streaming e Tempo Real (Kafka)", "ch": 30, "status": "nao-iniciado"}
       ]
     },
     {
