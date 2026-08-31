@@ -100,6 +100,24 @@ services:
         condition: service_healthy
     command: standalone
 
+  # --- NoSQL (M18): documento (MongoDB) + key-value (Redis) ---
+  #     docker compose --profile nosql up -d
+  mongo:
+    image: mongo:7.0
+    container_name: de-mongo
+    profiles: ["nosql"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+
+  redis:
+    image: redis:7.4
+    container_name: de-redis
+    profiles: ["nosql"]
+    ports:
+      - "6379:6379"
+
   # --- Kafka (M17): broker único em modo KRaft (sem ZooKeeper) para streaming ---
   #     docker compose --profile kafka up -d
   kafka:
@@ -142,3 +160,4 @@ volumes:
   miniodata:
   airflow-logs:
   kafkadata:
+  mongodata:

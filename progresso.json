@@ -9,7 +9,8 @@
         {"id": "M01", "nome": "Fundamentos de Eng. de Dados", "ch": 30, "status": "nao-iniciado"},
         {"id": "M02", "nome": "Linux, Git e Ambiente", "ch": 20, "status": "nao-iniciado"},
         {"id": "M03", "nome": "Python para Eng. de Dados", "ch": 60, "status": "nao-iniciado"},
-        {"id": "M04", "nome": "SQL e Bancos Relacionais", "ch": 45, "status": "nao-iniciado"}
+        {"id": "M04", "nome": "SQL e Bancos Relacionais", "ch": 45, "status": "nao-iniciado"},
+        {"id": "M18", "nome": "Bancos NoSQL e Não-Relacionais", "ch": 25, "status": "nao-iniciado"}
       ]
     },
     {
