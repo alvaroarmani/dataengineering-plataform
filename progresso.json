@@ -29,7 +29,8 @@
         {"id": "M08", "nome": "Ingestão e Integração", "ch": 30, "status": "nao-iniciado"},
         {"id": "M09", "nome": "Orquestração com Airflow", "ch": 40, "status": "nao-iniciado"},
         {"id": "M10", "nome": "Docker avançado", "ch": 25, "status": "nao-iniciado"},
-        {"id": "M17", "nome": "Streaming e Tempo Real (Kafka)", "ch": 30, "status": "nao-iniciado"}
+        {"id": "M17", "nome": "Streaming e Tempo Real (Kafka)", "ch": 30, "status": "nao-iniciado"},
+        {"id": "M20", "nome": "Cloud e Kubernetes", "ch": 30, "status": "nao-iniciado"}
       ]
     },
     {
@@ -39,7 +40,9 @@
         {"id": "M11", "nome": "Spark + Lakehouse", "ch": 40, "status": "nao-iniciado"},
         {"id": "M12", "nome": "Qualidade e Observabilidade", "ch": 25, "status": "nao-iniciado"},
         {"id": "M13", "nome": "DataOps, CI/CD e IaC", "ch": 25, "status": "nao-iniciado"},
-        {"id": "M14", "nome": "Governança, Segurança e LGPD", "ch": 20, "status": "nao-iniciado"}
+        {"id": "M14", "nome": "Governança, Segurança e LGPD", "ch": 20, "status": "nao-iniciado"},
+        {"id": "M19", "nome": "Sistemas Distribuídos para Dados", "ch": 25, "status": "nao-iniciado"},
+        {"id": "M21", "nome": "Data como Produto e FinOps", "ch": 20, "status": "nao-iniciado"}
       ]
     },
     {
