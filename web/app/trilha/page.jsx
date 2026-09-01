@@ -9,6 +9,7 @@ export default function Trilha() {
     <main className="wrap" style={{ paddingTop: 32, paddingBottom: 48 }}>
       <h1 style={{ fontSize: 30 }}>Trilha da Especialização</h1>
       <p className="muted" style={{ fontSize: 16, margin: '8px 0 0' }}>{total} disciplinas · {curso.eixos.length} eixos — avance por maestria, um módulo por vez.</p>
+      <p className="muted" style={{ fontSize: 13, margin: '6px 0 0' }}>Siga na ordem apresentada dentro de cada eixo. O código <strong>M##</strong> é um identificador estável do módulo (como um código de disciplina), não a sua posição na trilha.</p>
 
       <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 26 }}>
         {curso.eixos.map((eixo) => (

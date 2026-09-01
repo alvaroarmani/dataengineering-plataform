@@ -6,7 +6,7 @@
 ## Identificação
 - **Eixo:** 3 — Pipelines e Orquestração
 - **Carga horária:** 30h
-- **Pré-requisitos:** M10 (Docker), M13 (IaC/Terraform)
+- **Pré-requisitos:** M10 (Docker) · *recomendado (aprofunda):* M13 (IaC/Terraform, Eixo 4)
 - **Onde roda:** 🟢 Browser (exercícios de lógica) + 🐳 Kubernetes local via **kind** (lab avançado)
 
 ## Ementa
