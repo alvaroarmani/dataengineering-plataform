@@ -38,10 +38,21 @@ Não há pré-requisitos. Se você já atua com dados e sabe explicar OLTP vs OL
 e batch vs streaming, faça o [exercício](exercicio-01.md) direto — passando, pode avançar ao M02.
 
 ## Plano de aulas (unidades)
+
+**Unidade 1 — Panorama e ciclo de vida do dado**
 1. **Teoria:** [O que é Engenharia de Dados](teoria-01-o-que-e-engenharia-de-dados.md)
 2. **Lab:** [Primeiro contato com dados](lab-01-primeiro-contato-dados.ipynb)
-3. **Exercício:** [Exercício 01](exercicio-01.md)
-4. **Revisão:** [Flashcards](flashcards.md)
+3. **Exercícios:** [Receita por estado (🟢)](exercicio-01.md) · [Ordenar o ciclo de vida (🟢)](exercicio-03.md)
+
+**Unidade 2 — OLTP × OLAP e armazenamento colunar**
+1. **Teoria:** [OLTP vs OLAP e o armazenamento colunar](teoria-02-oltp-olap-colunar.md)
+2. **Exercícios:** [OLTP ou OLAP? (🟢)](exercicio-02.md) · [Vantagem do colunar (🟢)](exercicio-05.md) · [Armazenamento ideal (🟢)](exercicio-06.md)
+
+**Unidade 3 — Arquiteturas de dados**
+1. **Teoria:** [Arquiteturas: DW, Data Lake, Lakehouse e além](teoria-03-arquiteturas-dados.md)
+2. **Exercícios:** [Qual arquitetura? (🟢)](exercicio-04.md)
+
+**Revisão:** [Flashcards](flashcards.md)
 
 ## Metodologia e avaliação
 Ciclo problema → teoria → lab → exercício → revisão. **Critério de maestria:**

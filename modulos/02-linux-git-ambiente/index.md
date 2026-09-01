@@ -29,10 +29,21 @@ GitHub. Introdução a containers com Docker (imagens, containers, volumes) e us
 3. **Subir** a bancada Docker e entender imagem × container × volume.
 
 ## Plano de aulas (unidades)
+
+**Unidade 1 — Terminal, ambiente e a bancada**
 1. **Teoria:** [Terminal, Git e containers](teoria-01-terminal-git-containers.md)
 2. **Lab:** [Montando a bancada e seu primeiro commit](lab-01-montando-a-bancada.md)
-3. **Exercício:** [O que o `.gitignore` ignora](exercicio-01.md)
-4. **Revisão:** [Flashcards](flashcards.md)
+3. **Exercício:** [O que o `.gitignore` ignora (🟢)](exercicio-01.md)
+
+**Unidade 2 — Git em profundidade**
+1. **Teoria:** [Git: commits, branches e colaboração](teoria-02-git-em-profundidade.md)
+2. **Exercícios:** [Versionar ou não? (🟢)](exercicio-02.md) · [Commit válido? (🟢)](exercicio-03.md) · [Arquivos staged (🟢)](exercicio-04.md)
+
+**Unidade 3 — Docker e containers**
+1. **Teoria:** [Docker e containers](teoria-03-docker-containers.md)
+2. **Exercícios:** [Imagem, container ou volume? (🟢)](exercicio-05.md) · [Mapeamento de porta (🟢)](exercicio-06.md)
+
+**Revisão:** [Flashcards](flashcards.md)
 
 ## Metodologia e avaliação
 **Maestria:** publicar um repositório no GitHub + subir a bancada Docker + `pytest` verde
