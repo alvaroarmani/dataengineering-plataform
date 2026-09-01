@@ -1,0 +1,13 @@
+# CI do projeto — roda os testes de qualidade a cada push/PR (o portão automático).
+name: ci
+on: [push, pull_request]
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: projetos/eixo-4-escala-governanca/starter } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - run: pytest -q

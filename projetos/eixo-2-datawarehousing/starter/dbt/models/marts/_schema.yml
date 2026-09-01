@@ -1,0 +1,6 @@
+version: 2
+models:
+  - name: fct_vendas
+    columns:
+      - name: pedido_id
+        tests: [not_null, unique]   # grão de 1 linha por pedido

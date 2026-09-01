@@ -1,0 +1,11 @@
+name: 'eixo2_dw'
+version: '1.0.0'
+config-version: 2
+profile: 'curso'
+model-paths: ["models"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+models:
+  eixo2_dw:
+    staging:  {+materialized: view}
+    marts:    {+materialized: table}
