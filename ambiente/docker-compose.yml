@@ -142,18 +142,16 @@ services:
     volumes:
       - kafkadata:/var/lib/kafka/data
 
-  # --- Spark (M11): master + worker single-node para PySpark/Lakehouse ---
+  # --- Spark (M11): PySpark sob demanda (imagem oficial Apache Spark, modo local[*]) ---
+  #     docker compose --profile spark run --rm spark /opt/spark/bin/spark-submit /work/<job>.py
   spark:
-    image: bitnami/spark:3.5.3
+    image: apache/spark:3.5.3
     container_name: de-spark
     profiles: ["spark"]
-    ports:
-      - "8081:8080"   # UI do master
-      - "7077:7077"   # submit
-    environment:
-      SPARK_MODE: master
     volumes:
       - ../:/work
+    working_dir: /work
+    entrypoint: [""]
 
 volumes:
   pgdata:

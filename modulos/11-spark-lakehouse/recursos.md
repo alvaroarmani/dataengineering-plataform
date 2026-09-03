@@ -13,9 +13,9 @@ Curadoria de fontes. Todas registradas em [`referencias.yaml`](../../referencias
 - **Reis, J.; Housley, M. — Fundamentals of Data Engineering** (2022): escala, lake/lakehouse.
 
 ## Ferramentas na bancada
-- Profile `spark` (`bitnami/spark`) + `minio` (object storage S3 local) do `ambiente/docker-compose.yml`.
+- Profile `spark` (`apache/spark:3.5.3`) + `minio` (object storage S3 local) do `ambiente/docker-compose.yml`.
 - Exemplo PySpark: `modulos/11-spark-lakehouse/exemplo/job_spark.py`.
-- Rodar: `docker compose --profile spark run --rm spark spark-submit /work/.../job_spark.py`.
+- Rodar: `docker compose --profile spark run --rm spark /opt/spark/bin/spark-submit /work/.../job_spark.py` (Git Bash: `MSYS_NO_PATHCONV=1`).
 
 ---
 **Revisado em:** 2026-08-29

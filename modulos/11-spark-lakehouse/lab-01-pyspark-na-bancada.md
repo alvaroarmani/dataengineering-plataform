@@ -20,8 +20,11 @@ docker compose ps        # spark deve aparecer running
 ## 2. Rode um job PySpark (spark-submit)
 ```bash
 docker compose --profile spark run --rm spark \
-  spark-submit /work/modulos/11-spark-lakehouse/exemplo/job_spark.py
+  /opt/spark/bin/spark-submit /work/modulos/11-spark-lakehouse/exemplo/job_spark.py
 ```
+> No **Windows/Git Bash**, prefixe com `MSYS_NO_PATHCONV=1` para o terminal não converter o
+> caminho `/opt/...` (senão dá "no such file or directory").
+
 ✅ *Self-check:* a saída mostra a receita por categoria, com **A no topo** (10*2 + 3*4 = 32),
 depois C (20) e B (5). Repare que só o `.show()` (ação) disparou todo o plano (lazy).
 

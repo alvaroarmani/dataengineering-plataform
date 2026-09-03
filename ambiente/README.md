@@ -48,13 +48,16 @@ bash ambiente/validar-bancada.sh
 Smoke test dos serviços (postgres/minio/jupyter) e das ferramentas (dbt↔Postgres, Airflow),
 sem depender de soluções de exercícios. Rode com o **engine estável**.
 
-### Status da validação (2026-08-30)
+### Status da validação (2026-09-03) — bancada validada ponta a ponta
 Executado contra o engine ao vivo:
-- ✅ **Base**: `postgres` (aceitando conexões), `minio`, `jupyter` sobem com `docker compose up -d`.
-- ✅ **Graders Postgres reais** (com `psycopg2-binary`): M08 ex‑01 (upsert idempotente), M08 ex‑03
-  (dedup), M09 ex‑05 (carga idempotente) → **todos PASS** contra o Postgres real.
-- ⏳ **dbt/Airflow/Spark**: pendente — dependem do *pull* de imagens grandes e do engine de pé por
-  minutos; não concluído nesta máquina por instabilidade do Docker Desktop (ver abaixo).
+- ✅ **Base**: `postgres`, `minio`, `jupyter` sobem com `docker compose up -d`.
+- ✅ **Graders Postgres reais** (com `psycopg2-binary`): M08 ex‑01/ex‑03, M09 ex‑05 → **PASS**.
+- ✅ **dbt (M07)**: `dbt build` + `pytest` em ex‑01/03/05 → **PASS** (6/6, 8/8, 10/10). *Corrigido um
+  bug real: seeds eram lidos como `source()` — trocado para `ref()` (ver histórico do git).*
+- ✅ **Airflow (M09)**: `airflow dags test` em `pipeline_exemplo` e `pipeline_taskflow` → **SUCCESS**.
+- ✅ **Spark (M11)**: job de exemplo via `spark-submit` → **OK**. *Corrigido: imagem `bitnami/spark:3.5.3`
+  não existe mais → trocada por `apache/spark:3.5.3`.*
+- ⏳ **BigQuery (M06)**: requer projeto GCP + credenciais do aluno (não validável sem a conta dele).
 
 ## Solução de problemas
 
