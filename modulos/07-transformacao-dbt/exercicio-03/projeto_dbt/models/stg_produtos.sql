@@ -2,4 +2,4 @@
 select
     produto_id,
     categoria
-from {{ source('olist', 'raw_produtos') }}
+from {{ ref('raw_produtos') }}

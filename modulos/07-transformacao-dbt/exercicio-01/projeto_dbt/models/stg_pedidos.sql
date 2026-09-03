@@ -10,4 +10,4 @@
 select
     -- SEU CÓDIGO AQUI (pedido_id, cliente, estado, valor)
     id as pedido_id
-from {{ source('olist', 'raw_pedidos') }}
+from {{ ref('raw_pedidos') }}

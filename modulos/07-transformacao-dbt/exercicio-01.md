@@ -32,10 +32,13 @@ pytest -q modulos/07-transformacao-dbt/exercicio-01
 
 ## Dicas progressivas
 :::{dropdown} Dica 1 — o esqueleto
-`select cast(id as integer) as pedido_id, cliente, upper(uf) as estado, cast(valor_str as numeric) as valor from {{ source('olist','raw_pedidos') }}`.
+`select cast(id as integer) as pedido_id, cliente, upper(uf) as estado, cast(valor_str as numeric) as valor from {{ ref('raw_pedidos') }}`.
 :::
-:::{dropdown} Dica 2 — por que source()
-Referencie a fonte com `{{ source('olist','raw_pedidos') }}` (não `raw_pedidos` direto) para o dbt construir o lineage e testar a origem.
+:::{dropdown} Dica 2 — ref() de um seed (seed × source)
+Aqui a fonte crua é um **seed** (o CSV que o dbt carrega), então referenciamos com
+`{{ ref('raw_pedidos') }}` — assim o dbt cria a dependência no DAG (o seed carrega **antes** do
+model). O `{{ source(...) }}` é para tabelas cruas **externas** (que o dbt não gerencia), declaradas
+num `sources.yml`; usá-lo num seed faz o model e o seed rodarem sem ordem e o build falha.
 :::
 
 ## Solução comentada (abra só DEPOIS de passar)
@@ -46,7 +49,7 @@ select
     cliente,
     upper(uf)                  as estado,
     cast(valor_str as numeric) as valor
-from {{ source('olist', 'raw_pedidos') }}
+from {{ ref('raw_pedidos') }}
 ```
 Um staging model é limpeza 1:1: renomear (`id`→`pedido_id`), converter tipos (`cast`) e
 padronizar (`upper`). Nada de regra de negócio — isso fica nos marts (próxima unidade). O

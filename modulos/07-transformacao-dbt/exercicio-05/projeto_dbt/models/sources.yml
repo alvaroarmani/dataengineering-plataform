@@ -1,8 +1,0 @@
-version: 2
-
-sources:
-  - name: olist
-    schema: public
-    tables:
-      - name: raw_itens
-      - name: raw_produtos

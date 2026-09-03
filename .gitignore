@@ -33,3 +33,9 @@ web/public/lite/**/*.map
 # SO
 .DS_Store
 Thumbs.db
+
+# Artefatos do dbt (gerados ao rodar na bancada)
+target/
+dbt_packages/
+logs/
+.user.yml
