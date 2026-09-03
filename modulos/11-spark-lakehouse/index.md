@@ -32,7 +32,7 @@ tabela **Delta/Iceberg** (ACID, time travel). Noções de otimização e custo.
 **Unidade 2 — PySpark: DataFrames, transformações e ações**
 1. **Teoria:** [PySpark: DataFrames](teoria-02-pyspark-dataframes.md)
 2. **Lab (🐳 Spark real):** [PySpark na bancada](lab-01-pyspark-na-bancada.md)
-3. **Exercícios:** [Agregação por categoria (🟢)](exercicio-03.md) · [withColumn imutável (🟢)](exercicio-04.md)
+3. **Exercícios:** [Agregação por categoria (🟢)](exercicio-03.md) · [withColumn imutável (🟢)](exercicio-04.md) · [**Resumo por categoria no Spark real (🐳 grader)**](exercicio-09.md)
 
 **Unidade 3 — Partições, shuffle e otimização**
 1. **Teoria:** [Partições, shuffle e otimização](teoria-03-particoes-shuffle-otimizacao.md)
