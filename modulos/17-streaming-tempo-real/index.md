@@ -35,7 +35,7 @@ data lake/lakehouse (M11) e a arquitetura Lambda/Kappa.
 **Unidade 2 — Apache Kafka: o log distribuído**
 1. **Teoria:** [Kafka: tópicos, partições, offsets e consumer groups](teoria-02-kafka-topicos-particoes.md)
 2. **Lab:** [Kafka na bancada — produza e consuma (🐳)](lab-01-kafka-na-bancada.md)
-3. **Exercícios:** [Partição de uma chave (🟢)](exercicio-03.md) · [Lag do consumidor (🟢)](exercicio-04.md)
+3. **Exercícios:** [Partição de uma chave (🟢)](exercicio-03.md) · [Lag do consumidor (🟢)](exercicio-04.md) · [**Particionamento no Kafka real (🐳 grader)**](exercicio-07.md)
 
 **Unidade 3 — Processamento de streams: tempo, janelas e garantias**
 1. **Teoria:** [Tempo de evento, janelas e semântica de entrega](teoria-03-janelas-tempo-exactly-once.md)

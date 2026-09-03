@@ -16,8 +16,9 @@ requests==2.32.3
 
 # Testes (padrão de correção "faça o pytest passar")
 pytest==8.3.4
-# Graders reais (track ferramentas): conectam no Postgres da bancada. Sem ele, os graders fazem skip.
+# Graders reais (track ferramentas): conectam nos serviços da bancada. Sem eles, os graders fazem skip.
 psycopg2-binary==2.9.12
+kafka-python==3.0.11   # grader real de Kafka (M17 ex-07)
 
 # Usado pelo linter de conteúdo (scripts/verificar-conteudo.py); também dep transitiva do Jupyter Book.
 PyYAML==6.0.2
