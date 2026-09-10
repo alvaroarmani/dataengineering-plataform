@@ -42,7 +42,11 @@ tabela **Delta/Iceberg** (ACID, time travel). Noções de otimização e custo.
 1. **Teoria:** [Lakehouse, Delta/Iceberg e MinIO](teoria-04-lakehouse-delta-minio.md)
 2. **Exercícios:** [Time travel: versão (🟢)](exercicio-07.md) · [Schema enforcement (🟢)](exercicio-08.md)
 
-> **Módulo completo.** Processamento em escala + lakehouse — base para o TCC com dados grandes.
+**Unidade 5 — Spark avançado: execução, skew e otimização (nível pós)**
+1. **Teoria:** [Spark avançado: plano de execução, skew e otimização](teoria-05-spark-avancado-execucao-skew.md)
+2. **Exercícios:** [Contar stages / shuffles (🟢 complexo)](exercicio-10.md) · [Detectar partições com skew (🟢 complexo)](exercicio-11.md)
+
+> **Módulo completo.** Processamento em escala + lakehouse + **tuning (execução/skew/joins)** — base para o TCC com dados grandes.
 
 ## Metodologia e avaliação
 **Maestria:** job PySpark que agrega um dataset grande e grava em Delta/MinIO, conforme rubrica.
