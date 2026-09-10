@@ -45,7 +45,11 @@ streaming e mensageria (Kafka) — conceitual e demo.
 2. **Lab:** [Parquet na prática](lab-04-parquet.ipynb)
 3. **Exercícios:** [Validar contra um schema (🟢)](exercicio-07.md) · [Consumo por offset — Kafka (🟢)](exercicio-08.md)
 
-> **Módulo completo.** Ingestão confiável (incremental, idempotente, APIs, formatos) — base direta para orquestrar tudo com **Airflow** (M09).
+**Unidade 5 — CDC, schema evolution e exactly-once (nível pós)**
+1. **Teoria:** [CDC por dentro, schema evolution e exactly-once](teoria-05-cdc-schema-evolution.md)
+2. **Exercícios:** [Aplicar changelog CDC (🟢 complexo)](exercicio-09.md) · [Conciliar schema / drift (🟢 complexo)](exercicio-10.md)
+
+> **Módulo completo.** Ingestão confiável (incremental, idempotente, APIs, formatos, **CDC/schema evolution**) — base direta para orquestrar tudo com **Airflow** (M09).
 
 ## Metodologia e avaliação
 **Maestria:** implementar ingestão incremental de uma API idempotente, conforme rubrica + quiz ≥ 80%.
