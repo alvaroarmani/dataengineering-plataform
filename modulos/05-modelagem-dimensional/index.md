@@ -51,6 +51,10 @@ processos de negócio.
 2. **Lab:** [Modelando o Olist: do staging ao star](lab-04-modelar-olist.ipynb)
 3. **Exercícios:** [Analisando o star schema do Olist](exercicio-04.md) · [Frete e ticket no star](exercicio-08.md)
 
+**Unidade 5 — Modelagem avançada (nível pós)**
+1. **Teoria:** [Modelagem avançada: tipos de fato, dimensões e bus matrix](teoria-05-modelagem-avancada.md)
+2. **Exercícios:** [Fato de snapshot acumulado — mini-caso (🟢 complexo)](exercicio-09.md) · [Bridge table com alocação (🟢 complexo)](exercicio-10.md)
+
 > **Módulo completo.** A modelagem dimensional aprendida aqui será consolidada no projeto integrador do Eixo 2 e no TCC (Data Warehouse).
 
 ## Metodologia e avaliação
