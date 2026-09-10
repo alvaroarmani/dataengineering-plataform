@@ -34,7 +34,7 @@ scheduler/etcd, **self-healing** e **autoscaling (HPA)**. Rodando dados em k8s: 
 **Unidade 2 — Kubernetes: conceitos**
 1. **Teoria:** [Kubernetes: orquestração de contêineres](teoria-02-kubernetes-conceitos.md)
 2. **Lab:** [Kubernetes local com kind (🐳 avançado)](lab-01-kubernetes-kind.md)
-3. **Exercícios:** [Réplicas para a carga (🟢)](exercicio-02.md) · [Deployment saudável (🟢)](exercicio-03.md)
+3. **Exercícios:** [Réplicas para a carga (🟢)](exercicio-02.md) · [Deployment saudável (🟢)](exercicio-03.md) · [**Escreva um manifesto de Deployment (grader)**](exercicio-07.md)
 
 **Unidade 3 — Dados no Kubernetes e IaC**
 1. **Teoria:** [Rodando dados no Kubernetes: jobs, estado e IaC](teoria-03-dados-no-kubernetes.md)

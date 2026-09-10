@@ -1,0 +1,13 @@
+# Complete este manifesto de um Deployment do Kubernetes.
+# Meta: 3 réplicas de um container nginx:1.27, com o selector batendo nos labels do template.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  # SEU CÓDIGO AQUI:
+  #   replicas: <n>
+  #   selector: { matchLabels: { app: web } }
+  #   template:
+  #     metadata: { labels: { app: web } }   # precisam bater com o selector
+  #     spec: { containers: [ { name, image, ports } ] }

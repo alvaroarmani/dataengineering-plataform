@@ -26,7 +26,7 @@ segredos. Boas práticas de reprodutibilidade e deploy local. Introdução a reg
 **Unidade 1 — Dockerfile avançado e imagens enxutas**
 1. **Teoria:** [Dockerfile: camadas, cache, imagens enxutas](teoria-01-dockerfile-imagens.md)
 2. **Lab (🐳 Docker real):** [Dockerfile multi-stage e cache](lab-01-dockerfile-multistage.md)
-3. **Exercícios:** [Cache de camadas (🟢)](exercicio-01.md) · [.dockerignore (🟢)](exercicio-02.md)
+3. **Exercícios:** [Cache de camadas (🟢)](exercicio-01.md) · [.dockerignore (🟢)](exercicio-02.md) · [**Escreva um Dockerfile de verdade (🐳 grader)**](exercicio-07.md)
 
 **Unidade 2 — Redes, volumes e Compose multi-serviço**
 1. **Teoria:** [Redes, volumes e Compose](teoria-02-redes-volumes-compose.md)
