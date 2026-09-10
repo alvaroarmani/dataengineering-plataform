@@ -45,7 +45,11 @@ Paradigma ELT e o papel do dbt. Estrutura de um projeto dbt: `sources`, `models`
 2. **Lab (🐳 dbt real):** [Snapshots (SCD2) e docs/lineage](lab-04-snapshots-e-docs.md)
 3. **Exercícios:** [Lógica de snapshot SCD2 (🟢)](exercicio-07.md) · [Macros (🟢)](exercicio-08.md)
 
-> **Módulo completo.** Projeto dbt real (staging→marts), testes, snapshots (SCD2), docs/lineage e macros — a base do *analytics engineering*.
+**Unidade 5 — dbt avançado: incremental, materializations e CI (nível pós)**
+1. **Teoria:** [dbt avançado: modelos incrementais, materializations e CI](teoria-05-dbt-avancado-incremental.md)
+2. **Exercícios:** [Merge incremental com dado atrasado (🟢 complexo)](exercicio-09.md) · [Seleção incremental por watermark (🟢 complexo)](exercicio-10.md)
+
+> **Módulo completo.** Projeto dbt real (staging→marts), testes, snapshots (SCD2), docs/lineage, macros e **incremental/CI** — a base do *analytics engineering*.
 
 ## Metodologia e avaliação
 **Maestria:** projeto dbt sobre o star schema com testes passando + `dbt docs`, conforme rubrica.
