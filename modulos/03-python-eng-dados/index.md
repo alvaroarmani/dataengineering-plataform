@@ -61,9 +61,13 @@ ambientes virtuais, type hints, estilo (PEP 8), testes com pytest.
 17. **Lab:** [Escrevendo testes (a mentalidade)](lab-06-escrevendo-testes.ipynb)
 18. **Exercício:** [Validação de registro](exercicio-06.md)
 
+**Unidade 7 — Python avançado para dados (nível pós)**
+19. **Teoria:** [Python avançado: lazy, decorators, context managers e concorrência](teoria-07-python-avancado-dados.md)
+20. **Exercícios:** [Agregação em fluxo / single-pass (🟢 complexo)](exercicio-07.md) · [Sessionização (🟢 complexo)](exercicio-08.md)
+
 **Revisão:** [Flashcards](flashcards.md)
 
-✅ **Módulo completo** — 6 unidades. Próximo: [M04 — SQL e Bancos Relacionais](../04-sql-bancos-relacionais/index.md).
+✅ **Módulo completo** — 7 unidades. Próximo: [M04 — SQL e Bancos Relacionais](../04-sql-bancos-relacionais/index.md).
 
 ## Metodologia e avaliação
 **Maestria:** série de exercícios `pytest` verdes + um mini-ETL em Python conforme rubrica +
