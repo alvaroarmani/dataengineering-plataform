@@ -48,6 +48,9 @@ subqueries e CTEs. Funções de janela (window functions). Índices e noções d
 **Unidade 6 — Transações, ACID e NoSQL**
 6. **Teoria:** [Transações, ACID e NoSQL](teoria-06-transacoes-acid-nosql.md) · **Lab:** [Transações](lab-06-transacoes.ipynb) · **Exercícios:** [Integridade: duplicatas](exercicio-11.md) · [Consistência](exercicio-12.md)
 
+**Unidade 7 — Índices por dentro e particionamento**
+7. **Teoria:** [Índices por dentro e particionamento](teoria-07-indices-particionamento.md) · **Exercícios:** [Qual índice usar? (🟢)](exercicio-13.md) · [Partition pruning (🟢)](exercicio-14.md)
+
 **Revisão:** [Flashcards](flashcards.md)
 
 ✅ **Módulo completo** — 6 unidades. Fecha o **Eixo 1** (Fundamentos); a seguir, o projeto integrador do eixo.

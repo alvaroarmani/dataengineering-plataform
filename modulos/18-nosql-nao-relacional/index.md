@@ -41,6 +41,10 @@ partition/clustering keys e downsampling de séries.
 1. **Teoria:** [Wide-column e séries temporais](teoria-03-widecolumn-timeseries.md)
 2. **Exercícios:** [Chave de partição (🟢)](exercicio-04.md) · [Downsample de série (🟢)](exercicio-05.md)
 
+**Unidade 4 — Busca e relevância (full-text)**
+1. **Teoria:** [Busca e relevância: índice invertido, TF-IDF e BM25](teoria-04-busca-relevancia.md)
+2. **Exercícios:** [Índice invertido (🟢)](exercicio-07.md) · [Ranquear por frequência / TF (🟢)](exercicio-08.md)
+
 > **Módulo completo.** O complemento não-relacional do M04 — fecha a base de bancos de dados do curso.
 
 ## Metodologia e avaliação
