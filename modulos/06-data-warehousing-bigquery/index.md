@@ -45,6 +45,10 @@ outros DWs cloud (Snowflake, Redshift) — conceitual.
 2. **Lab:** [A calculadora de custo do DW cloud](lab-04-calculadora-custo.ipynb)
 3. **Exercícios:** [Modelo de custo (Python)](exercicio-04.md) · [Consultas cost-aware](exercicio-05.md)
 
+**Unidade 5 — Otimização de consultas e modelagem física (nível pós)**
+1. **Teoria:** [Otimização de consultas e modelagem física avançada](teoria-05-otimizacao-consultas-avancada.md)
+2. **Exercícios:** [Bytes varridos: poda coluna × partição (🟢 complexo)](exercicio-09.md) · [Layout físico a partir do workload (🟢 complexo)](exercicio-10.md)
+
 > **Módulo completo.** DW cloud, colunar, particionamento e custo — base direta para o **dbt** (M07) e o TCC.
 
 ## Metodologia e avaliação
