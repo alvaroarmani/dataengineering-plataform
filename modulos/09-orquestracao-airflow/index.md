@@ -45,7 +45,11 @@ dados (XComs) e boas práticas. Idempotência e reprocessamento seguro. Observab
 2. **Lab (🐳 Airflow real):** [Retries e alertas](lab-04-retries-alertas.md)
 3. **Exercícios:** [Retries do Airflow (🟢)](exercicio-07.md) · [Estado do DAG run (🟢)](exercicio-08.md)
 
-> **Módulo completo.** Orquestração real (DAGs, operators, scheduling idempotente, observabilidade) — pronto para o **M10 (Docker avançado)** e o TCC.
+**Unidade 5 — Airflow avançado (nível pós)**
+1. **Teoria:** [Airflow avançado: dynamic mapping, deferrable, datasets e executores](teoria-05-airflow-avancado.md)
+2. **Exercícios:** [Ordem topológica do DAG (🟢 complexo)](exercicio-09.md) · [Tarefas prontas / fronteira do scheduler (🟢 complexo)](exercicio-10.md)
+
+> **Módulo completo.** Orquestração real (DAGs, operators, scheduling idempotente, observabilidade, **dynamic mapping/datasets/executores**) — pronto para o **M10 (Docker avançado)** e o TCC.
 
 ## Metodologia e avaliação
 **Maestria:** DAG idempotente e agendada que reprocessa um dia sem duplicar, conforme rubrica.
