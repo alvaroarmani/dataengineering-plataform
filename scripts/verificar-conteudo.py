@@ -262,7 +262,8 @@ def checar_estrutura(avisos_out: list[str]) -> None:
             txt = open(md, encoding="utf-8").read()
             if len(re.findall(r"Dica \d", txt)) < 2:
                 sem_dicas.append(base)
-            if RE_SEM_ACENTO.search(txt):
+            prosa = re.sub(r"`[^`\n]*`", "", re.sub(r"```.*?```", "", txt, flags=re.S))
+            if RE_SEM_ACENTO.search(prosa):
                 sem_acento.append(base)
         if rasos:
             avisos_out.append(f"{nome}: exercícios rasos (< {MIN_CHECAGENS} checagens nos testes): "
@@ -276,7 +277,7 @@ def checar_estrutura(avisos_out: list[str]) -> None:
 # Riqueza de exercício: assert/pytest.raises contam como checagem.
 RE_CHECAGEM = re.compile(r"^\s*assert\b|pytest\.raises", re.M)
 MIN_CHECAGENS = 4
-# Texto em português sem acento (resquício de arquivos gerados às pressas).
+# Texto em português sem acento (resquício de arquivos gerados às pressas); código é ignorado.
 RE_SEM_ACENTO = re.compile(r"(?<![\w/.`-])(nao|voce|funcao|codigo|tambem|entao|solucao)(?![\w/.`-])", re.I)
 
 

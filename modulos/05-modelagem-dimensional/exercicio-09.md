@@ -1,53 +1,35 @@
-# Exercício 09 — Fato de snapshot acumulado (mini-caso · nível avançado)
+# Exercício 09 — Fato de snapshot acumulado: lead times, pedidos em aberto e gargalo
 
-**Onde roda:** 🟢 Browser ou 🐳 Bancada Docker (Python puro). Exercício **complexo, multi-etapa** —
-aplica o *accumulating snapshot fact* da [teoria 05](teoria-05-modelagem-avancada.md).
+**Onde roda:** 🟢 Browser ou 🐳 Bancada (Python puro — no dbt, o mesmo modelo vira um `incremental` com `merge`).
 
-## Contexto (o caso)
-Você modela o **processo de entrega** de um e-commerce como um **accumulating snapshot fact**: uma
-linha por pedido, com uma coluna de data para cada **marco** do pipeline —
-`criado → pago → enviado → entregue` — preenchidas conforme o pedido avança. Pedidos incompletos têm
-marcos **ausentes**. O negócio quer os **lead times** (tempo entre marcos) para achar gargalos, e o
-**status atual** de cada pedido.
+## Contexto
+Um **fato de snapshot acumulado** (teoria 05) tem **uma linha por processo** (um pedido) e uma
+coluna por **marco** (criado, pago, enviado, entregue) — a linha é **atualizada** conforme o pedido
+avança, diferente do fato transacional, em que cada evento é uma linha nova. É o modelo certo para
+perguntas de **processo**: quanto tempo leva cada etapa? Onde está o gargalo? Quantos pedidos estão
+parados há mais de uma semana?
+
+Os dados reais trazem os problemas de sempre: marcos ausentes (o pedido ainda não chegou lá, ou a
+integração perdeu o evento) e marcos **inconsistentes** (enviado antes de pago — relógio de um
+sistema, fuso de outro).
 
 ## Tarefa
-Em [`exercicio-09/solucao.py`](exercicio-09/solucao.py), implemente **`snapshot_acumulado(pedidos)`**.
-Cada `pedido` é um dict com `pedido_id` e os marcos como datas `'AAAA-MM-DD'` (alguns ausentes).
-Para **cada** pedido, retorne um dict com:
-
-| Campo | Regra |
-|---|---|
-| `pedido_id` | o id do pedido |
-| `status` | a **última** etapa que tem data (`criado`/`pago`/`enviado`/`entregue`) |
-| `dias_pago` | dias de `criado` → `pago` |
-| `dias_envio` | dias de `pago` → `enviado` |
-| `dias_entrega` | dias de `enviado` → `entregue` |
-| `dias_total` | dias de `criado` → `entregue` |
-
-Onde faltar um dos marcos do intervalo, o lead time é **`None`** (o pedido ainda não chegou lá).
+Em [`exercicio-09/solucao.py`](exercicio-09/solucao.py), implemente `snapshot_acumulado(pedidos, data_ref)` e `gargalo(snapshot)`.
 
 ```bash
 cd modulos/05-modelagem-dimensional/exercicio-09
 pytest -q
 ```
 
-Exemplo:
-```python
-snapshot_acumulado([
-    {"pedido_id": 1, "criado": "2026-01-01", "pago": "2026-01-02", "enviado": "2026-01-05", "entregue": "2026-01-10"},
-    {"pedido_id": 2, "criado": "2026-01-01", "pago": "2026-01-03"},
-])
-# pedido 1: status 'entregue', dias 1/3/5, total 9
-# pedido 2: status 'pago', dias_pago 2, envio/entrega/total = None
-```
-
 ## Dicas progressivas
-:::{dropdown} Dica 1 — status
-Percorra as etapas em ordem e guarde a última que tiver data — esse é o `status`.
+:::{dropdown} Dica 1 — status e lead times
+Status: `[e for e in ETAPAS if p.get(e)][-1]`. Um helper `_dias(a, b)` que devolve `None` quando falta alguma data resolve os quatro lead times.
 :::
-:::{dropdown} Dica 2 — lead times com marcos ausentes
-Faça um helper `dias(a, b)` que retorna `None` se `a` ou `b` faltarem, senão
-`(date.fromisoformat(b) - date.fromisoformat(a)).days`. Assim os pedidos incompletos ficam com `None`.
+:::{dropdown} Dica 2 — em aberto e inconsistência
+Em aberto só para não entregues: `data_ref - criado`. Inconsistente: a lista das datas presentes, na ordem das etapas, não está ordenada (`presentes != sorted(presentes)` — datas ISO ordenam como texto).
+:::
+:::{dropdown} Dica 3 — gargalo
+Para cada coluna de lead time, a média dos valores não nulos de linhas **consistentes**; devolva a maior.
 :::
 
 ## Solução comentada (abra só DEPOIS de passar)
@@ -55,31 +37,54 @@ Faça um helper `dias(a, b)` que retorna `None` se `a` ou `b` faltarem, senão
 ```python
 from datetime import date
 
-def snapshot_acumulado(pedidos):
-    etapas = ["criado", "pago", "enviado", "entregue"]
+ETAPAS = ["criado", "pago", "enviado", "entregue"]
 
-    def dias(a, b):
-        if not a or not b:
-            return None
-        return (date.fromisoformat(b) - date.fromisoformat(a)).days
 
-    out = []
-    for p in pedidos:
-        status = "criado"
-        for e in etapas:
-            if p.get(e):
-                status = e           # última etapa com data
-        out.append({
+def _dias(a, b):
+    if not a or not b:
+        return None
+    return (date.fromisoformat(b) - date.fromisoformat(a)).days
+
+
+def snapshot_acumulado(pedidos: list, data_ref: str) -> list:
+    linhas = []
+    for p in sorted(pedidos, key=lambda x: x["pedido_id"]):
+        if not p.get("criado"):
+            raise ValueError(f"pedido {p['pedido_id']} sem data de criação")
+        status = [e for e in ETAPAS if p.get(e)][-1]
+        presentes = [p[e] for e in ETAPAS if p.get(e)]
+        linhas.append({
             "pedido_id": p["pedido_id"],
             "status": status,
-            "dias_pago": dias(p.get("criado"), p.get("pago")),
-            "dias_envio": dias(p.get("pago"), p.get("enviado")),
-            "dias_entrega": dias(p.get("enviado"), p.get("entregue")),
-            "dias_total": dias(p.get("criado"), p.get("entregue")),
+            "dias_pago": _dias(p.get("criado"), p.get("pago")),
+            "dias_envio": _dias(p.get("pago"), p.get("enviado")),
+            "dias_entrega": _dias(p.get("enviado"), p.get("entregue")),
+            "dias_total": _dias(p.get("criado"), p.get("entregue")),
+            "dias_em_aberto": None if p.get("entregue") else _dias(p["criado"], data_ref),
+            "inconsistente": presentes != sorted(presentes),
         })
-    return out
+    return linhas
+
+
+def gargalo(snapshot: list) -> tuple:
+    medias = {}
+    for col in ("dias_pago", "dias_envio", "dias_entrega"):
+        vals = [l[col] for l in snapshot if l[col] is not None and not l["inconsistente"]]
+        if vals:
+            medias[col] = sum(vals) / len(vals)
+    if not medias:
+        raise ValueError("sem lead times para avaliar")
+    pior = max(medias, key=lambda c: medias[c])
+    return pior, round(medias[pior], 1)
 ```
+O pedido 5 mostra por que a flag `inconsistente` existe: sem ela, o `dias_envio = -2` entraria na
+média e **esconderia** o gargalo real. A etapa mais lenta é o envio (4,5 dias em média) — a pergunta de
+negócio que o snapshot acumulado responde e que o fato transacional só responderia com vários self-joins.
+
+O `dias_em_aberto` é a métrica operacional: o pedido 3 está parado em "criado" há 14 dias. No dbt,
+esse modelo costuma ser um `incremental` com `unique_key = pedido_id` e estratégia `merge`: a cada
+carga, a linha do pedido é **atualizada** com os novos marcos (M07).
 :::
 
 ---
-**Revisado em:** 2026-09-09
+**Revisado em:** 2026-09-30

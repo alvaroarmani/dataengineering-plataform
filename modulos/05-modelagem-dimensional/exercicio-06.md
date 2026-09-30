@@ -4,7 +4,7 @@
 
 ## Tarefas
 Em [`exercicio-06/solucao.py`](exercicio-06/solucao.py):
-- **`CONSULTA_A`** — dimensão (sk_produto, codigo, categoria) com ROW_NUMBER OVER (ORDER BY codigo).
+- **`CONSULTA_A`** — dimensão `(sk_produto, codigo, categoria)` com `ROW_NUMBER() OVER (ORDER BY codigo)`.
 - **`CONSULTA_B`** — lookup: (venda_id, sk_produto, valor) juntando stg_venda à dimensão pela chave natural, ordenado por venda_id.
 
 ```bash
