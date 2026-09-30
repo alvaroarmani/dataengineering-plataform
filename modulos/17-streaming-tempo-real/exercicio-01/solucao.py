@@ -1,7 +1,20 @@
-"""Exercício 01 (M17) — Roteamento de eventos (fan-out). Implemente e rode `pytest -q`."""
+"""Exercício 01 (M17) — Roteamento de eventos com padrões de tópico e DLQ.
+
+Rode `pytest -q`. Detalhes no enunciado (exercicio-01.md).
+"""
 
 
-def roteia(evento_tipo, assinaturas):
-    """assinaturas = {consumidor: [tipos que assina]}. Retorne a lista ORDENADA de consumidores que assinam `evento_tipo` (event-driven: publique uma vez, muitos consomem)."""
+def casa(padrao: str, tipo: str) -> bool:
+    """Tipos e padrões são segmentos separados por ponto ("pagamento.aprovado").
+    "*" casa exatamente um segmento; "#" casa zero ou mais segmentos; o resto, igualdade."""
+    # SEU CÓDIGO AQUI
+    raise NotImplementedError
+
+
+def entregar(eventos: list, assinaturas: dict) -> dict:
+    """eventos = [(id, tipo)]; assinaturas = {consumidor: [padroes]}.
+    Retorne {consumidor: [ids na ordem dos eventos]} para TODO consumidor (lista vazia se nada casou)
+    e a chave "DLQ" com os ids que nenhum consumidor recebeu. Um consumidor recebe cada evento no
+    máximo uma vez, mesmo que vários padrões dele casem."""
     # SEU CÓDIGO AQUI
     raise NotImplementedError

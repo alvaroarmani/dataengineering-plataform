@@ -30,16 +30,16 @@ data lake/lakehouse (M11) e a arquitetura Lambda/Kappa.
 
 **Unidade 1 — Batch vs Streaming e arquiteturas de eventos**
 1. **Teoria:** [Batch vs streaming e o modelo de eventos](teoria-01-batch-vs-streaming-eventos.md)
-2. **Exercícios:** [Roteamento de eventos (🟢)](exercicio-01.md) · [Batch ou streaming? Classificar latência (🟢)](exercicio-02.md)
+2. **Exercícios:** [Roteamento de eventos com padrões e DLQ (🟢)](exercicio-01.md) · [Batch x streaming: medindo a latência (🟢)](exercicio-02.md)
 
 **Unidade 2 — Apache Kafka: o log distribuído**
 1. **Teoria:** [Kafka: tópicos, partições, offsets e consumer groups](teoria-02-kafka-topicos-particoes.md)
 2. **Lab:** [Kafka na bancada — produza e consuma (🐳)](lab-01-kafka-na-bancada.md)
-3. **Exercícios:** [Partição de uma chave (🟢)](exercicio-03.md) · [Lag do consumidor (🟢)](exercicio-04.md) · [**Particionamento no Kafka real (🐳 grader)**](exercicio-07.md)
+3. **Exercícios:** [Particionamento por chave e ordem (🟢)](exercicio-03.md) · [Consumer group: atribuição e lag (🟢)](exercicio-04.md) · [**Particionamento no Kafka real (🐳 grader)**](exercicio-07.md)
 
 **Unidade 3 — Processamento de streams: tempo, janelas e garantias**
 1. **Teoria:** [Tempo de evento, janelas e semântica de entrega](teoria-03-janelas-tempo-exactly-once.md)
-2. **Exercícios:** [Janelas com watermark: atrasados × completude (🟢)](exercicio-05.md) · [Exactly-once por dedup (🟢)](exercicio-06.md)
+2. **Exercícios:** [Janelas com watermark: atrasados × completude (🟢)](exercicio-05.md) · [Exactly-once de efeito com falha e reprocessamento (🟢)](exercicio-06.md)
 
 > **Módulo completo.** Fecha a lacuna de tempo real do Eixo 3 — o complemento streaming do batch (M08/M09).
 
