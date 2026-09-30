@@ -27,24 +27,24 @@ tabela **Delta/Iceberg** (ACID, time travel). Noções de otimização e custo.
 
 **Unidade 1 — Processamento distribuído e arquitetura do Spark**
 1. **Teoria:** [Distribuído e arquitetura do Spark](teoria-01-distribuido-arquitetura-spark.md)
-2. **Exercícios:** [Transformação vs ação (🟢)](exercicio-01.md) · [Quando executa — lazy (🟢)](exercicio-02.md)
+2. **Exercícios:** [Lazy evaluation e cache: leituras da fonte (🟢)](exercicio-01.md) · [Catalyst: pruning e pushdown (🟢)](exercicio-02.md)
 
 **Unidade 2 — PySpark: DataFrames, transformações e ações**
 1. **Teoria:** [PySpark: DataFrames](teoria-02-pyspark-dataframes.md)
 2. **Lab (🐳 Spark real):** [PySpark na bancada](lab-01-pyspark-na-bancada.md)
-3. **Exercícios:** [Agregação por categoria (🟢)](exercicio-03.md) · [withColumn imutável (🟢)](exercicio-04.md) · [**Resumo por categoria no Spark real (🐳 grader)**](exercicio-09.md)
+3. **Exercícios:** [groupBy com a semântica de nulos do Spark (🟢)](exercicio-03.md) · [Pipeline imutável de transformações (🟢)](exercicio-04.md) · [**Resumo por categoria no Spark real (🐳 grader)**](exercicio-09.md)
 
 **Unidade 3 — Partições, shuffle e otimização**
 1. **Teoria:** [Partições, shuffle e otimização](teoria-03-particoes-shuffle-otimizacao.md)
-2. **Exercícios:** [Causa shuffle? (🟢)](exercicio-05.md) · [Contar shuffles (🟢)](exercicio-06.md)
+2. **Exercícios:** [Broadcast ou sort-merge? (🟢)](exercicio-05.md) · [Stages e shuffles de um plano (🟢)](exercicio-06.md)
 
 **Unidade 4 — Data Lake, Lakehouse e Delta/Iceberg**
 1. **Teoria:** [Lakehouse, Delta/Iceberg e MinIO](teoria-04-lakehouse-delta-minio.md)
-2. **Exercícios:** [Time travel: versão (🟢)](exercicio-07.md) · [Schema enforcement (🟢)](exercicio-08.md)
+2. **Exercícios:** [Delta log: time travel e VACUUM (🟢)](exercicio-07.md) · [Schema enforcement x evolution (🟢)](exercicio-08.md)
 
 **Unidade 5 — Spark avançado: execução, skew e otimização (nível pós)**
 1. **Teoria:** [Spark avançado: plano de execução, skew e otimização](teoria-05-spark-avancado-execucao-skew.md)
-2. **Exercícios:** [Contar stages / shuffles (🟢 complexo)](exercicio-10.md) · [Detectar partições com skew (🟢 complexo)](exercicio-11.md)
+2. **Exercícios:** [Dimensionar partições e arquivos pequenos (🟢 complexo)](exercicio-10.md) · [Skew: detectar e dividir como o AQE (🟢 complexo)](exercicio-11.md)
 
 > **Módulo completo.** Processamento em escala + lakehouse + **tuning (execução/skew/joins)** — base para o TCC com dados grandes.
 
