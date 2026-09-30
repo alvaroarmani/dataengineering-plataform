@@ -46,3 +46,21 @@ def test_receita_total_por_estado(con):
         ("MG", 485.0),
         ("SP", 356.0),
     ]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Item com frete NULL (price + NULL = NULL: sem COALESCE, o preço do item some da receita).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO fato_item_pedido VALUES (?,?,?,?)", [
+        (1, 3, 400.0, None),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('moveis_decoracao', 316.6666666666667), ('informatica_acessorios', 200.0), ('cama_mesa_banho', 60.0)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('SP', 756.0), ('RJ', 650.0), ('MG', 485.0)]

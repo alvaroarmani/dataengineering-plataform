@@ -21,3 +21,23 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [('B', 190.0), ('A', 103.33333333333333), ('C', 80.0)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Outra distribuição de itens e uma categoria da dimensão SEM vendas (não deve aparecer).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO fato_item VALUES (?,?,?,?)", [
+        (3, 3, 500, 45),
+        (2, 2, 20, 5),
+    ])
+    con.execute("INSERT INTO dim_produto VALUES (4, 'D')")
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('MG', 65), ('RJ', 57), ('SP', 36)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('C', 290.0), ('B', 133.33333333333334), ('A', 103.33333333333333)]

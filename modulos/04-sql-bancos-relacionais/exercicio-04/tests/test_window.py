@@ -39,3 +39,21 @@ def test_receita_por_estado_window(con):
     assert con.execute(CONSULTA_B).fetchall() == [
         ("SP", 3835.0), ("RJ", 1140.0), ("MG", 825.0),
     ]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# EMPATE no maior valor de MG (id 8 e id 16 valem 600) — desempate pelo menor id.
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO pedidos VALUES (?,?,?,?,?)", [
+        (16, 'MG', 'casa', 600.0, 6),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('SP', 12, 1500.0), ('RJ', 9, 900.0), ('MG', 8, 600.0)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('SP', 3835.0), ('MG', 1425.0), ('RJ', 1140.0)]

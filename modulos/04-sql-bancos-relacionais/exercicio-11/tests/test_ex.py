@@ -17,3 +17,23 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [(5, 3)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# pedido repetido 3 vezes e pedido_id NULL (COUNT(*) conta, COUNT(DISTINCT) ignora).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO pagamentos VALUES (?,?)", [
+        (3, 50),
+        (3, 50),
+        (None, 10),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [(1,), (2,), (3,)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [(8, 3)]

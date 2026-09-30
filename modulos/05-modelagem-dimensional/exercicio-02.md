@@ -23,6 +23,8 @@ cd modulos/05-modelagem-dimensional/exercicio-02
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Venda de um código que ainda não chegou à dimensão (late-arriving: recebe sk_produto = -1, o membro 'desconhecido') e um produto novo na staging, que REORDENA as chaves geradas por ROW_NUMBER.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — gerar a surrogate key
 `SELECT ROW_NUMBER() OVER (ORDER BY codigo) AS sk_produto, codigo, categoria FROM stg_produto`.
@@ -40,15 +42,17 @@ SELECT ROW_NUMBER() OVER (ORDER BY codigo) AS sk_produto, codigo, categoria
 FROM stg_produto;
 
 -- CONSULTA_B: surrogate key lookup — troca a chave natural pela surrogate
-SELECT v.venda_id, d.sk_produto, v.valor
+SELECT v.venda_id, COALESCE(d.sk_produto, -1) AS sk_produto, v.valor
 FROM stg_venda v
-JOIN dim_produto d ON v.codigo_produto = d.codigo
+LEFT JOIN dim_produto d ON v.codigo_produto = d.codigo
 ORDER BY v.venda_id;
 ```
 A dimensão guarda **surrogate + natural**; o fato guarda só a **surrogate** (nunca 'P-100').
 O *lookup* — JOIN pela chave natural para obter o `sk` — é exatamente o que o ETL faz ao
 carregar cada tabela fato num Data Warehouse.
+
+**As armadilhas:** uma venda pode chegar **antes** do produto na dimensão (*late-arriving dimension*). O padrão é apontá-la para o membro desconhecido (`sk = -1`) e corrigir depois — nunca descartá-la. Repare também que um produto novo na staging **renumera** as chaves geradas por `ROW_NUMBER`: por isso, em produção, a surrogate key de quem já existe é **preservada** (a dimensão é atualizada incrementalmente, M07), e não regenerada do zero.
 :::
 
 ---
-**Revisado em:** 2026-08-23
+**Revisado em:** 2026-09-30

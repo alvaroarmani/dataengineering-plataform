@@ -16,6 +16,7 @@ CONSULTA_A = """
 
 # B) Surrogate key lookup: monte o fato (venda_id, sk_produto, valor) juntando
 # stg_venda a dim_produto pela chave natural (codigo). Ordene por venda_id.
+# Venda de código que não existe na dimensão: sk_produto = -1 (membro desconhecido), sem perder a linha.
 CONSULTA_B = """
 -- SEU CÓDIGO AQUI
 """

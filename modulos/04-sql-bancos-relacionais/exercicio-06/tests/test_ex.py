@@ -17,3 +17,23 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [('casa', 200.0), ('eletronicos', 156.66666666666666), ('livros', 40.0)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# preço exatamente 100 (fronteira), preço NULL e uma categoria só com NULL (AVG vira NULL).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO produtos VALUES (?,?,?,?)", [
+        (6, 'mouse', 'eletronicos', 100),
+        (7, 'radio', 'eletronicos', None),
+        (8, 'vaso', 'jardim', None),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('tv', 300), ('fone', 150)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('casa', 200.0), ('eletronicos', 142.5), ('jardim', None), ('livros', 40.0)]

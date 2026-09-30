@@ -5,6 +5,8 @@ Tabelas: pedidos(id, estado, categoria, valor, cliente_id) e clientes(id, nome, 
 """
 
 # Total gasto por cliente: colunas (nome, total), ordenado por total DESC.
+# Atenção: dois clientes podem ter o MESMO nome — agrupe pelo cliente, não pelo nome.
+# Atenção: dois clientes podem ter o MESMO nome — agrupe pelo cliente, não pelo nome.
 CONSULTA_A = """
 -- SEU CÓDIGO AQUI
 """

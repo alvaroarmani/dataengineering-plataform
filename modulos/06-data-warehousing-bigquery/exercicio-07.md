@@ -12,6 +12,8 @@ cd modulos/06-data-warehousing-bigquery/exercicio-07
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Outro ano na categoria A e um mês de 2025 (da categoria B) que passa a ser o de maior receita.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 `WHERE categoria='A'` antes do GROUP BY ano.
@@ -32,4 +34,4 @@ SELECT mes, SUM(valor) AS receita FROM fato_vendas WHERE ano=2025 GROUP BY mes O
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

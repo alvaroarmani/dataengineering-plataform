@@ -17,3 +17,24 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [(2,)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# nivel NULL vira um grupo próprio no GROUP BY; 'error' minúsculo NÃO é 'ERROR'.
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO logs VALUES (?,?)", [
+        (6, None),
+        (7, 'error'),
+        (8, 'ERROR'),
+        (9, None),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('ERROR', 3), ('INFO', 2), ('WARN', 1), ('error', 1), (None, 2)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [(3,)]

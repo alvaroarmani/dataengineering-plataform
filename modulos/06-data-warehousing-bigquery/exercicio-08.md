@@ -12,6 +12,8 @@ cd modulos/06-data-warehousing-bigquery/exercicio-08
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Fronteiras do intervalo: 31/01 é janeiro, 01/02 já é fevereiro, 31/12/2025 e 01/03/2026 ficam fora.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 Filtre `dia >= '2026-01-01' AND dia < '2026-02-01'`.
@@ -32,4 +34,4 @@ SELECT tipo, SUM(valor) AS receita FROM eventos WHERE dia >= DATE '2026-02-01' A
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

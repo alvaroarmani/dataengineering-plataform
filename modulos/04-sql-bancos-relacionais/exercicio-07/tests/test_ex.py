@@ -19,3 +19,23 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [('bruno', 200)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# cliente sem pedido (não entra no JOIN) e um novo maior gastador via pedidos extras.
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO clientes VALUES (?,?,?)", [
+        (4, 'duda', 'RJ'),
+        (5, 'eva', 'BH'),
+    ])
+    con.execute('INSERT INTO pedidos VALUES (5, 4, 250), (6, 4, 60)')
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('RJ', 510), ('SP', 230)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('duda', 310)]

@@ -39,3 +39,23 @@ def test_receita_por_cliente(con):
     assert con.execute(CONSULTA_B).fetchall() == [
         ("ana", 2730.0), ("bruno", 960.0), ("caio", 115.0),
     ]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Venda de produto AUSENTE da dimensão (FK órfã: entra como 'Desconhecido', a receita não some) e cliente HOMÔNIMO (outra 'ana').
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO fato_vendas VALUES (?,?,?,?,?)", [
+        (9, 4, 10, 1, 500.0),
+        (10, 1, 99, 1, 70.0),
+    ])
+    con.execute("INSERT INTO dim_cliente VALUES (4, 'ana', 'Curitiba')")
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('eletronicos', 4000.0), ('casa', 190.0), ('livros', 115.0), ('Desconhecido', 70.0)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('ana', 2800.0), ('bruno', 960.0), ('ana', 500.0), ('caio', 115.0)]

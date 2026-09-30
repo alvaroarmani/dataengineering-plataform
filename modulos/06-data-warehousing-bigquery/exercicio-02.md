@@ -21,6 +21,8 @@ cd modulos/06-data-warehousing-bigquery/exercicio-02
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Anos fora do filtro com valores grandes (2022 e 2026) e uma categoria nova em 2025 — quem esquece o filtro de partição soma demais.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — pruning
 Filtre pela coluna de partição: `WHERE ano = 2025` antes de agrupar por `categoria`.
@@ -51,4 +53,4 @@ intervalo — menos bytes varridos, consulta mais rápida e mais barata.
 :::
 
 ---
-**Revisado em:** 2026-08-23
+**Revisado em:** 2026-09-30

@@ -37,3 +37,22 @@ def test_acima_da_media(con):
 
 def test_clientes_acima_da_media(con):
     assert con.execute(CONSULTA_B).fetchall() == [(1, 2775.0), (2, 1790.0)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# um pedido enorme desloca a média e um valor NULL (AVG ignora NULL).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO pedidos VALUES (?,?,?,?,?)", [
+        (16, 'RJ', 'casa', 5000.0, 4),
+        (17, 'SP', 'livros', None, 3),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [(16, 5000.0), (12, 1500.0), (1, 1200.0), (9, 900.0), (5, 800.0)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [(4, 5175.0), (1, 2775.0)]

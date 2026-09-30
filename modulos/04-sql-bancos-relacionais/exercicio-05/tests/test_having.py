@@ -35,3 +35,22 @@ def test_clientes_mais_de_3(con):
 
 def test_segundo_maior(con):
     assert con.execute(CONSULTA_B).fetchall() == [(1200.0,)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# o MAIOR valor aparece duas vezes (o 2º maior DISTINTO continua 1200) e o cliente 5 passa de 3 pedidos.
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO pedidos VALUES (?,?,?,?,?)", [
+        (16, 'SP', 'eletronicos', 1500.0, 5),
+        (17, 'RJ', 'casa', 70.0, 5),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [(1, 4), (2, 4), (5, 4)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [(1200.0,)]

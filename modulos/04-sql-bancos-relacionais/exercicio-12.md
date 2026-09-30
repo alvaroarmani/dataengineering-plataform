@@ -12,6 +12,8 @@ cd modulos/04-sql-bancos-relacionais/exercicio-12
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Saldo exatamente 0 (é válido) e saldo NULL (nem negativo, nem somado).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 `WHERE saldo < 0 ORDER BY conta`.
@@ -32,4 +34,4 @@ SELECT SUM(saldo) FROM contas WHERE saldo >= 0
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

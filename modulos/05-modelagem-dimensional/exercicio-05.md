@@ -12,6 +12,8 @@ cd modulos/05-modelagem-dimensional/exercicio-05
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Outra distribuição de vendas: muda a cidade campeã e desfaz o empate de quantidade.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 junte fato + dim_produto, GROUP BY categoria.
@@ -24,7 +26,7 @@ junte fato + dim_cliente, ORDER BY receita DESC LIMIT 1.
 :::{dropdown} Ver solução comentada
 ```sql
 -- CONSULTA_A
-SELECT p.categoria, SUM(f.qtd) AS qtd FROM fato_vendas f JOIN dim_produto p ON f.produto_id=p.produto_id GROUP BY p.categoria ORDER BY qtd DESC, p.categoria, p.categoria
+SELECT p.categoria, SUM(f.qtd) AS qtd FROM fato_vendas f JOIN dim_produto p ON f.produto_id=p.produto_id GROUP BY p.categoria ORDER BY qtd DESC, p.categoria
 
 -- CONSULTA_B
 SELECT c.cidade, SUM(f.valor) AS receita FROM fato_vendas f JOIN dim_cliente c ON f.cliente_id=c.cliente_id GROUP BY c.cidade ORDER BY receita DESC LIMIT 1
@@ -32,4 +34,4 @@ SELECT c.cidade, SUM(f.valor) AS receita FROM fato_vendas f JOIN dim_cliente c O
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

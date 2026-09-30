@@ -21,3 +21,22 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [('RJ', 290)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Outra distribuição de vendas: muda a cidade campeã e desfaz o empate de quantidade.
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO fato_vendas VALUES (?,?,?,?)", [
+        (3, 10, 5, 400),
+        (2, 20, 2, 30),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('eletronicos', 9), ('livros', 6)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('MG', 480)]

@@ -17,3 +17,23 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [('ana',), ('caio',)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# outra distribuição de vendas: muda quem fica acima da média (resultado decorado não passa).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO vendas VALUES (?,?)", [
+        ('duda', 900),
+        ('bruno', 400),
+        ('eva', 10),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('duda', 900), ('bruno', 450), ('ana', 300), ('caio', 300), ('eva', 10)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('bruno',), ('duda',)]

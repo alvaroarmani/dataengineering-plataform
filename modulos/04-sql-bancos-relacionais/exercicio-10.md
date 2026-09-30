@@ -12,6 +12,8 @@ cd modulos/04-sql-bancos-relacionais/exercicio-10
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Nivel NULL vira um grupo próprio no GROUP BY; 'error' minúsculo NÃO é 'ERROR'.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 `GROUP BY nivel ORDER BY nivel`.
@@ -32,4 +34,4 @@ SELECT COUNT(*) FROM logs WHERE nivel='ERROR'
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

@@ -17,6 +17,8 @@ cd modulos/04-sql-bancos-relacionais/exercicio-03
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Um pedido enorme desloca a média e um valor NULL (AVG ignora NULL).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — CONSULTA_A
 `WHERE valor > (SELECT AVG(valor) FROM pedidos)`.
@@ -45,4 +47,4 @@ a CTE `t` nomeia o "total por cliente" e a subquery compara cada total com a mé
 :::
 
 ---
-**Revisado em:** 2026-08-22
+**Revisado em:** 2026-09-30

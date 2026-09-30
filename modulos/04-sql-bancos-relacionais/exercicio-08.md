@@ -12,6 +12,8 @@ cd modulos/04-sql-bancos-relacionais/exercicio-08
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Outra distribuição de vendas: muda quem fica acima da média (resultado decorado não passa).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 GROUP BY vendedor.
@@ -32,4 +34,4 @@ WITH t AS (SELECT vendedor, SUM(valor) AS tot FROM vendas GROUP BY vendedor) SEL
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

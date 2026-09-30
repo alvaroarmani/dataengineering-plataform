@@ -5,7 +5,7 @@ CONSULTA_A = """
 -- SEU CÓDIGO AQUI
 """
 
-# B) nome do cliente de MAIOR gasto (nome, gasto), 1 linha.
+# B) nome do cliente de MAIOR gasto (nome, gasto), 1 linha. Agrupe pelo cliente (id), não só pelo nome. Agrupe pelo cliente (id), não só pelo nome.
 CONSULTA_B = """
 -- SEU CÓDIGO AQUI
 """

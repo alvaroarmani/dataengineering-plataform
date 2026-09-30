@@ -12,6 +12,8 @@ cd modulos/04-sql-bancos-relacionais/exercicio-07
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Cliente sem pedido (não entra no JOIN) e um novo maior gastador via pedidos extras.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 junte pedidos + clientes por cliente_id.
@@ -27,9 +29,11 @@ GROUP BY nome, ORDER BY gasto DESC LIMIT 1.
 SELECT c.cidade, SUM(p.valor) AS receita FROM pedidos p JOIN clientes c ON p.cliente_id=c.id GROUP BY c.cidade ORDER BY receita DESC
 
 -- CONSULTA_B
-SELECT c.nome, SUM(p.valor) AS gasto FROM pedidos p JOIN clientes c ON p.cliente_id=c.id GROUP BY c.nome ORDER BY gasto DESC LIMIT 1
+SELECT c.nome, SUM(p.valor) AS gasto FROM pedidos p JOIN clientes c ON p.cliente_id=c.id GROUP BY c.id, c.nome ORDER BY gasto DESC LIMIT 1
 ```
+
+**A armadilha:** agrupar só por `c.nome` juntaria clientes homônimos; agrupe pela chave (`c.id, c.nome`). E o cliente sem pedidos simplesmente não aparece no `JOIN` — correto para "quem mais gastou".
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

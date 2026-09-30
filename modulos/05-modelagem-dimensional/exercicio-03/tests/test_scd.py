@@ -44,3 +44,23 @@ def test_point_in_time(con):
         (200, "Rio de Janeiro"),
         (300, "Curitiba"),
     ]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Versão que começa EXATAMENTE em 01/07/2024 (vale), versão que termina exatamente nesse dia (não vale) e cliente que só passa a existir depois (não aparece).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO dim_cliente VALUES (?,?,?,?,?,?)", [
+        (6, 400, 'Recife', '2024-01-01', '2024-07-01', False),
+        (7, 400, 'Olinda', '2024-07-01', '9999-12-31', True),
+        (8, 500, 'Natal', '2024-08-01', '9999-12-31', True),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [(100, 'Campinas'), (200, 'Rio de Janeiro'), (300, 'Belo Horizonte'), (400, 'Olinda'), (500, 'Natal')]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [(100, 'São Paulo'), (200, 'Rio de Janeiro'), (300, 'Curitiba'), (400, 'Olinda')]

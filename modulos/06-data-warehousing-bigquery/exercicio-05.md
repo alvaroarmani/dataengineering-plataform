@@ -20,6 +20,8 @@ cd modulos/06-data-warehousing-bigquery/exercicio-05
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Um mês novo vira o campeão de 2025 e um valor enorme em 2024 pune quem esquece o filtro de partição.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — cost-aware
 Selecione só `categoria, price` (nunca `descricao` nem `SELECT *`) e filtre `WHERE ano = 2025`.
@@ -52,4 +54,4 @@ da varredura, como visto na teoria).
 :::
 
 ---
-**Revisado em:** 2026-08-24
+**Revisado em:** 2026-09-30

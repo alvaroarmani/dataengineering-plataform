@@ -45,3 +45,23 @@ def test_consulta_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [
         ("eletronicos", 5000.0), ("casa", 550.0), ("livros", 250.0),
     ]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# valor exatamente 100 (fronteira do >), valor NULL e estado NULL.
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO pedidos VALUES (?,?,?,?,?)", [
+        (16, 'SP', 'casa', 100.0, 6),
+        (17, 'SP', 'livros', None, 6),
+        (18, None, 'casa', 999.0, 7),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [(12, 1500.0), (1, 1200.0), (5, 800.0), (10, 200.0)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('eletronicos', 5000.0), ('casa', 1649.0), ('livros', 250.0)]

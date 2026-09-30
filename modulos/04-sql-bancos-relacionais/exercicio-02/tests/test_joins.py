@@ -45,3 +45,23 @@ def test_receita_por_cidade(con):
     assert con.execute(CONSULTA_B).fetchall() == [
         ("São Paulo", 3035.0), ("Rio de Janeiro", 1965.0), ("Belo Horizonte", 800.0),
     ]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# cliente HOMÔNIMO (outra 'ana', em Curitiba) e pedido de cliente inexistente (órfão).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO pedidos VALUES (?,?,?,?,?)", [
+        (16, 'PR', 'casa', 400.0, 7),
+        (17, 'SP', 'casa', 999.0, 99),
+    ])
+    con.execute("INSERT INTO clientes VALUES (7, 'ana', 'Curitiba')")
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('ana', 2775.0), ('bruno', 1790.0), ('caio', 800.0), ('ana', 400.0), ('eva', 260.0), ('duda', 175.0)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('São Paulo', 3035.0), ('Rio de Janeiro', 1965.0), ('Belo Horizonte', 800.0), ('Curitiba', 400.0)]

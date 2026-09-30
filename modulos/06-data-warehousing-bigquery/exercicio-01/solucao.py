@@ -7,7 +7,7 @@ raw_pedidos(pedido_id INT, cliente VARCHAR, estado VARCHAR, valor DOUBLE)
 - contém DUPLICATAS e o estado em caixa variada ('sp', 'SP', 'RJ'...).
 """
 
-# A) CAMADA CORE: limpe o raw — remova duplicatas (DISTINCT) e padronize o estado (UPPER).
+# A) CAMADA CORE: limpe o raw — remova duplicatas (DISTINCT) e padronize o estado (TRIM + UPPER).
 # Colunas (pedido_id, cliente, estado, valor), ordenado por pedido_id.
 CONSULTA_A = """
 -- SEU CÓDIGO AQUI

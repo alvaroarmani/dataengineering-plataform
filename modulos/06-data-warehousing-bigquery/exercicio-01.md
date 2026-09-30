@@ -22,6 +22,8 @@ cd modulos/06-data-warehousing-bigquery/exercicio-01
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. A mesma reentrega com o estado escrito de jeitos diferentes ('Sp', ' sp ') — só vira UMA linha se você padronizar com TRIM + UPPER ANTES de deduplicar.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — core
 `SELECT DISTINCT pedido_id, cliente, UPPER(estado) AS estado, valor FROM raw_pedidos`.
@@ -35,13 +37,13 @@ Agregue sobre o core, não sobre o raw. Use uma CTE:
 :::{dropdown} Ver solução comentada
 ```sql
 -- CONSULTA_A: camada core (limpa e padronizada)
-SELECT DISTINCT pedido_id, cliente, UPPER(estado) AS estado, valor
+SELECT DISTINCT pedido_id, cliente, UPPER(TRIM(estado)) AS estado, valor   -- padroniza, depois deduplica
 FROM raw_pedidos
 ORDER BY pedido_id;
 
 -- CONSULTA_B: mart sobre o core (dedup evita inflar SP)
 WITH core AS (
-    SELECT DISTINCT pedido_id, cliente, UPPER(estado) AS estado, valor
+    SELECT DISTINCT pedido_id, cliente, UPPER(TRIM(estado)) AS estado, valor
     FROM raw_pedidos
 )
 SELECT estado, SUM(valor) AS receita
@@ -51,7 +53,9 @@ ORDER BY receita DESC;
 ```
 A duplicata do pedido 1 mostra por que a camada **core** existe: se você agregar direto no
 raw, SP viraria 280 em vez de 180. Limpar antes de consumir é o coração da arquitetura em camadas.
+
+**A armadilha da ordem:** padronize **antes** de deduplicar. `DISTINCT` compara o texto exato — `'Sp'`, `' sp '` e `'SP'` são três valores diferentes até passarem por `UPPER(TRIM(...))`. Na camada core, limpeza vem sempre antes de dedup e de agregação.
 :::
 
 ---
-**Revisado em:** 2026-08-23
+**Revisado em:** 2026-09-30

@@ -22,6 +22,8 @@ cd modulos/05-modelagem-dimensional/exercicio-04
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Item com frete NULL (price + NULL = NULL: sem COALESCE, o preço do item some da receita).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — o padrão do star
 `FROM fato_item_pedido f JOIN dim_X d ON f.sk_X = d.sk_X GROUP BY <atributo> ORDER BY <métrica> DESC`.
@@ -41,7 +43,7 @@ GROUP BY dp.categoria
 ORDER BY ticket_medio DESC;
 
 -- CONSULTA_B: receita total (price + freight) por estado
-SELECT dc.estado, SUM(f.price + f.freight) AS receita
+SELECT dc.estado, SUM(f.price + COALESCE(f.freight, 0)) AS receita   -- NULL contamina a soma
 FROM fato_item_pedido f
 JOIN dim_cliente dc ON f.sk_cliente = dc.sk_cliente
 GROUP BY dc.estado
@@ -49,7 +51,9 @@ ORDER BY receita DESC;
 ```
 O grão de item permite as duas leituras: `AVG` por produto/categoria e `SUM` por cliente/estado.
 É o mesmo modelo respondendo a perguntas diferentes — o valor de um star bem desenhado.
+
+**A armadilha:** `price + NULL` é `NULL`, e o `SUM` ignora `NULL` — então um item sem frete faria o **preço** dele sumir da receita. `COALESCE(f.freight, 0)` deixa explícita a regra de negócio (frete desconhecido conta como zero).
 :::
 
 ---
-**Revisado em:** 2026-08-23
+**Revisado em:** 2026-09-30

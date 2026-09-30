@@ -22,6 +22,8 @@ cd modulos/05-modelagem-dimensional/exercicio-03
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Versão que começa EXATAMENTE em 01/07/2024 (vale), versão que termina exatamente nesse dia (não vale) e cliente que só passa a existir depois (não aparece).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — visão atual
 A linha vigente hoje tem `corrente = TRUE`: `WHERE corrente`.
@@ -52,4 +54,4 @@ A flag `corrente` responde "como está hoje"; o intervalo `valido_de`/`valido_at
 :::
 
 ---
-**Revisado em:** 2026-08-23
+**Revisado em:** 2026-09-30

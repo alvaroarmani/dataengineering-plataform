@@ -1,6 +1,6 @@
 """Exercício 09 (M4) — Window functions. Preencha e rode `pytest -q`."""
 
-# A) (id, rn) com ROW_NUMBER por valor desc, ordenado por rn.
+# A) (id, rn) com ROW_NUMBER por valor desc (empate: menor id primeiro), ordenado por rn.
 CONSULTA_A = """
 -- SEU CÓDIGO AQUI
 """

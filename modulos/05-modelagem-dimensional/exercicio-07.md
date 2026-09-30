@@ -12,6 +12,8 @@ cd modulos/05-modelagem-dimensional/exercicio-07
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Versão que começa EXATAMENTE em 01/01/2025 (vale) e cliente que só existe depois dessa data.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 `WHERE corrente`.
@@ -32,4 +34,4 @@ SELECT cliente_id, cidade FROM dim_cliente WHERE valido_de <= DATE '2025-01-01' 
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

@@ -17,3 +17,23 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [(100, 'SP'), (200, 'MG')]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Versão que começa EXATAMENTE em 01/01/2025 (vale) e cliente que só existe depois dessa data.
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO dim_cliente VALUES (?,?,?,?,?,?)", [
+        (4, 300, 'BA', '2024-05-01', '2025-01-01', False),
+        (5, 300, 'PE', '2025-01-01', '9999-12-31', True),
+        (6, 400, 'AM', '2025-02-01', '9999-12-31', True),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [(100, 'RJ'), (200, 'MG'), (300, 'PE'), (400, 'AM')]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [(100, 'SP'), (200, 'MG'), (300, 'PE')]

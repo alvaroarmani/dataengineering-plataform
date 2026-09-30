@@ -35,3 +35,23 @@ def test_pruning_categoria_2025(con):
 def test_range_por_ano(con):
     # ano >= 2024: 2024 = 300, 2025 = 700
     assert con.execute(CONSULTA_B).fetchall() == [(2024, 300.0), (2025, 700.0)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Anos fora do filtro com valores grandes (2022 e 2026) e uma categoria nova em 2025 — quem esquece o filtro de partição soma demais.
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO fato_vendas VALUES (?,?,?,?)", [
+        (2025, 3, 'C', 75.0),
+        (2026, 1, 'A', 10.0),
+        (2022, 5, 'A', 999.0),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('A', 550.0), ('B', 150.0), ('C', 75.0)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [(2024, 300.0), (2025, 775.0), (2026, 10.0)]

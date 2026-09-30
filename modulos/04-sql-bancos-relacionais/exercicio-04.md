@@ -17,6 +17,8 @@ cd modulos/04-sql-bancos-relacionais/exercicio-04
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. EMPATE no maior valor de MG (id 8 e id 16 valem 600) — desempate pelo menor id.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — CONSULTA_A
 `WITH r AS (SELECT estado, id, valor, ROW_NUMBER() OVER (PARTITION BY estado ORDER BY valor DESC) rn FROM pedidos) SELECT estado, id, valor FROM r WHERE rn = 1 ORDER BY valor DESC`.
@@ -31,7 +33,7 @@ pytest -q
 -- CONSULTA_A
 WITH r AS (
     SELECT estado, id, valor,
-           ROW_NUMBER() OVER (PARTITION BY estado ORDER BY valor DESC) AS rn
+           ROW_NUMBER() OVER (PARTITION BY estado ORDER BY valor DESC, id) AS rn  -- id desempata
     FROM pedidos
 )
 SELECT estado, id, valor FROM r WHERE rn = 1 ORDER BY valor DESC;
@@ -44,7 +46,9 @@ Em A, `ROW_NUMBER` numera os pedidos dentro de cada estado por valor; filtrar `r
 (numa consulta externa, pois a window roda depois do WHERE) dá o maior de cada estado. Em B,
 a agregação em janela repete a receita do estado em cada linha; `DISTINCT` reduz para uma
 linha por estado — sem colapsar via GROUP BY.
+
+**A armadilha do empate:** com dois pedidos de 600 em MG, `ROW_NUMBER() OVER (... ORDER BY valor DESC)` escolhe um deles **arbitrariamente** — e pode mudar de execução para execução. Todo `ORDER BY` de window que decide "qual fica" precisa de um desempate determinístico (`, id`).
 :::
 
 ---
-**Revisado em:** 2026-08-22
+**Revisado em:** 2026-09-30

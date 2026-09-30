@@ -17,3 +17,23 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [(150,)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# saldo exatamente 0 (é válido) e saldo NULL (nem negativo, nem somado).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO contas VALUES (?,?)", [
+        ('e', 0),
+        ('f', None),
+        ('g', -1),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('b',), ('d',), ('g',)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [(150,)]

@@ -12,6 +12,8 @@ cd modulos/04-sql-bancos-relacionais/exercicio-06
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Preço exatamente 100 (fronteira), preço NULL e uma categoria só com NULL (AVG vira NULL).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 `WHERE categoria='eletronicos' AND preco>100 ORDER BY preco DESC`.
@@ -32,4 +34,4 @@ SELECT categoria, AVG(preco) AS media FROM produtos GROUP BY categoria ORDER BY 
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

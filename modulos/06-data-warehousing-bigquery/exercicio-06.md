@@ -12,6 +12,8 @@ cd modulos/06-data-warehousing-bigquery/exercicio-06
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. A mesma cliente em dois estados (conta uma vez em CADA estado) e um cliente com dois pedidos no mesmo estado (conta uma vez só).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 `SELECT DISTINCT ... UPPER(estado) ...`.
@@ -32,4 +34,4 @@ WITH core AS (SELECT DISTINCT pedido_id, cliente, UPPER(estado) AS estado, valor
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

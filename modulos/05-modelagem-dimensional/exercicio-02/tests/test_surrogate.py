@@ -45,3 +45,22 @@ def test_surrogate_key_lookup_no_fato(con):
         (3, 4, 80.0),
         (4, 3, 1500.0),
     ]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Venda de um código que ainda não chegou à dimensão (late-arriving: recebe sk_produto = -1, o membro 'desconhecido') e um produto novo na staging, que REORDENA as chaves geradas por ROW_NUMBER.
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO stg_venda VALUES (?,?,?)", [
+        (5, 'P-999', 10.0),
+    ])
+    con.execute("INSERT INTO stg_produto VALUES ('P-005', 'casa')")
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [(1, 'P-005', 'casa'), (2, 'P-010', 'livros'), (3, 'P-050', 'livros'), (4, 'P-100', 'eletronicos'), (5, 'P-200', 'casa')]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [(1, 3, 1200.0), (2, 1, 30.0), (3, 4, 80.0), (4, 3, 1500.0), (5, -1, 10.0)]

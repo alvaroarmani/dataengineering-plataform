@@ -19,3 +19,21 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [(1, 1, 100), (2, 3, 50), (3, 1, 120)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Staging com o MESMO produto duas vezes (extração duplicada): sem deduplicar, a dimensão ganha 2 linhas para um código e o JOIN do fato DUPLICA vendas (fan-out).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO stg_produto VALUES (?,?)", [
+        ('P-10', 'eletronicos'),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [(1, 'P-10', 'eletronicos'), (2, 'P-20', 'livros'), (3, 'P-30', 'casa')]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [(1, 1, 100), (2, 3, 50), (3, 1, 120)]

@@ -17,6 +17,8 @@ cd modulos/04-sql-bancos-relacionais/exercicio-05
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. O MAIOR valor aparece duas vezes (o 2º maior DISTINTO continua 1200) e o cliente 5 passa de 3 pedidos.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — CONSULTA_A
 `GROUP BY cliente_id HAVING COUNT(*) > 3` — `HAVING` filtra **grupos**, não linhas.
@@ -46,4 +48,4 @@ pega o segundo — um padrão clássico para "N-ésimo maior".
 :::
 
 ---
-**Revisado em:** 2026-08-22
+**Revisado em:** 2026-09-30

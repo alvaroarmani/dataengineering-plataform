@@ -21,6 +21,8 @@ cd modulos/04-sql-bancos-relacionais/exercicio-01
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Valor exatamente 100 (fronteira do >), valor NULL e estado NULL.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — CONSULTA_A
 `SELECT id, valor FROM pedidos WHERE estado = 'SP' AND valor > 100 ORDER BY valor DESC`.
@@ -49,4 +51,4 @@ por categoria e o `SUM` agrega dentro de cada grupo; o `ORDER BY` no fim organiz
 :::
 
 ---
-**Revisado em:** 2026-08-22
+**Revisado em:** 2026-09-30

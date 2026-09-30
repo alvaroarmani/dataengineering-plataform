@@ -15,7 +15,7 @@ CONSULTA_A = """
 """
 
 # B) RECEITA TOTAL por estado do cliente: colunas (estado, receita) = SUM(price + freight),
-# ordenado do maior para o menor. Junte a fato com dim_cliente.
+# ordenado do maior para o menor. Junte a fato com dim_cliente. Frete nulo conta como 0.
 CONSULTA_B = """
 -- SEU CÓDIGO AQUI
 """

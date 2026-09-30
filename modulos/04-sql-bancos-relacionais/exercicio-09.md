@@ -12,6 +12,8 @@ cd modulos/04-sql-bancos-relacionais/exercicio-09
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. EMPATE de valor (id 3 e id 5 valem 80) — o ROW_NUMBER desempata pelo menor id.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 `ROW_NUMBER() OVER (ORDER BY valor DESC)`.
@@ -24,12 +26,14 @@ pytest -q
 :::{dropdown} Ver solução comentada
 ```sql
 -- CONSULTA_A
-SELECT id, ROW_NUMBER() OVER (ORDER BY valor DESC) AS rn FROM itens ORDER BY rn
+SELECT id, ROW_NUMBER() OVER (ORDER BY valor DESC, id) AS rn FROM itens ORDER BY rn
 
 -- CONSULTA_B
 SELECT id, SUM(valor) OVER (ORDER BY id) AS acum FROM itens ORDER BY id
 ```
+
+**A armadilha do empate:** com dois itens de valor 80, `ROW_NUMBER() OVER (ORDER BY valor DESC)` sozinho é não determinístico; `ORDER BY valor DESC, id` fixa a ordem. Na soma acumulada, repare que o item de valor 0 repete o acumulado anterior.
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

@@ -12,6 +12,8 @@ cd modulos/05-modelagem-dimensional/exercicio-08
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Outra distribuição de itens e uma categoria da dimensão SEM vendas (não deve aparecer).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1
 junte fato_item + dim_cliente.
@@ -32,4 +34,4 @@ SELECT p.categoria, AVG(f.price) AS ticket FROM fato_item f JOIN dim_produto p O
 :::
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-09-30

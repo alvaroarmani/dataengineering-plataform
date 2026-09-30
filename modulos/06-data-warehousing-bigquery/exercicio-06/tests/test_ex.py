@@ -19,3 +19,23 @@ def test_a(con):
 
 def test_b(con):
     assert con.execute(CONSULTA_B).fetchall() == [('MG', 1), ('RJ', 1), ('SP', 2)]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# A mesma cliente em dois estados (conta uma vez em CADA estado) e um cliente com dois pedidos no mesmo estado (conta uma vez só).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO raw_pedidos VALUES (?,?,?,?)", [
+        (5, 'ana', 'RJ', 10),
+        (6, 'bruno', 'rj', 30),
+        (7, 'diana', 'sp', 5),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [(1, 'ana', 'SP', 100), (2, 'bruno', 'RJ', 200), (3, 'caio', 'MG', 50), (4, 'diana', 'SP', 80), (5, 'ana', 'RJ', 10), (6, 'bruno', 'RJ', 30), (7, 'diana', 'SP', 5)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('MG', 1), ('RJ', 2), ('SP', 2)]

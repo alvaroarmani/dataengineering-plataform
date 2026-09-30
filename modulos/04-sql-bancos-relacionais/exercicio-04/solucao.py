@@ -5,6 +5,8 @@ Tabela: pedidos(id, estado, categoria, valor, cliente_id).
 """
 
 # Pedido de maior valor de cada estado: colunas (estado, id, valor), ordenado por valor DESC.
+# Empate no maior valor dentro do estado: fica o de MENOR id.
+# Empate no maior valor dentro do estado: fica o de MENOR id.
 CONSULTA_A = """
 -- SEU CÓDIGO AQUI
 """
