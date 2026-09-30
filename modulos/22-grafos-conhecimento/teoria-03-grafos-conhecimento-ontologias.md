@@ -144,7 +144,7 @@ para IA.
 ## 📚 Referências
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — triplas/RDF e SPARQL. <!-- @kleppmann2017 -->
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — metadados/lineage/governança. <!-- @reis2022 -->
-- Dehghani, Z. *Data Mesh Principles and Logical Architecture* (2020) — semântica e produtos de dados. <!-- @dehghani2020 -->
+- W3C. *RDF 1.1 Concepts and Abstract Syntax* (W3C Recommendation, 2014) — triplas e modelo RDF. <!-- @w3c-rdf11 -->
 
 *Acessado em: 2026-09-09.*
 

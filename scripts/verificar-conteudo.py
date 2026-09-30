@@ -18,6 +18,7 @@ import glob
 import os
 import re
 import sys
+import unicodedata
 
 try:
     import yaml
@@ -35,8 +36,11 @@ for _stream in (sys.stdout, sys.stderr):
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Régua por tipo de página de teoria.
+# min_refs é um PISO de fontes PERTINENTES — não uma cota a preencher. Uma referência só entra se
+# sustenta de fato o conteúdo da página; inflar a lista para bater o número é proibido (ver
+# CONTRIBUTING). Por isso o piso é 2, e a checagem de coerência título/ano (abaixo) é bloqueante.
 REGRAS = {
-    "conceitual": {"min_refs": 3, "quiz": True, "literatura_ou_paraalem": True, "doc_obrigatoria": False},
+    "conceitual": {"min_refs": 2, "quiz": True, "literatura_ou_paraalem": True, "doc_obrigatoria": False},
     "pratico":    {"min_refs": 2, "quiz": True, "literatura_ou_paraalem": False, "doc_obrigatoria": False},
     "ferramenta": {"min_refs": 2, "quiz": False, "literatura_ou_paraalem": False, "doc_obrigatoria": True},
 }
@@ -48,14 +52,60 @@ RE_REVISADO = re.compile(r"\*\*Revisado em:\*\*\s*(\d{4}-\d{2}-\d{2})")
 RE_URL = re.compile(r"https?://[^\s)\]\"'>]+")
 
 
-def carregar_chaves_registro(caminho: str) -> set[str]:
+def carregar_registro(caminho: str) -> dict[str, dict]:
+    """Retorna {chave: entrada} de todas as obras do registro."""
     with open(caminho, encoding="utf-8") as f:
         data = yaml.safe_load(f) or {}
-    chaves: set[str] = set()
+    registro: dict[str, dict] = {}
     for grupo in data.values():
         if isinstance(grupo, dict):
-            chaves.update(grupo.keys())
-    return chaves
+            for chave, entrada in grupo.items():
+                registro[chave] = entrada if isinstance(entrada, dict) else {}
+    return registro
+
+
+def carregar_chaves_registro(caminho: str) -> set[str]:
+    return set(carregar_registro(caminho))
+
+
+_STOP = {"the", "an", "of", "and", "for", "to", "in", "on", "that", "over",
+         "da", "de", "do", "das", "dos", "um", "uma", "os", "as", "com", "para"}
+
+
+def _norm(s: str) -> str:
+    return unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().lower()
+
+
+def _palavras_titulo(titulo: str) -> list[str]:
+    """As 2 primeiras palavras significativas do título (identificam a obra)."""
+    ws = re.findall(r"[a-z0-9]+", _norm(titulo))
+    return [w for w in ws if w not in _STOP and len(w) >= 3][:2]
+
+
+def checar_coerencia_citacoes(txt: str, registro: dict[str, dict]) -> list[str]:
+    """Cada linha que cita <!-- @chave --> precisa bater com a obra registrada:
+    o ANO e as palavras-chave do TÍTULO têm de aparecer na linha. Impede citar a obra X com a
+    chave da obra Y (erro que já aconteceu: chave do Delta Lake 2020 descrita como Lakehouse 2021)."""
+    erros: list[str] = []
+    for linha in txt.splitlines():
+        for chave in RE_CHAVE.findall(linha):
+            ent = registro.get(chave)
+            if not ent:
+                continue  # chave desconhecida já é reportada em outro lugar
+            alvo = _norm(linha)
+            ano = str(ent.get("ano", "")).strip()
+            faltas = []
+            if ano and ano not in alvo:
+                faltas.append(f"ano {ano}")
+            falt_tit = [w for w in _palavras_titulo(str(ent.get("titulo", ""))) if w not in alvo]
+            if falt_tit:
+                faltas.append("título (" + ", ".join(falt_tit) + ")")
+            if faltas:
+                erros.append(
+                    f"citação @{chave} não bate com o registro — falta {' e '.join(faltas)}; "
+                    f"registro: '{ent.get('titulo')}' ({ano}). Linha: {linha.strip()[:90]}"
+                )
+    return erros
 
 
 def tem_secao(texto: str, *palavras: str) -> bool:
@@ -68,10 +118,12 @@ def tem_secao(texto: str, *palavras: str) -> bool:
     return False
 
 
-def validar_teoria(caminho: str, chaves: set[str]) -> list[str]:
+def validar_teoria(caminho: str, chaves: set[str], registro: dict[str, dict] | None = None) -> list[str]:
     erros: list[str] = []
     with open(caminho, encoding="utf-8") as f:
         txt = f.read()
+    if registro:
+        erros.extend(checar_coerencia_citacoes(txt, registro))
 
     m = RE_TIPO.search(txt)
     tipo = (m.group(1).lower() if m else TIPO_PADRAO)
@@ -209,7 +261,8 @@ def main() -> int:
     if not os.path.exists(reg):
         print("ERRO: referencias.yaml não encontrado na raiz.", file=sys.stderr)
         return 2
-    chaves = carregar_chaves_registro(reg)
+    registro = carregar_registro(reg)
+    chaves = set(registro)
 
     teorias = glob.glob(os.path.join(RAIZ, "modulos", "**", "teoria-*.md"), recursive=True)
     indices = glob.glob(os.path.join(RAIZ, "modulos", "**", "index.md"), recursive=True)
@@ -219,7 +272,7 @@ def main() -> int:
 
     for caminho in sorted(teorias):
         rel = os.path.relpath(caminho, RAIZ)
-        erros = validar_teoria(caminho, chaves)
+        erros = validar_teoria(caminho, chaves, registro)
         if erros:
             total_erros += len(erros)
             print(f"\n❌ {rel}")

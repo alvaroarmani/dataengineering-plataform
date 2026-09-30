@@ -137,7 +137,6 @@ cluster do zero, mas **raciocinar** sobre ele. Kubernetes aparece em muitas vaga
 ## 📚 Referências
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — orquestração de contêineres. <!-- @reis2022 -->
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — coordenação e tolerância a falhas. <!-- @kleppmann2017 -->
-- Armbrust, M. et al. *Lakehouse* (2021) — plataformas de dados na nuvem. <!-- @armbrust2020 -->
 
 *Acessado em: 2026-08-31.*
 

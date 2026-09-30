@@ -32,7 +32,13 @@ baralho de flashcards de um módulo.
 Toda teoria é ancorada em fontes — e o linter `scripts/verificar-conteudo.py` impõe isto.
 
 - **Tipo da página:** declare no topo `<!-- tipo: conceitual | pratico | ferramenta -->`. A régua muda:
-  - `conceitual` → ≥3 refs + Quiz + (box "📖 Da literatura" **ou** seção "Para ir além").
+  - `conceitual` → ≥2 refs **pertinentes** + Quiz + (box "📖 Da literatura" **ou** seção "Para ir além").
+  - **Pertinência > quantidade:** cite só obras que sustentam de fato o conteúdo da página. Nunca
+    adicione uma referência para "bater o mínimo". Prefira a **fonte primária** do tema (o paper do
+    Raft para consenso, o do Dynamo para quóruns, a lei para LGPD). O linter confere que o **título e o
+    ano** de cada citação batem com o `referencias.yaml` — chave certa com obra errada é erro bloqueante.
+  - Boxes "📖 Da literatura" só atribuem a uma obra o que ela de fato diz; "🏭 Do mundo real" deve
+    ter fonte verificável (blog de engenharia, postmortem) — sem fonte, não atribua.
   - `pratico` → ≥2 refs + Quiz.
   - `ferramenta` → ≥2 refs + **≥1 doc oficial** (chave `docs-*`).
 - **Registro é a fonte única:** cite **apenas** obras de `referencias.yaml`. Marque cada referência com a chave em comentário: `- Autor, *Título* ... <!-- @chave -->`. Fonte fora do registro **reprova no linter** (combate citação inventada). Falta uma obra? **Adicione-a primeiro ao `referencias.yaml`** (com dados verificados).

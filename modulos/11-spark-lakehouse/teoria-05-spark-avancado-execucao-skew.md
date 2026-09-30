@@ -79,10 +79,10 @@ shuffle, skew e recomputação.
 
 :::{admonition} 📖 Da literatura
 :class: seealso
-Armbrust et al. (criadores do Spark SQL/Catalyst) descrevem o **otimizador Catalyst** e a execução em
-stages; Dean & Ghemawat estabelecem o modelo de shuffle/partição do MapReduce que o Spark herda e
-otimiza. Kleppmann cobre processamento batch distribuído e o custo do shuffle. — *Spark SQL/Lakehouse*;
-*MapReduce*; *Designing Data-Intensive Applications* (cap. 10).
+Armbrust et al., no paper do Spark SQL, descrevem o **otimizador Catalyst** (plano lógico → otimizado →
+físico); Dean & Ghemawat estabelecem o modelo de shuffle/partição do MapReduce que o Spark herda e
+otimiza. Kleppmann cobre processamento batch distribuído e o custo do shuffle. — *Spark SQL: Relational Data
+Processing in Spark*; *MapReduce*; *Designing Data-Intensive Applications* (cap. 10).
 :::
 
 :::{admonition} 🏭 Do mundo real
@@ -90,7 +90,7 @@ otimiza. Kleppmann cobre processamento batch distribuído e o custo do shuffle. 
 A tríade de tuning de Spark em produção é: **reduzir shuffle** (filtrar/projetar cedo, broadcast joins),
 **tratar skew** (salting/AQE) e **cachear o reusado**. "Adicionar executores" quase nunca resolve um job
 lento por skew ou por sort-merge desnecessário — é preciso ler o plano. Ligar o **AQE** resolve boa parte
-do skew e do dimensionamento de partições automaticamente. — Armbrust et al.; prática de mercado.
+do skew e do dimensionamento de partições automaticamente. — Documentação do Spark (Performance Tuning/AQE).
 :::
 
 ## ⚠️ Erros comuns
@@ -146,14 +146,14 @@ diagnosticar e corrigir **data skew** (salting/AQE), usar **cache** com critéri
   :::
 
 ## 🚀 Para ir além (leitura dirigida)
-- **Armbrust et al. — Spark SQL / Lakehouse** (Catalyst e execução).
+- **Armbrust et al. — Spark SQL: Relational Data Processing in Spark** (o otimizador Catalyst).
 - **Kleppmann — Designing Data-Intensive Applications** (cap. 10, batch e shuffle).
 - **Documentação do Spark** — SQL performance tuning, AQE, join strategies.
 
 ## 📚 Referências
-- Armbrust, M. et al. *Lakehouse / Spark SQL* (2021) — Catalyst e otimização de execução. <!-- @armbrust2020 -->
+- Armbrust, M. et al. *Spark SQL: Relational Data Processing in Spark* (2015) — otimizador Catalyst. <!-- @armbrust2015 -->
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — batch distribuído e shuffle. <!-- @kleppmann2017 -->
-- Dean, J.; Ghemawat, S. *MapReduce* (2004) — modelo de partição/shuffle. <!-- @dean2004 -->
+- Dean, J.; Ghemawat, S. *MapReduce: Simplified Data Processing on Large Clusters* (2004) — modelo de partição/shuffle. <!-- @dean2004 -->
 
 *Acessado em: 2026-09-09.*
 

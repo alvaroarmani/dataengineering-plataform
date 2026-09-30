@@ -133,7 +133,7 @@ atenderia um pedido de exclusão de dados?".
 ## 📚 Referências
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — privacidade e conformidade. <!-- @reis2022 -->
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — apagamento e integridade. <!-- @kleppmann2017 -->
-- Dehghani, Z. *Data Mesh Principles and Logical Architecture* (2020) — governança e privacidade na plataforma. <!-- @dehghani2020 -->
+- Brasil. *Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018)* (2018) — texto legal, fonte primária. <!-- @lgpd2018 -->
 
 *Acessado em: 2026-08-29.*
 

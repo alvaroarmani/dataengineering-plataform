@@ -9,7 +9,8 @@
     A chave DEVE existir em referencias.yaml — o linter rejeita fontes fora do registro.
   - Política: paráfrase fiel + citação precisa (autor, livro, cap.); citação curta e
     atribuída quando agregar; verbatim só de fonte aberta; NUNCA inventar página/citação.
-  - Mínimos: conceitual ≥3 refs + Quiz + (box "Da literatura" OU "Para ir além");
+  - Mínimos: conceitual ≥2 refs PERTINENTES (nunca encher para bater o número; o linter confere
+    título+ano contra o registro) + Quiz + (box "Da literatura" OU "Para ir além");
              pratico ≥2 refs + Quiz; ferramenta ≥2 refs + ≥1 doc oficial (docs-*).
 
   TOM (dose "média", leitura leve):

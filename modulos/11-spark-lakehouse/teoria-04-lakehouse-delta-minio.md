@@ -117,7 +117,7 @@ visão de arquitetura moderna.
 - **Apache Iceberg / Delta Lake docs** (formatos de tabela).
 
 ## 📚 Referências
-- Armbrust, M. et al. *Delta Lake: ACID Table Storage over Cloud Object Stores* (2020). <!-- @armbrust2020 -->
+- Armbrust, M. et al. *Delta Lake: High-Performance ACID Table Storage over Cloud Object Stores* (2020). <!-- @armbrust2020 -->
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — lake, lakehouse, armazenamento. <!-- @reis2022 -->
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — cap. 3/10 (armazenamento, batch). <!-- @kleppmann2017 -->
 

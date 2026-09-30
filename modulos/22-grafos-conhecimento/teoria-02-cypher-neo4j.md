@@ -139,7 +139,7 @@ que mencionam Neo4j esperam esse nível; entrevistas de grafo pedem a consulta d
 ## 📚 Referências
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — Cypher e property graphs. <!-- @kleppmann2017 -->
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — bancos especializados. <!-- @reis2022 -->
-- Dehghani, Z. *Data Mesh Principles and Logical Architecture* (2020) — consulta de dados conectados. <!-- @dehghani2020 -->
+- Robinson, I.; Webber, J.; Eifrem, E. *Graph Databases* (2ª ed., 2015) — Cypher e modelagem no Neo4j. <!-- @robinson2015 -->
 
 *Acessado em: 2026-09-09.*
 

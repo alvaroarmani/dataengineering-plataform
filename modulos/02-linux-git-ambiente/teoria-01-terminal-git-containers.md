@@ -124,7 +124,7 @@ aparece explicitamente na maioria das vagas Jr/Pleno de dados.
 - Chacon, S.; Straub, B. *Pro Git*, 2ª ed. (2014) — [leitura aberta](https://git-scm.com/book/pt-br/v2), cap. 1 e 3. <!-- @chacon2014 -->
 - MIT. *The Missing Semester of Your CS Education* (2020) — [site aberto](https://missing.csail.mit.edu/). <!-- @mit-missing-semester -->
 - Docker. *Documentação oficial* — [docs.docker.com](https://docs.docker.com/). <!-- @docs-docker -->
-- Git. *Reference* — [git-scm.com/docs](https://git-scm.com/docs). <!-- @docs-git -->
+- Git. *Documentação oficial (Reference)* — [git-scm.com/docs](https://git-scm.com/docs). <!-- @docs-git -->
 
 *Acessado em: 2026-08-21.*
 

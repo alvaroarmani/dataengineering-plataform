@@ -89,6 +89,26 @@ livros:
     idioma: en
     caps: "agregações, window functions, análise temporal"
 
+  robinson2015:
+    autor: "Ian Robinson; Jim Webber; Emil Eifrem"
+    titulo: "Graph Databases"
+    edicao: "2ª"
+    ano: 2015
+    tipo: livro
+    acesso: aberto   # e-book gratuito distribuído pela Neo4j (link bloqueia verificação automática)
+    idioma: en
+    caps: "property graph, modelagem de grafos, Cypher, casos de uso"
+
+  storment2023:
+    autor: "J.R. Storment; Mike Fuller"
+    titulo: "Cloud FinOps"
+    edicao: "2ª"
+    ano: 2023
+    tipo: livro
+    acesso: pago
+    idioma: en
+    caps: "ciclo FinOps (informar/otimizar/operar), alocação de custo, unit economics"
+
 papers_artigos:
   rogati2017:
     autor: "Monica Rogati"
@@ -143,6 +163,42 @@ papers_artigos:
     acesso: aberto
     idioma: en
 
+  armbrust2021:
+    autor: "Michael Armbrust; Ali Ghodsi; Reynold Xin; Matei Zaharia"
+    titulo: "Lakehouse: A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics"
+    ano: 2021
+    tipo: paper
+    acesso: aberto
+    url: "https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf"   # verificado 2026-09-29
+    idioma: en
+
+  ongaro2014:
+    autor: "Diego Ongaro; John Ousterhout"
+    titulo: "In Search of an Understandable Consensus Algorithm (Raft)"
+    ano: 2014
+    tipo: paper
+    acesso: aberto
+    url: "https://raft.github.io/raft.pdf"   # verificado 2026-09-29
+    idioma: en
+
+  decandia2007:
+    autor: "Giuseppe DeCandia et al."
+    titulo: "Dynamo: Amazon's Highly Available Key-value Store"
+    ano: 2007
+    tipo: paper
+    acesso: aberto
+    url: "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf"   # verificado 2026-09-29
+    idioma: en
+
+  armbrust2015:
+    autor: "Michael Armbrust et al."
+    titulo: "Spark SQL: Relational Data Processing in Spark"
+    ano: 2015
+    tipo: paper
+    acesso: aberto
+    url: "https://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf"   # verificado 2026-09-29
+    idioma: en
+
   chacon2014:
     autor: "Scott Chacon; Ben Straub"
     titulo: "Pro Git"
@@ -186,3 +242,5 @@ docs_oficiais:
   docs-docker:   { titulo: "Docker — Documentação oficial", tipo: doc, acesso: aberto, url: "https://docs.docker.com/", idioma: en }
   docs-git:      { titulo: "Git — Documentação oficial (Reference)", tipo: doc, acesso: aberto, url: "https://git-scm.com/docs", idioma: en }
   docs-pytest:   { titulo: "pytest — Documentação oficial", tipo: doc, acesso: aberto, url: "https://docs.pytest.org/", idioma: en }
+  w3c-rdf11:     { titulo: "RDF 1.1 Concepts and Abstract Syntax (W3C Recommendation)", ano: 2014, tipo: doc, acesso: aberto, url: "https://www.w3.org/TR/rdf11-concepts/", idioma: en }
+  lgpd2018:      { titulo: "Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018)", ano: 2018, tipo: lei, acesso: aberto, url: "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm", idioma: pt }

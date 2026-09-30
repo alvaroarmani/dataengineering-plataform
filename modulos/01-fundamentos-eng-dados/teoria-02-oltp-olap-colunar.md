@@ -134,7 +134,7 @@ usar um banco transacional vs um data warehouse?" é pergunta quase garantida.
 ## 📚 Referências
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — armazenamento row vs colunar. <!-- @kleppmann2017 -->
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — OLTP e OLAP. <!-- @reis2022 -->
-- Armbrust, M. et al. *Lakehouse: A New Generation of Open Platforms* (2021) — armazenamento colunar. <!-- @armbrust2020 -->
+- Armbrust, M.; Ghodsi, A.; Xin, R.; Zaharia, M. *Lakehouse: A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics* (2021) — formatos colunares abertos. <!-- @armbrust2021 -->
 
 *Acessado em: 2026-08-31.*
 

@@ -133,12 +133,13 @@ design e em qualquer discussão de banco distribuído.
 ## 🚀 Para ir além (leitura dirigida)
 - **Kleppmann — Designing Data-Intensive Applications** (cap. 5 replicação, cap. 9 consistência/consenso).
 - **Reis & Housley — Fundamentals of Data Engineering** (consistência em sistemas de dados).
+- **DeCandia et al. — Dynamo** (o paper que popularizou quóruns R+W>N e consistência eventual).
 - **Documentação do Apache Cassandra** — níveis de consistência ajustáveis (quóruns).
 
 ## 📚 Referências
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — replicação, CAP, consistência. <!-- @kleppmann2017 -->
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — consistência de dados. <!-- @reis2022 -->
-- Dean, J.; Ghemawat, S. *MapReduce* (2004) — tolerância a falhas em cluster. <!-- @dean2004 -->
+- DeCandia, G. et al. *Dynamo: Amazon's Highly Available Key-value Store* (2007) — quóruns e consistência eventual. <!-- @decandia2007 -->
 
 *Acessado em: 2026-08-31.*
 

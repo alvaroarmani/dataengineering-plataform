@@ -134,7 +134,7 @@ requisito. Quase toda vaga cita ao menos uma nuvem (AWS/GCP/Azure).
 
 ## 📚 Referências
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — nuvem e FinOps. <!-- @reis2022 -->
-- Armbrust, M. et al. *Lakehouse: A New Generation of Open Platforms* (2021) — dados na nuvem. <!-- @armbrust2020 -->
+- Armbrust, M.; Ghodsi, A.; Xin, R.; Zaharia, M. *Lakehouse: A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics* (2021) — lakehouse sobre object storage. <!-- @armbrust2021 -->
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — implantação distribuída. <!-- @kleppmann2017 -->
 
 *Acessado em: 2026-08-31.*

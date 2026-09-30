@@ -131,7 +131,7 @@ sobre tolerância a falhas e quórum.
 
 ## 📚 Referências
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — consenso e tolerância a falhas. <!-- @kleppmann2017 -->
-- Dean, J.; Ghemawat, S. *MapReduce* (2004) — tolerância a falhas em larga escala. <!-- @dean2004 -->
+- Ongaro, D.; Ousterhout, J. *In Search of an Understandable Consensus Algorithm (Raft)* (2014). <!-- @ongaro2014 -->
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — coordenação distribuída. <!-- @reis2022 -->
 
 *Acessado em: 2026-08-31.*

@@ -140,7 +140,7 @@ variável), explicar o property graph (nós/arestas com propriedades) e as opera
 ## 📚 Referências
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — cap. 2, graph data models. <!-- @kleppmann2017 -->
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — modelos de dados. <!-- @reis2022 -->
-- Dehghani, Z. *Data Mesh Principles and Logical Architecture* (2020) — dados conectados por domínio. <!-- @dehghani2020 -->
+- Robinson, I.; Webber, J.; Eifrem, E. *Graph Databases* (2ª ed., 2015) — property graph e quando usar grafos. <!-- @robinson2015 -->
 
 *Acessado em: 2026-09-09.*
 

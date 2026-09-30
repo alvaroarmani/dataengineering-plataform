@@ -139,7 +139,7 @@ data warehouse?" e "ETL ou ELT?" são perguntas recorrentes.
 
 ## 📚 Referências
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — arquiteturas e ETL/ELT. <!-- @reis2022 -->
-- Armbrust, M. et al. *Lakehouse: A New Generation of Open Platforms* (2021) — lakehouse. <!-- @armbrust2020 -->
+- Armbrust, M.; Ghodsi, A.; Xin, R.; Zaharia, M. *Lakehouse: A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics* (2021) — lakehouse. <!-- @armbrust2021 -->
 - Dehghani, Z. *Data Mesh Principles and Logical Architecture* (2020) — data mesh. <!-- @dehghani2020 -->
 
 *Acessado em: 2026-08-31.*

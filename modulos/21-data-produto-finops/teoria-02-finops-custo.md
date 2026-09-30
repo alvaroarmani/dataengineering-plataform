@@ -133,7 +133,7 @@ right-sizing), e defender visibilidade (tags, orçamentos). "Como você reduziri
 
 ## 📚 Referências
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — FinOps e custo. <!-- @reis2022 -->
-- Dehghani, Z. *Data Mesh Principles and Logical Architecture* (2020) — plataforma e custo. <!-- @dehghani2020 -->
+- Storment, J.R.; Fuller, M. *Cloud FinOps* (2ª ed., 2023) — ciclo FinOps e alocação de custo. <!-- @storment2023 -->
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — trade-offs de armazenamento/computação. <!-- @kleppmann2017 -->
 
 *Acessado em: 2026-08-31.*

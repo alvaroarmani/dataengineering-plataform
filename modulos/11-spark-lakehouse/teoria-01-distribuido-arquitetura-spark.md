@@ -125,7 +125,7 @@ perguntas de entrevista.
 ## 📚 Referências
 - Apache Spark — Documentação oficial (arquitetura, DataFrame, lazy evaluation). <!-- @docs-spark -->
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — cap. 10 (batch distribuído). <!-- @kleppmann2017 -->
-- Dean, J.; Ghemawat, S. *MapReduce* (2004) — modelo de processamento distribuído. <!-- @dean2004 -->
+- Dean, J.; Ghemawat, S. *MapReduce: Simplified Data Processing on Large Clusters* (2004) — modelo de processamento distribuído. <!-- @dean2004 -->
 
 *Acessado em: 2026-08-29.*
 

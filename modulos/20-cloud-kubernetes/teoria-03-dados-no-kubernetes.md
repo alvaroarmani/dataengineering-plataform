@@ -70,9 +70,8 @@ com a infra inteira nascendo de código — cloud + k8s + IaC costurados.
 :::{admonition} 📖 Da literatura
 :class: seealso
 Reis & Housley defendem infraestrutura **reprodutível via IaC** e o uso de contêineres/orquestração como
-padrão operacional do ciclo de vida do dado, sempre pesando a complexidade contra o benefício. Armbrust
-et al. mostram plataformas de dados (Lakehouse) construídas sobre esses blocos na nuvem. — *Fundamentals
-of Data Engineering*; *Lakehouse*.
+padrão operacional do ciclo de vida do dado, sempre pesando a complexidade contra o benefício. —
+*Fundamentals of Data Engineering*.
 :::
 
 :::{admonition} 🏭 Do mundo real
@@ -142,7 +141,6 @@ Aparece em system design e em vagas de plataformas de dados.
 
 ## 📚 Referências
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — IaC e orquestração. <!-- @reis2022 -->
-- Armbrust, M. et al. *Lakehouse* (2021) — plataformas de dados na nuvem/k8s. <!-- @armbrust2020 -->
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — estado e persistência distribuída. <!-- @kleppmann2017 -->
 
 *Acessado em: 2026-08-31.*

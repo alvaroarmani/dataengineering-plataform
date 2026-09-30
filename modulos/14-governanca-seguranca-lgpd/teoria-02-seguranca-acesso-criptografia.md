@@ -129,7 +129,6 @@ tabela com dados sensíveis?" é pergunta clássica de entrevista.
 ## 📚 Referências
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — segurança de dados. <!-- @reis2022 -->
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — criptografia e acesso. <!-- @kleppmann2017 -->
-- Dehghani, Z. *Data Mesh Principles and Logical Architecture* (2020) — segurança na plataforma. <!-- @dehghani2020 -->
 
 *Acessado em: 2026-08-29.*
 

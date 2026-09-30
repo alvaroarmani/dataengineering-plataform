@@ -152,7 +152,7 @@ faz?" é pergunta certa de pleno/sênior.
 
 ## 📚 Referências
 - Kleppmann, M. *Designing Data-Intensive Applications* (2017) — colunar e execução de consultas. <!-- @kleppmann2017 -->
-- Armbrust, M. et al. *Lakehouse: A New Generation of Open Platforms* (2021) — otimização de layout. <!-- @armbrust2020 -->
+- Armbrust, M.; Ghodsi, A.; Xin, R.; Zaharia, M. *Lakehouse: A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics* (2021) — data skipping e layout. <!-- @armbrust2021 -->
 - Reis, J.; Housley, M. *Fundamentals of Data Engineering* (2022) — custo e layout físico. <!-- @reis2022 -->
 
 *Acessado em: 2026-09-09.*
