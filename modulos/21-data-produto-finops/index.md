@@ -30,15 +30,15 @@ de negócio.
 
 **Unidade 1 — Data como produto**
 1. **Teoria:** [Data como produto: dono, SLA, Data Mesh](teoria-01-data-como-produto.md)
-2. **Exercícios:** [Cumpre o SLA? (🟢)](exercicio-05.md) · [Data product pronto? (🟢)](exercicio-06.md)
+2. **Exercícios:** [SLO e orçamento de erro (🟢)](exercicio-05.md) · [Scorecard de um data product (🟢)](exercicio-06.md)
 
 **Unidade 2 — FinOps: o custo dos dados**
 1. **Teoria:** [FinOps: custo como métrica de engenharia](teoria-02-finops-custo.md)
-2. **Exercícios:** [Custo de uma consulta (🟢)](exercicio-01.md) · [Economia com particionamento (🟢)](exercicio-02.md)
+2. **Exercícios:** [Custo pay-per-scan com mínimo por tabela (🟢)](exercicio-01.md) · [Showback: custo por time e maiores ofensores (🟢)](exercicio-02.md)
 
 **Unidade 3 — Valor, ROI e métricas**
 1. **Teoria:** [Valor, ROI e as métricas que provam o impacto](teoria-03-valor-roi-metricas.md)
-2. **Exercícios:** [ROI de um projeto (🟢)](exercicio-03.md) · [TCO (🟢)](exercicio-04.md)
+2. **Exercícios:** [ROI e payback: o horizonte importa (🟢)](exercicio-03.md) · [TCO: self-hosted x gerenciado (🟢)](exercicio-04.md)
 
 > **Módulo completo.** Encerra o Eixo 4 pela maturidade: dados como produto, custo sob controle, valor provado.
 
