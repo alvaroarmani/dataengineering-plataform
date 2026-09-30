@@ -30,15 +30,15 @@ BFS, componentes conexas, recomendação por vizinhos em comum. **Grafos de conh
 
 **Unidade 1 — Por que grafos? Modelo e algoritmos**
 1. **Teoria:** [Por que grafos? Quando o relacionamento é o dado](teoria-01-por-que-grafos.md)
-2. **Exercícios:** [Vizinhos (🟢)](exercicio-01.md) · [Grau (🟢)](exercicio-02.md) · [Distância em saltos / BFS (🟢)](exercicio-03.md)
+2. **Exercícios:** [Da tabela de arestas ao grafo (🟢)](exercicio-01.md) · [Graus: fontes e sumidouros do lineage (🟢)](exercicio-02.md) · [Caminho mais curto e k saltos / BFS (🟢)](exercicio-03.md)
 
 **Unidade 2 — Cypher e Neo4j**
 1. **Teoria:** [Cypher e Neo4j: consultando grafos](teoria-02-cypher-neo4j.md)
-2. **Exercícios:** [Amigos em comum / recomendação (🟢)](exercicio-04.md) · [Nó mais conectado (🟢)](exercicio-05.md)
+2. **Exercícios:** [Recomendação por amigos em comum (🟢)](exercicio-04.md) · [Centralidade: os hubs da rede (🟢)](exercicio-05.md)
 
 **Unidade 3 — Grafos de conhecimento**
 1. **Teoria:** [Grafos de conhecimento, ontologias e lineage](teoria-03-grafos-conhecimento-ontologias.md)
-2. **Exercícios:** [Componente conexa (🟢)](exercicio-06.md)
+2. **Exercícios:** [Resolução de entidades com componentes conexas (🟢)](exercicio-06.md)
 
 > **Módulo completo.** O terceiro modelo de dados do curso (relacional M04 · NoSQL M18 · **grafos**).
 
