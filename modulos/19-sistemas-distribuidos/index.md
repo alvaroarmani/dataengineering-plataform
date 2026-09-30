@@ -30,15 +30,15 @@ sustentam as ferramentas do curso.
 
 **Unidade 1 — Por que distribuir? Particionamento e falhas**
 1. **Teoria:** [Por que distribuir? Particionamento e falhas parciais](teoria-01-por-que-distribuir-particionamento.md)
-2. **Exercícios:** [Custo de replicação (🟢)](exercicio-01.md) · [Consistent hashing: nó do dado (🟢)](exercicio-02.md)
+2. **Exercícios:** [Sharding por módulo: o custo de crescer (🟢)](exercicio-01.md) · [Hashing consistente com nós virtuais (🟢)](exercicio-02.md)
 
 **Unidade 2 — Replicação, consistência e CAP**
 1. **Teoria:** [Replicação, consistência e o teorema CAP](teoria-02-replicacao-consistencia-cap.md)
-2. **Exercícios:** [Réplica atrasada / lag (🟢)](exercicio-05.md) · [Nó de menor carga (🟢)](exercicio-06.md)
+2. **Exercícios:** [Roteamento de leitura com lag (🟢)](exercicio-05.md) · [Conflitos: LWW x vetores de versão (🟢)](exercicio-06.md)
 
 **Unidade 3 — Consenso e tolerância a falhas**
 1. **Teoria:** [Consenso e tolerância a falhas](teoria-03-consenso-tolerancia-falhas.md)
-2. **Exercícios:** [Tolerância a falhas 2f+1 (🟢)](exercicio-03.md) · [Consenso por maioria (🟢)](exercicio-04.md)
+2. **Exercícios:** [Partição de rede: quem tem quórum? (🟢)](exercicio-03.md) · [Eleição no Raft (🟢)](exercicio-04.md)
 
 > **Módulo completo.** A base teórica que explica *por que* Spark, Kafka, Cassandra e Kubernetes funcionam como funcionam.
 
