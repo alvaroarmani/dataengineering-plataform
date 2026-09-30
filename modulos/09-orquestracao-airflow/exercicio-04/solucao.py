@@ -1,12 +1,18 @@
-"""Exercício 04 (M9) — Sensor: esperar uma condição (poke até liberar).
+"""Exercício 04 (M9) — Sensor: modo poke x reschedule e o custo de esperar.
 
-Um sensor verifica ("poka") periodicamente até a condição ficar verdadeira, ou estoura um
-limite. Implemente e rode `pytest -q`.
+Rode `pytest -q`. Detalhes no enunciado (exercicio-04.md).
 """
 
 
-def poke_ate(condicao, max_pokes):
-    """Chame `condicao()` repetidamente (cada chamada = 1 poke). Assim que retornar True,
-    devolva o NÚMERO de pokes feitos. Se atingir `max_pokes` sem sucesso, levante TimeoutError."""
+def simular_sensor(disponivel_em, intervalo: int, timeout: int, modo: str) -> dict:
+    """Tempo em minutos a partir de 0. A condição fica verdadeira no minuto `disponivel_em`
+    (None = nunca). O sensor checa nos minutos 0, intervalo, 2*intervalo, ... enquanto o minuto for
+    <= timeout. Cada checagem conta como um poke e ocupa o slot por 1 minuto.
+      sucesso: a primeira checagem com minuto >= disponivel_em
+      minutos_de_slot:
+        "poke"       -> do minuto 0 até o fim (a checagem de sucesso, ou o timeout), + 1
+        "reschedule" -> 1 por checagem
+    Retorne {"sucesso": bool, "pokes": n, "minuto_fim": minuto da última checagem, "minutos_de_slot": n}.
+    intervalo < 1 ou modo desconhecido -> ValueError."""
     # SEU CÓDIGO AQUI
     raise NotImplementedError

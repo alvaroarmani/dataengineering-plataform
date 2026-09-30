@@ -1,7 +1,16 @@
-"""Exercicio 09 (M9) - Ordem topologica do DAG (complexo). Implemente e rode `pytest -q`."""
+"""Exercício 09 (M9) — Dynamic Task Mapping sob um pool: quanto tempo leva.
+
+Rode `pytest -q`. Detalhes no enunciado (exercicio-09.md).
+"""
+
+import heapq
 
 
-def ordem_topologica(grafo):
-    """O scheduler roda as tasks em ordem topologica. grafo = {task: [dependencias (upstream)]}. Retorne uma ordem valida de execucao (toda task apos suas dependencias); em empate, ordem alfabetica. Se houver ciclo, retorne None."""
-    # SEU CODIGO AQUI
+def simular_pool(duracoes: list, slots: int, maiores_primeiro: bool = False) -> dict:
+    """duracoes = minutos de cada instância mapeada, na ordem em que o mapeamento as cria.
+    As instâncias entram na fila nessa ordem (ou da MAIOR para a menor, se maiores_primeiro, com empate
+    pelo índice original); cada uma ocupa o primeiro slot que ficar livre (desempate: slot de menor número).
+    Retorne {"inicio": [minuto de início de cada instância, na ordem ORIGINAL], "total": minuto em que a
+    última termina}. slots < 1 -> ValueError. Lista vazia -> {"inicio": [], "total": 0}."""
+    # SEU CÓDIGO AQUI
     raise NotImplementedError

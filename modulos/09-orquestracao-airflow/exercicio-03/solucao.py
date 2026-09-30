@@ -1,12 +1,16 @@
-"""Exercício 03 (M9) — XCom: passar valores entre tasks.
+"""Exercício 03 (M9) — XCom: dependências, e o limite do que se passa entre tasks.
 
-Execute as tasks em ordem, guardando o retorno de cada uma num "xcom" (dict) que as
-seguintes podem ler. Rode `pytest -q`.
+Rode `pytest -q`. Detalhes no enunciado (exercicio-03.md).
 """
 
+import json
 
-def rodar_tasks(tasks):
-    """`tasks` = lista de (nome, func). Cada `func` recebe o dict `xcom` (retornos das tasks
-    anteriores por nome) e devolve seu resultado. Rode na ordem e retorne o `xcom` final."""
+
+def executar(tasks: list, limite_bytes: int = 1024) -> dict:
+    """tasks = [(nome, [upstreams], func)] numa ordem em que cada upstream já apareceu antes.
+    Cada func recebe um dict {upstream: xcom} SÓ com os seus upstreams e devolve o seu XCom.
+    O XCom é serializado com json.dumps: se passar de `limite_bytes` bytes (len da string em UTF-8),
+    levante ValueError dizendo qual task estourou. Upstream que ainda não rodou -> KeyError.
+    Retorne {nome: xcom} de todas as tasks."""
     # SEU CÓDIGO AQUI
     raise NotImplementedError

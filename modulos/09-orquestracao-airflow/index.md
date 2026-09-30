@@ -33,21 +33,21 @@ dados (XComs) e boas práticas. Idempotência e reprocessamento seguro. Observab
 **Unidade 2 — Operators, tasks, sensors e XComs**
 1. **Teoria:** [Operators, sensors e XComs](teoria-02-operators-sensors-xcoms.md)
 2. **Lab (🐳 Airflow real):** [TaskFlow API e XCom](lab-02-taskflow-xcom.md)
-3. **Exercícios:** [XCom entre tasks (🟢)](exercicio-03.md) · [Sensor: poke até liberar (🟢)](exercicio-04.md)
+3. **Exercícios:** [XCom: dependências e limite de tamanho (🟢)](exercicio-03.md) · [Sensor: poke x reschedule (🟢)](exercicio-04.md)
 
 **Unidade 3 — Scheduling, backfill e idempotência**
 1. **Teoria:** [Scheduling, backfill e idempotência](teoria-03-scheduling-backfill-idempotencia.md)
 2. **Lab (🐳 Airflow real):** [Backfill idempotente](lab-03-backfill-idempotente.md)
-3. **Exercícios:** [Carga idempotente do dia (🐳 Postgres real)](exercicio-05.md) · [Overwrite em Python (🟢)](exercicio-06.md)
+3. **Exercícios:** [Carga idempotente do dia (🐳 Postgres real)](exercicio-05.md) · [Backfill idempotente com overwrite (🟢)](exercicio-06.md)
 
 **Unidade 4 — Observabilidade e deploy**
 1. **Teoria:** [Observabilidade e deploy do Airflow](teoria-04-observabilidade-deploy.md)
 2. **Lab (🐳 Airflow real):** [Retries e alertas](lab-04-retries-alertas.md)
-3. **Exercícios:** [Retries do Airflow (🟢)](exercicio-07.md) · [Estado do DAG run (🟢)](exercicio-08.md)
+3. **Exercícios:** [Retries do Airflow (🟢)](exercicio-07.md) · [Trigger rules e estado do run (🟢)](exercicio-08.md)
 
 **Unidade 5 — Airflow avançado (nível pós)**
 1. **Teoria:** [Airflow avançado: dynamic mapping, deferrable, datasets e executores](teoria-05-airflow-avancado.md)
-2. **Exercícios:** [Ordem topológica do DAG (🟢 complexo)](exercicio-09.md) · [Tarefas prontas / fronteira do scheduler (🟢 complexo)](exercicio-10.md)
+2. **Exercícios:** [Dynamic Task Mapping sob um pool (🟢 complexo)](exercicio-09.md) · [Data-aware scheduling por datasets (🟢 complexo)](exercicio-10.md)
 
 > **Módulo completo.** Orquestração real (DAGs, operators, scheduling idempotente, observabilidade, **dynamic mapping/datasets/executores**) — pronto para o **M10 (Docker avançado)** e o TCC.
 

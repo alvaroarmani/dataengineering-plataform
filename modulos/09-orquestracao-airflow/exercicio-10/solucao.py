@@ -1,7 +1,13 @@
-"""Exercicio 10 (M9) - Tarefas prontas para rodar (fronteira) (complexo). Implemente e rode `pytest -q`."""
+"""Exercício 10 (M9) — Data-aware scheduling: DAGs disparadas por datasets.
+
+Rode `pytest -q`. Detalhes no enunciado (exercicio-10.md).
+"""
 
 
-def tarefas_prontas(grafo, concluidas):
-    """A cada momento, o scheduler roda a FRONTEIRA: tasks ainda nao concluidas cujas dependencias JA foram concluidas. grafo = {task: [dependencias]}; concluidas = lista de tasks ja feitas. Retorne a lista ORDENADA das tasks prontas."""
-    # SEU CODIGO AQUI
+def disparos(consumidores: dict, atualizacoes: list) -> list:
+    """consumidores = {dag: [datasets de que depende]}; atualizacoes = [dataset atualizado] em ordem.
+    Após cada atualização, toda DAG cujos datasets TODOS foram atualizados desde o último disparo dela
+    é disparada (e o controle dela zera). Retorne [(indice_da_atualizacao, dag)] em ordem de índice e,
+    no mesmo índice, ordem alfabética. DAG sem datasets -> ValueError."""
+    # SEU CÓDIGO AQUI
     raise NotImplementedError
