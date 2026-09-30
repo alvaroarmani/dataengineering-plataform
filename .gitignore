@@ -17,6 +17,8 @@ datasets/data/
 *.parquet
 *.csv
 !datasets/**/exemplo*.csv
+# Amostras reais pequenas e versionadas (geradas por datasets/gerar_amostras.py)
+!datasets/amostras/*.csv
 
 # Plataforma Next.js (web/) — NÃO usar comentário inline (quebra o padrão!)
 web/node_modules/

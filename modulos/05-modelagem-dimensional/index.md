@@ -55,6 +55,9 @@ processos de negócio.
 1. **Teoria:** [Modelagem avançada: tipos de fato, dimensões e bus matrix](teoria-05-modelagem-avancada.md)
 2. **Exercícios:** [Fato de snapshot acumulado — mini-caso (🟢 complexo)](exercicio-09.md) · [Bridge table com alocação (🟢 complexo)](exercicio-10.md)
 
+**Mini-caso com dados reais — fecha o módulo**
+1. **Exercício:** [Star schema com corridas reais de táxi de NY (🟢 dados reais · complexo)](exercicio-11.md) — dimensão role-playing, membro "Desconhecido" e teste de reconciliação.
+
 > **Módulo completo.** A modelagem dimensional aprendida aqui será consolidada no projeto integrador do Eixo 2 e no TCC (Data Warehouse).
 
 ## Metodologia e avaliação

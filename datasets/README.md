@@ -10,7 +10,7 @@ Corridas de táxi de Nova York — grande, colunar, ótimo para agregações e p
 
 - **Formato:** Parquet (mensal).
 - **Fonte:** <https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page>
-- **Uso:** M03 (pandas), M06 (DW/BigQuery), M11 (Spark), TCC.
+- **Uso:** M03 (pandas), M04/M05/M12 (mini-casos, via amostra), M06 (DW/BigQuery), M11 (Spark), TCC.
 
 ### 2. Olist — E-commerce Brasileiro
 Pedidos reais de e-commerce (clientes, itens, pagamentos, reviews) — perfeito para
@@ -23,8 +23,26 @@ Pedidos reais de e-commerce (clientes, itens, pagamentos, reviews) — perfeito 
 ### 3. APIs públicas (ingestão)
 Para praticar ingestão via API (batch/incremental).
 
-- **Exemplos:** Banco Central (câmbio/SGS), IBGE, OpenWeather.
+- **Exemplos:** Banco Central (PTAX/SGS — já no `manifest.yaml`), IBGE, OpenWeather.
 - **Uso:** M08 (ingestão), M09 (Airflow).
+
+## Amostras reais versionadas (`datasets/amostras/`)
+Os exercícios **com dados reais** (mini-casos) leem amostras pequenas que ficam **no Git** — assim
+rodam em qualquer lugar, sem download, e os resultados esperados dos testes são determinísticos.
+Nada é inventado: são recortes dos arquivos oficiais.
+
+| Arquivo | O que é | Usado em |
+|---|---|---|
+| `nyc_taxi_2024_01_amostra.csv` | 2.617 corridas de jan/2024: 2.500 sorteadas (semente fixa) + até 20 linhas **reais** de cada anomalia do mês (tarifa negativa, passageiros nulo/zero, desembarque antes do embarque, distância absurda, fora do mês) | M04 ex-15, M05 ex-11, M12 ex-09 |
+| `taxi_zone_lookup.csv` | tabela oficial das 265 zonas da TLC | M04 ex-15, M05 ex-11 |
+| `ptax_2024_01.json` | resposta **bruta** da API PTAX do Banco Central (dólar, jan/2024) | M08 ex-11 |
+
+Para regenerar a partir dos arquivos completos:
+
+```bash
+python datasets/baixar.py nyc_taxi nyc_taxi_zonas bcb_ptax
+python datasets/gerar_amostras.py
+```
 
 ## Fluxo reproduzível (scripts)
 
@@ -52,4 +70,4 @@ O Olist vem do Kaggle (autenticação). Opções:
 - Para exemplos pequenos versionáveis, use nomes `exemplo-*.csv` (permitidos no `.gitignore`).
 
 ---
-**Revisado em:** 2026-08-24
+**Revisado em:** 2026-09-29

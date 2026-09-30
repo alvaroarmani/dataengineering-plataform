@@ -51,9 +51,12 @@ subqueries e CTEs. Funções de janela (window functions). Índices e noções d
 **Unidade 7 — Índices por dentro e particionamento**
 7. **Teoria:** [Índices por dentro e particionamento](teoria-07-indices-particionamento.md) · **Exercícios:** [Qual índice usar? (🟢)](exercicio-13.md) · [Partition pruning (🟢)](exercicio-14.md)
 
+**Mini-caso com dados reais — fecha o módulo**
+8. **Exercício:** [SQL em corridas reais de táxi de NY (🟢 dados reais · complexo)](exercicio-15.md) — JOIN, HAVING, top-1 por grupo e diagnóstico de qualidade sobre a base oficial da TLC.
+
 **Revisão:** [Flashcards](flashcards.md)
 
-✅ **Módulo completo** — 6 unidades. Fecha o **Eixo 1** (Fundamentos); a seguir, o projeto integrador do eixo.
+✅ **Módulo completo** — 7 unidades + mini-caso com dados reais. Fecha o **Eixo 1** (Fundamentos); a seguir, o projeto integrador do eixo.
 
 ## Metodologia e avaliação
 **Maestria:** bateria de desafios SQL (autocorrigidos) + quiz ≥ 80%. SQL entra também nos

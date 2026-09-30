@@ -250,6 +250,34 @@ def checar_estrutura(avisos_out: list[str]) -> None:
                     f"{nome}: ferramenta real esperada, mas sem grader real (exercicio-*/conftest.py) "
                     f"nem lab guiado na ferramenta (🐳) — evite DuckDB disfarçado"
                 )
+        # riqueza: exercício com poucas checagens ou sem escada de dicas vira "lookup" — não treina
+        rasos, sem_dicas, sem_acento = [], [], []
+        for md in sorted(exercicios):
+            base = os.path.splitext(os.path.basename(md))[0]
+            testes = glob.glob(os.path.join(d, base, "tests", "*.py"))
+            if testes:
+                n = sum(len(RE_CHECAGEM.findall(open(t, encoding="utf-8").read())) for t in testes)
+                if n < MIN_CHECAGENS:
+                    rasos.append(f"{base}({n})")
+            txt = open(md, encoding="utf-8").read()
+            if len(re.findall(r"Dica \d", txt)) < 2:
+                sem_dicas.append(base)
+            if RE_SEM_ACENTO.search(txt):
+                sem_acento.append(base)
+        if rasos:
+            avisos_out.append(f"{nome}: exercícios rasos (< {MIN_CHECAGENS} checagens nos testes): "
+                              + ", ".join(rasos))
+        if sem_dicas:
+            avisos_out.append(f"{nome}: exercícios com < 2 dicas progressivas: " + ", ".join(sem_dicas))
+        if sem_acento:
+            avisos_out.append(f"{nome}: enunciados sem acentuação (ex.: 'nao', 'voce'): " + ", ".join(sem_acento))
+
+
+# Riqueza de exercício: assert/pytest.raises contam como checagem.
+RE_CHECAGEM = re.compile(r"^\s*assert\b|pytest\.raises", re.M)
+MIN_CHECAGENS = 4
+# Texto em português sem acento (resquício de arquivos gerados às pressas).
+RE_SEM_ACENTO = re.compile(r"(?<![\w/.`-])(nao|voce|funcao|codigo|tambem|entao|solucao)(?![\w/.`-])", re.I)
 
 
 def main() -> int:

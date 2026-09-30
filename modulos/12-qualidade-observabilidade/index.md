@@ -42,6 +42,9 @@ confiabilidade (data downtime).
 1. **Teoria:** [Monitoramento, alertas e confiabilidade](teoria-04-monitoramento-alertas.md)
 2. **Exercícios:** [Deve alertar? (🟢)](exercicio-07.md) · [Fora da faixa (🟢)](exercicio-08.md)
 
+**Mini-caso com dados reais — fecha o módulo**
+1. **Exercício:** [Quarentena de corridas reais de táxi de NY (🟢 dados reais · complexo)](exercicio-09.md) — profiling, quarentena com motivo e gate de aprovação do lote sobre anomalias reais da TLC.
+
 > **Módulo completo.** Qualidade + observabilidade — a confiança que sustenta todo o resto.
 
 ## Metodologia e avaliação
