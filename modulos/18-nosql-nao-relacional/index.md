@@ -30,12 +30,12 @@ partition/clustering keys e downsampling de séries.
 
 **Unidade 1 — Por que NoSQL? Modelos e trade-offs**
 1. **Teoria:** [Por que NoSQL? Modelos e trade-offs (CAP)](teoria-01-por-que-nosql-modelos.md)
-2. **Exercícios:** [Do relacional ao documento: desnormalizar e pagar o preço (🟢)](exercicio-01.md) · [Quórum e consistência (🟢)](exercicio-06.md)
+2. **Exercícios:** [Do relacional ao documento: desnormalizar e pagar o preço (🟢)](exercicio-01.md) · [Quóruns na prática: R + W > N (🟢)](exercicio-06.md)
 
 **Unidade 2 — Documento (MongoDB) e key-value (Redis)**
 1. **Teoria:** [Documento e key-value](teoria-02-documento-keyvalue.md)
 2. **Lab:** [MongoDB na bancada — documentos e agregação (🐳)](lab-01-mongodb-na-bancada.md)
-3. **Exercícios:** [Agregar por campo (🟢)](exercicio-02.md) · [Expiração de cache / TTL (🟢)](exercicio-03.md)
+3. **Exercícios:** [Pipeline de agregação estilo MongoDB (🟢)](exercicio-02.md) · [Cache com TTL e despejo LRU (🟢)](exercicio-03.md)
 
 **Unidade 3 — Wide-column (Cassandra) e série temporal**
 1. **Teoria:** [Wide-column e séries temporais](teoria-03-widecolumn-timeseries.md)
@@ -43,7 +43,7 @@ partition/clustering keys e downsampling de séries.
 
 **Unidade 4 — Busca e relevância (full-text)**
 1. **Teoria:** [Busca e relevância: índice invertido, TF-IDF e BM25](teoria-04-busca-relevancia.md)
-2. **Exercícios:** [Índice invertido (🟢)](exercicio-07.md) · [Ranquear por frequência / TF (🟢)](exercicio-08.md)
+2. **Exercícios:** [Índice invertido com busca por frase (🟢)](exercicio-07.md) · [Ranqueamento por TF-IDF (🟢)](exercicio-08.md)
 
 > **Módulo completo.** O complemento não-relacional do M04 — fecha a base de bancos de dados do curso.
 
