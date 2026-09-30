@@ -29,16 +29,16 @@ scheduler/etcd, **self-healing** e **autoscaling (HPA)**. Rodando dados em k8s: 
 
 **Unidade 1 — A nuvem para dados**
 1. **Teoria:** [A nuvem para dados: modelos de serviço](teoria-01-nuvem-para-dados.md)
-2. **Exercícios:** [Serverless ou container? Ponto de equilíbrio (🟢)](exercicio-01.md) · [Cabe no nó / scheduler (🟢)](exercicio-05.md)
+2. **Exercícios:** [Serverless ou container? Ponto de equilíbrio (🟢)](exercicio-01.md) · [Scheduler: onde cada pod vai rodar (🟢)](exercicio-05.md)
 
 **Unidade 2 — Kubernetes: conceitos**
 1. **Teoria:** [Kubernetes: orquestração de contêineres](teoria-02-kubernetes-conceitos.md)
 2. **Lab:** [Kubernetes local com kind (🐳 avançado)](lab-01-kubernetes-kind.md)
-3. **Exercícios:** [Réplicas para a carga (🟢)](exercicio-02.md) · [Deployment saudável (🟢)](exercicio-03.md) · [**Escreva um manifesto de Deployment (grader)**](exercicio-07.md)
+3. **Exercícios:** [Réplicas que sobrevivem à perda de uma zona (🟢)](exercicio-02.md) · [Rolling update: maxSurge e maxUnavailable (🟢)](exercicio-03.md) · [**Escreva um manifesto de Deployment (grader)**](exercicio-07.md)
 
 **Unidade 3 — Dados no Kubernetes e IaC**
 1. **Teoria:** [Rodando dados no Kubernetes: jobs, estado e IaC](teoria-03-dados-no-kubernetes.md)
-2. **Exercícios:** [Autoscaling / HPA (🟢)](exercicio-04.md) · [DNS de service (🟢)](exercicio-06.md)
+2. **Exercícios:** [HPA: tolerância, limites e várias métricas (🟢)](exercicio-04.md) · [Service discovery: resolução de nomes no cluster (🟢)](exercicio-06.md)
 
 > **Módulo completo.** Fecha a infra do Eixo 3: do contêiner (M10) à orquestração em escala na nuvem.
 

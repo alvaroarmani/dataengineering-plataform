@@ -30,15 +30,15 @@ backoff**, circuit breaker, e o padrão **Saga** (compensações) para transaç�
 
 **Unidade 1 — APIs REST para dados**
 1. **Teoria:** [APIs REST: consumir e servir](teoria-01-apis-rest-dados.md)
-2. **Exercícios:** [API de pedidos: status e precedência (🟢)](exercicio-01.md) · [Paginação (🟢)](exercicio-02.md) · [Contrato: campos faltando (🟢)](exercicio-06.md)
+2. **Exercícios:** [API de pedidos: status e precedência (🟢)](exercicio-01.md) · [Paginação: offset x cursor (🟢)](exercicio-02.md) · [Evolução de contrato e versionamento (🟢)](exercicio-06.md)
 
 **Unidade 2 — Microserviços e event-driven**
 1. **Teoria:** [Microserviços e integração orientada a eventos](teoria-02-microservicos-event-driven.md)
-2. **Exercícios:** [Idempotency-Key (🟢)](exercicio-03.md)
+2. **Exercícios:** [Idempotency-Key do lado do servidor (🟢)](exercicio-03.md)
 
 **Unidade 3 — Resiliência na integração**
 1. **Teoria:** [Idempotência, retry e Saga](teoria-03-resiliencia-integracao.md)
-2. **Exercícios:** [Retry com backoff (🟢)](exercicio-04.md) · [Saga: compensações (🟢)](exercicio-05.md)
+2. **Exercícios:** [Política de retry com backoff e Retry-After (🟢)](exercicio-04.md) · [Saga orquestrada com ponto sem volta (🟢)](exercicio-05.md)
 
 > **Módulo completo.** Liga o pipeline ao resto do sistema — a integração que falta entre os dados e as aplicações.
 
