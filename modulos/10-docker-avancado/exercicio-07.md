@@ -16,14 +16,21 @@ pytest -q modulos/10-docker-avancado/exercicio-07
 > O grader faz `docker build` da sua imagem e `docker run`, e confere a saída. **Fora da bancada,
 > faz *skip*.**
 
-## Dica
-:::{dropdown} Dica
+## Dicas progressivas
+:::{dropdown} Dica 1 — o que a imagem precisa ter
+Uma imagem de Python mínima precisa de três coisas: uma **base** com Python (prefira uma `-slim`), o **código** copiado para dentro e o **comando** que roda quando o container sobe. O grader faz `docker build` e depois `docker run` e procura a saída do script.
+:::
+:::{dropdown} Dica 2 — a ordem das instruções
+`FROM` sempre primeiro; depois defina a pasta de trabalho (`WORKDIR`) para não espalhar arquivos na raiz; copie só o necessário (`COPY app.py .`, não `COPY .`); e termine com `CMD` na forma de lista (`["python", "app.py"]`), que não passa por um shell.
+:::
+:::{dropdown} Dica 3 — quase lá
 ```dockerfile
 FROM python:3.12-slim
 WORKDIR /app
 COPY app.py .
 CMD ["python", "app.py"]
 ```
+Se o build passar e a saída não aparecer, confira se o `CMD` aponta para o arquivo no `WORKDIR`.
 :::
 
 ## Solução comentada (abra só DEPOIS de passar)
@@ -37,4 +44,4 @@ CMD ["python", "app.py"]  # comando que roda quando o container sobe
 :::
 
 ---
-**Revisado em:** 2026-09-09
+**Revisado em:** 2026-09-30

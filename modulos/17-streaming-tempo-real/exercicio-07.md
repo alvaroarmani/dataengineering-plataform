@@ -24,10 +24,15 @@ pytest -q modulos/17-streaming-tempo-real/exercicio-07
 > (3) **mais de uma partição** foi usada (chave por cliente, não constante).
 > **Fora da bancada, faz *skip*.**
 
-## Dica
-:::{dropdown} Dica
-A chave precisa identificar o cliente: `[(str(e["cliente_id"]), e["acao"]) for e in eventos]`.
-Chave constante jogaria tudo numa partição só; chave por ação espalharia um mesmo cliente.
+## Dicas progressivas
+:::{dropdown} Dica 1 — o que a chave decide
+No Kafka, a partição é `hash(chave) % partições` (teoria 02): mensagens com a **mesma chave** vão para a **mesma partição**, e só dentro de uma partição há ordem garantida. A pergunta é: que chave faz os eventos de um cliente ficarem em ordem?
+:::
+:::{dropdown} Dica 2 — as armadilhas
+Chave **constante** joga tudo numa partição só (ordem garantida, mas zero paralelismo). Chave **por ação** espalha os eventos de um mesmo cliente por várias partições (paralelismo, mas a ordem do cliente se perde). Sem chave, é round-robin.
+:::
+:::{dropdown} Dica 3 — quase lá
+A chave precisa identificar o cliente e ser texto (o produtor serializa bytes): `[(str(e["cliente_id"]), e["acao"]) for e in eventos]`, mantendo a ordem de entrada.
 :::
 
 ## Solução comentada (abra só DEPOIS de passar)
@@ -41,4 +46,4 @@ def preparar_mensagens(eventos):
 :::
 
 ---
-**Revisado em:** 2026-09-03
+**Revisado em:** 2026-09-30

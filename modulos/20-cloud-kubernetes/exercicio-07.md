@@ -17,10 +17,15 @@ pytest -q modulos/20-cloud-kubernetes/exercicio-07
 > O grader confere estrutura, réplicas, casamento selector↔labels e a imagem. Para ver o Deployment
 > **rodando de verdade** (self-healing, scale), faça o **Lab 01** com `kind`.
 
-## Dica
-:::{dropdown} Dica
-O `selector.matchLabels` e o `template.metadata.labels` precisam ser idênticos (ex.: `{app: web}`) —
-é assim que o Deployment sabe quais pods são dele.
+## Dicas progressivas
+:::{dropdown} Dica 1 — o esqueleto
+Um Deployment tem `apiVersion: apps/v1`, `kind: Deployment`, `metadata.name` e um `spec` com `replicas`, `selector` e `template` (o molde dos pods). O grader lê o YAML e confere a estrutura.
+:::
+:::{dropdown} Dica 2 — o elo entre Deployment e pods
+O `spec.selector.matchLabels` e o `spec.template.metadata.labels` precisam ter os **mesmos** rótulos (ex.: `{app: web}`): é assim que o Deployment sabe quais pods são dele. Se divergirem, o Kubernetes recusa o manifesto.
+:::
+:::{dropdown} Dica 3 — o container
+Em `spec.template.spec.containers`, um item com `name`, `image` (com tag de versão, não `latest`) e `ports` com o `containerPort`. Defina também `resources.requests` — é o que o scheduler usa (exercício 05).
 :::
 
 ## Solução comentada (abra só DEPOIS de passar)
@@ -49,4 +54,4 @@ spec:
 :::
 
 ---
-**Revisado em:** 2026-09-09
+**Revisado em:** 2026-09-30
