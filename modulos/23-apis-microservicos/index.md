@@ -30,7 +30,7 @@ backoff**, circuit breaker, e o padrão **Saga** (compensações) para transaç�
 
 **Unidade 1 — APIs REST para dados**
 1. **Teoria:** [APIs REST: consumir e servir](teoria-01-apis-rest-dados.md)
-2. **Exercícios:** [Status HTTP (🟢)](exercicio-01.md) · [Paginação (🟢)](exercicio-02.md) · [Contrato: campos faltando (🟢)](exercicio-06.md)
+2. **Exercícios:** [API de pedidos: status e precedência (🟢)](exercicio-01.md) · [Paginação (🟢)](exercicio-02.md) · [Contrato: campos faltando (🟢)](exercicio-06.md)
 
 **Unidade 2 — Microserviços e event-driven**
 1. **Teoria:** [Microserviços e integração orientada a eventos](teoria-02-microservicos-event-driven.md)

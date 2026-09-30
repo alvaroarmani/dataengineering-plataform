@@ -49,7 +49,7 @@ subqueries e CTEs. Funções de janela (window functions). Índices e noções d
 6. **Teoria:** [Transações, ACID e NoSQL](teoria-06-transacoes-acid-nosql.md) · **Lab:** [Transações](lab-06-transacoes.ipynb) · **Exercícios:** [Integridade: duplicatas](exercicio-11.md) · [Consistência](exercicio-12.md)
 
 **Unidade 7 — Índices por dentro e particionamento**
-7. **Teoria:** [Índices por dentro e particionamento](teoria-07-indices-particionamento.md) · **Exercícios:** [Qual índice usar? (🟢)](exercicio-13.md) · [Partition pruning (🟢)](exercicio-14.md)
+7. **Teoria:** [Índices por dentro e particionamento](teoria-07-indices-particionamento.md) · **Exercícios:** [Qual índice o banco consegue usar? Regra do prefixo (🟢)](exercicio-13.md) · [Partition pruning (🟢)](exercicio-14.md)
 
 **Mini-caso com dados reais — fecha o módulo**
 8. **Exercício:** [SQL em corridas reais de táxi de NY (🟢 dados reais · complexo)](exercicio-15.md) — JOIN, HAVING, top-1 por grupo e diagnóstico de qualidade sobre a base oficial da TLC.

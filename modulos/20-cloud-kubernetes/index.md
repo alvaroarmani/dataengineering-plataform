@@ -29,7 +29,7 @@ scheduler/etcd, **self-healing** e **autoscaling (HPA)**. Rodando dados em k8s: 
 
 **Unidade 1 — A nuvem para dados**
 1. **Teoria:** [A nuvem para dados: modelos de serviço](teoria-01-nuvem-para-dados.md)
-2. **Exercícios:** [Escolher o serviço (🟢)](exercicio-01.md) · [Cabe no nó / scheduler (🟢)](exercicio-05.md)
+2. **Exercícios:** [Serverless ou container? Ponto de equilíbrio (🟢)](exercicio-01.md) · [Cabe no nó / scheduler (🟢)](exercicio-05.md)
 
 **Unidade 2 — Kubernetes: conceitos**
 1. **Teoria:** [Kubernetes: orquestração de contêineres](teoria-02-kubernetes-conceitos.md)

@@ -30,7 +30,7 @@ partition/clustering keys e downsampling de séries.
 
 **Unidade 1 — Por que NoSQL? Modelos e trade-offs**
 1. **Teoria:** [Por que NoSQL? Modelos e trade-offs (CAP)](teoria-01-por-que-nosql-modelos.md)
-2. **Exercícios:** [Escolher a família (🟢)](exercicio-01.md) · [Quórum e consistência (🟢)](exercicio-06.md)
+2. **Exercícios:** [Do relacional ao documento: desnormalizar e pagar o preço (🟢)](exercicio-01.md) · [Quórum e consistência (🟢)](exercicio-06.md)
 
 **Unidade 2 — Documento (MongoDB) e key-value (Redis)**
 1. **Teoria:** [Documento e key-value](teoria-02-documento-keyvalue.md)
@@ -39,7 +39,7 @@ partition/clustering keys e downsampling de séries.
 
 **Unidade 3 — Wide-column (Cassandra) e série temporal**
 1. **Teoria:** [Wide-column e séries temporais](teoria-03-widecolumn-timeseries.md)
-2. **Exercícios:** [Chave de partição (🟢)](exercicio-04.md) · [Downsample de série (🟢)](exercicio-05.md)
+2. **Exercícios:** [Chave de partição: medir o hotspot (🟢)](exercicio-04.md) · [Série temporal: rollup e retenção (🟢)](exercicio-05.md)
 
 **Unidade 4 — Busca e relevância (full-text)**
 1. **Teoria:** [Busca e relevância: índice invertido, TF-IDF e BM25](teoria-04-busca-relevancia.md)

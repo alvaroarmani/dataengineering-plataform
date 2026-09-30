@@ -30,7 +30,7 @@ data lake/lakehouse (M11) e a arquitetura Lambda/Kappa.
 
 **Unidade 1 — Batch vs Streaming e arquiteturas de eventos**
 1. **Teoria:** [Batch vs streaming e o modelo de eventos](teoria-01-batch-vs-streaming-eventos.md)
-2. **Exercícios:** [Batch ou streaming? (🟢)](exercicio-01.md) · [Roteamento de eventos (🟢)](exercicio-02.md)
+2. **Exercícios:** [Roteamento de eventos (🟢)](exercicio-01.md) · [Batch ou streaming? Classificar latência (🟢)](exercicio-02.md)
 
 **Unidade 2 — Apache Kafka: o log distribuído**
 1. **Teoria:** [Kafka: tópicos, partições, offsets e consumer groups](teoria-02-kafka-topicos-particoes.md)
@@ -39,7 +39,7 @@ data lake/lakehouse (M11) e a arquitetura Lambda/Kappa.
 
 **Unidade 3 — Processamento de streams: tempo, janelas e garantias**
 1. **Teoria:** [Tempo de evento, janelas e semântica de entrega](teoria-03-janelas-tempo-exactly-once.md)
-2. **Exercícios:** [Janela por tempo de evento (🟢)](exercicio-05.md) · [Exactly-once por dedup (🟢)](exercicio-06.md)
+2. **Exercícios:** [Janelas com watermark: atrasados × completude (🟢)](exercicio-05.md) · [Exactly-once por dedup (🟢)](exercicio-06.md)
 
 > **Módulo completo.** Fecha a lacuna de tempo real do Eixo 3 — o complemento streaming do batch (M08/M09).
 

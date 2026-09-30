@@ -36,7 +36,7 @@ Professional Data Engineer). Mapa de vagas e como se candidatar.
 
 **Unidade 3 — System design de pipeline e certificações**
 1. **Teoria:** [System design de pipeline e trilha de certificações](teoria-03-system-design-certificacoes.md)
-2. **Exercícios:** [Batch ou streaming? (🟢)](exercicio-05.md) · [Undercurrents faltando (🟢)](exercicio-06.md)
+2. **Exercícios:** [Requisitos em números: estimativa de capacidade (🟢)](exercicio-05.md) · [Undercurrents faltando (🟢)](exercicio-06.md)
 
 > **Módulo completo.** Prepara a transição da competência para a oferta de emprego.
 

@@ -50,7 +50,7 @@ e batch vs streaming, faça o [exercício](exercicio-01.md) direto — passando,
 
 **Unidade 3 — Arquiteturas de dados**
 1. **Teoria:** [Arquiteturas: DW, Data Lake, Lakehouse e além](teoria-03-arquiteturas-dados.md)
-2. **Exercícios:** [Qual arquitetura? (🟢)](exercicio-04.md)
+2. **Exercícios:** [Qual arquitetura? Decisão por requisitos (🟢)](exercicio-04.md)
 
 **Revisão:** [Flashcards](flashcards.md)
 
