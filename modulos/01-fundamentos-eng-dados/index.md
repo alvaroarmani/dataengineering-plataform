@@ -42,11 +42,11 @@ e batch vs streaming, faça o [exercício](exercicio-01.md) direto — passando,
 **Unidade 1 — Panorama e ciclo de vida do dado**
 1. **Teoria:** [O que é Engenharia de Dados](teoria-01-o-que-e-engenharia-de-dados.md)
 2. **Lab:** [Primeiro contato com dados](lab-01-primeiro-contato-dados.ipynb)
-3. **Exercícios:** [Receita por estado (🟢)](exercicio-01.md) · [Ordenar o ciclo de vida (🟢)](exercicio-03.md)
+3. **Exercícios:** [Receita por estado (🟢)](exercicio-01.md) · [Validar a ordem das etapas do pipeline (🟢)](exercicio-03.md)
 
 **Unidade 2 — OLTP × OLAP e armazenamento colunar**
 1. **Teoria:** [OLTP vs OLAP e o armazenamento colunar](teoria-02-oltp-olap-colunar.md)
-2. **Exercícios:** [OLTP ou OLAP? (🟢)](exercicio-02.md) · [Vantagem do colunar (🟢)](exercicio-05.md) · [Armazenamento ideal (🟢)](exercicio-06.md)
+2. **Exercícios:** [OLTP ou OLAP? Pela carga real (🟢)](exercicio-02.md) · [Linha x coluna: bytes lidos (🟢)](exercicio-05.md) · [Compressão RLE: por que ordenar comprime (🟢)](exercicio-06.md)
 
 **Unidade 3 — Arquiteturas de dados**
 1. **Teoria:** [Arquiteturas: DW, Data Lake, Lakehouse e além](teoria-03-arquiteturas-dados.md)

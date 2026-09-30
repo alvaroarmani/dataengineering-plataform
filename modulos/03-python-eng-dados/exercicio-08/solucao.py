@@ -1,7 +1,20 @@
-"""Exercicio 08 (M3) - Sessionizacao de eventos (complexo). Implemente e rode `pytest -q`."""
+"""Exercício 08 (M3) — Sessionização: início, fim e duração de cada sessão.
+
+Rode `pytest -q`. Detalhes no enunciado (exercicio-08.md).
+"""
 
 
-def sessionizar(eventos, gap_max):
-    """Sessionizacao (classico de analytics): eventos = lista de (usuario, timestamp). Por usuario, ordene por timestamp e agrupe em SESSOES: um gap entre eventos consecutivos maior que gap_max inicia uma nova sessao. Retorne {usuario: [tamanhos de cada sessao]}."""
-    # SEU CODIGO AQUI
+def sessionizar(eventos: list, gap_max: float) -> dict:
+    """eventos = [(usuario, timestamp)] em QUALQUER ordem, possivelmente com (usuario, timestamp) repetido.
+    Por usuário: descarte duplicatas exatas, ordene e quebre uma nova sessão quando o intervalo para o
+    evento anterior for MAIOR que gap_max (igual ainda é a mesma sessão).
+    Retorne {usuario: [(inicio, fim, n_eventos), ...]} com os usuários em ordem alfabética.
+    gap_max <= 0 -> ValueError."""
+    # SEU CÓDIGO AQUI
+    raise NotImplementedError
+
+
+def resumo_por_usuario(sessoes: dict) -> dict:
+    """{usuario: {"sessoes": qtd, "eventos": total, "duracao_media": média de (fim - inicio), 1 casa}}."""
+    # SEU CÓDIGO AQUI
     raise NotImplementedError

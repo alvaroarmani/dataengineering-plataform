@@ -37,11 +37,11 @@ GitHub. Introdução a containers com Docker (imagens, containers, volumes) e us
 
 **Unidade 2 — Git em profundidade**
 1. **Teoria:** [Git: commits, branches e colaboração](teoria-02-git-em-profundidade.md)
-2. **Exercícios:** [Versionar ou não? (🟢)](exercicio-02.md) · [Commit válido? (🟢)](exercicio-03.md) · [Arquivos staged (🟢)](exercicio-04.md)
+2. **Exercícios:** [Pre-commit: achar segredos antes do commit (🟢)](exercicio-02.md) · [Conventional Commits e a próxima versão (🟢)](exercicio-03.md) · [Lendo o git status --porcelain (🟢)](exercicio-04.md)
 
 **Unidade 3 — Docker e containers**
 1. **Teoria:** [Docker e containers](teoria-03-docker-containers.md)
-2. **Exercícios:** [O que sobrevive a um `docker rm`? (🟢 simulador)](exercicio-05.md) · [Mapeamento de porta (🟢)](exercicio-06.md)
+2. **Exercícios:** [O que sobrevive a um `docker rm`? (🟢 simulador)](exercicio-05.md) · [Portas publicadas: parse e conflitos (🟢)](exercicio-06.md)
 
 **Revisão:** [Flashcards](flashcards.md)
 

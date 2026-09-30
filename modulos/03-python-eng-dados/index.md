@@ -63,7 +63,7 @@ ambientes virtuais, type hints, estilo (PEP 8), testes com pytest.
 
 **Unidade 7 — Python avançado para dados (nível pós)**
 19. **Teoria:** [Python avançado: lazy, decorators, context managers e concorrência](teoria-07-python-avancado-dados.md)
-20. **Exercícios:** [Agregação em fluxo / single-pass (🟢 complexo)](exercicio-07.md) · [Sessionização (🟢 complexo)](exercicio-08.md)
+20. **Exercícios:** [Estatísticas em uma passada / Welford (🟢 complexo)](exercicio-07.md) · [Sessionização com duração (🟢 complexo)](exercicio-08.md)
 
 **Revisão:** [Flashcards](flashcards.md)
 

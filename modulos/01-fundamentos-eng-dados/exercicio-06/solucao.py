@@ -1,7 +1,22 @@
-"""Exercicio 06 (M1) - Armazenamento ideal por carga. Implemente e rode `pytest -q`."""
+"""Exercício 06 (M1) — Compressão por run-length: por que ordenar comprime.
+
+Rode `pytest -q`. Detalhes no enunciado (exercicio-06.md).
+"""
 
 
-def armazenamento_ideal(carga):
-    """OLTP favorece armazenamento por 'linha' (row); OLAP favorece por 'coluna' (colunar). Retorne 'linha' p/ 'OLTP', 'coluna' p/ 'OLAP', senao 'indefinido'."""
-    # SEU CODIGO AQUI
+def rle(coluna: list) -> list:
+    """Lista de pares (valor, repeticoes) para sequências CONSECUTIVAS de valores iguais."""
+    # SEU CÓDIGO AQUI
+    raise NotImplementedError
+
+
+def desfazer_rle(pares: list) -> list:
+    """Reconstrói a coluna. Repetição < 1 -> ValueError."""
+    # SEU CÓDIGO AQUI
+    raise NotImplementedError
+
+
+def taxa_compressao(coluna: list) -> float:
+    """len(coluna) / len(rle(coluna)), com 2 casas (1.0 = nada comprimiu). Coluna vazia -> 1.0."""
+    # SEU CÓDIGO AQUI
     raise NotImplementedError
