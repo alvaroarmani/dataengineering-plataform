@@ -43,7 +43,7 @@ streaming e mensageria (Kafka) — conceitual e demo.
 **Unidade 4 — Formatos (Parquet/Avro) e intro a Kafka**
 1. **Teoria:** [Formatos de dados e streaming (Kafka)](teoria-04-formatos-kafka.md)
 2. **Lab:** [Parquet na prática](lab-04-parquet.ipynb)
-3. **Exercícios:** [Validar contra um schema (🟢)](exercicio-07.md) · [Consumo por offset — Kafka (🟢)](exercicio-08.md)
+3. **Exercícios:** [Validar contra um schema (🟢)](exercicio-07.md) · [Consumo por offset: lotes e retenção (🟢)](exercicio-08.md)
 
 **Unidade 5 — CDC, schema evolution e exactly-once (nível pós)**
 1. **Teoria:** [CDC por dentro, schema evolution e exactly-once](teoria-05-cdc-schema-evolution.md)

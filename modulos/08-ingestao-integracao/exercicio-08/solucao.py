@@ -1,12 +1,17 @@
-"""Exercício 08 (M8) — Consumo por offset (a ideia do Kafka).
+"""Exercício 08 (M8) — Consumo por offset: lotes, retenção e auto.offset.reset.
 
-Um consumidor lê de um log a partir de um offset e avança. Implemente e rode `pytest -q`.
+Rode `pytest -q`. Detalhes no enunciado (exercicio-08.md).
 """
 
 
-def consumir(log, offset):
-    """`log` = lista de mensagens; `offset` = índice da PRÓXIMA mensagem a ler.
-    Retorne uma tupla (novas_mensagens, novo_offset): as mensagens a partir de `offset`
-    e o novo offset (após consumir tudo que havia)."""
+def poll(log: list, inicio_log: int, offset: int, max_msgs: int = 500, reset: str = "earliest") -> dict:
+    """log = mensagens disponíveis; a primeira tem offset `inicio_log` (as anteriores foram apagadas pela
+    retenção). offset = próximo offset que o consumidor quer ler. fim = inicio_log + len(log).
+      - offset > fim -> ValueError (offset inválido).
+      - offset < inicio_log (apagado): reset "earliest" -> lê a partir de inicio_log;
+        "latest" -> vai para o fim (nada lido); "none" -> ValueError. As mensagens puladas entre o offset
+        pedido e o ponto de leitura contam em "perdidas".
+      - leia no máximo max_msgs mensagens a partir do ponto de leitura.
+    Retorne {"mensagens": [...], "proximo_offset": n, "perdidas": n}. max_msgs < 1 -> ValueError."""
     # SEU CÓDIGO AQUI
     raise NotImplementedError

@@ -28,15 +28,15 @@ Professional Data Engineer). Mapa de vagas e como se candidatar.
 
 **Unidade 1 — Portfólio, GitHub, currículo e LinkedIn**
 1. **Teoria:** [Portfólio, GitHub, currículo e LinkedIn](teoria-01-portfolio-github-curriculo.md)
-2. **Exercícios:** [README completo? (🟢)](exercicio-01.md) · [Projetos prontos p/ portfólio (🟢)](exercicio-02.md)
+2. **Exercícios:** [Um linter de README de portfólio (🟢)](exercicio-01.md) · [Quais projetos vão para o currículo (🟢)](exercicio-02.md)
 
 **Unidade 2 — Entrevista técnica: SQL ao vivo e modelagem**
 1. **Teoria:** [A entrevista técnica: SQL ao vivo e case de modelagem](teoria-02-entrevista-sql-modelagem.md)
-2. **Exercícios:** [SQL ao vivo — top N por grupo (🟢 DuckDB)](exercicio-03.md) · [Separar fatos e dimensões (🟢)](exercicio-04.md)
+2. **Exercícios:** [SQL ao vivo — top N por grupo (🟢 DuckDB)](exercicio-03.md) · [Da tabela achatada ao star schema (🟢)](exercicio-04.md)
 
 **Unidade 3 — System design de pipeline e certificações**
 1. **Teoria:** [System design de pipeline e trilha de certificações](teoria-03-system-design-certificacoes.md)
-2. **Exercícios:** [Requisitos em números: estimativa de capacidade (🟢)](exercicio-05.md) · [Undercurrents faltando (🟢)](exercicio-06.md)
+2. **Exercícios:** [Requisitos em números: estimativa de capacidade (🟢)](exercicio-05.md) · [Revisar um design: correntes de fundo (🟢)](exercicio-06.md)
 
 > **Módulo completo.** Prepara a transição da competência para a oferta de emprego.
 

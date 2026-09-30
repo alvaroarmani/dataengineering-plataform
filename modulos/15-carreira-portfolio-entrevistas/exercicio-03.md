@@ -46,4 +46,4 @@ ORDER BY categoria ASC, receita DESC, produto_id ASC
 :::
 
 ---
-**Revisado em:** 2026-08-30
+**Revisado em:** 2026-09-30

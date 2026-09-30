@@ -13,6 +13,7 @@ alcance dos URLs, mas é sempre NÃO-BLOQUEANTE (apenas avisa).
 from __future__ import annotations
 
 import argparse
+import ast
 import datetime as dt
 import glob
 import os
@@ -256,7 +257,7 @@ def checar_estrutura(avisos_out: list[str]) -> None:
             base = os.path.splitext(os.path.basename(md))[0]
             testes = glob.glob(os.path.join(d, base, "tests", "*.py"))
             if testes:
-                n = sum(len(RE_CHECAGEM.findall(open(t, encoding="utf-8").read())) for t in testes)
+                n = sum(contar_checagens(open(t, encoding="utf-8").read()) for t in testes)
                 if n < MIN_CHECAGENS:
                     rasos.append(f"{base}({n})")
             txt = open(md, encoding="utf-8").read()
@@ -277,6 +278,21 @@ def checar_estrutura(avisos_out: list[str]) -> None:
 # Riqueza de exercício: assert/pytest.raises contam como checagem.
 RE_CHECAGEM = re.compile(r"^\s*assert\b|pytest\.raises", re.M)
 MIN_CHECAGENS = 4
+
+
+def contar_checagens(codigo: str) -> int:
+    """assert/pytest.raises contam 1 cada; um teste parametrizado conta cada caso a mais."""
+    n = len(RE_CHECAGEM.findall(codigo))
+    try:
+        arvore = ast.parse(codigo)
+    except SyntaxError:
+        return n
+    for no in ast.walk(arvore):
+        if isinstance(no, ast.Call) and getattr(no.func, "attr", "") == "parametrize" and len(no.args) >= 2:
+            casos = no.args[1]
+            if isinstance(casos, (ast.List, ast.Tuple)):
+                n += max(0, len(casos.elts) - 1)
+    return n
 # Texto em português sem acento (resquício de arquivos gerados às pressas); código é ignorado.
 RE_SEM_ACENTO = re.compile(r"(?<![\w/.`-])(nao|voce|funcao|codigo|tambem|entao|solucao)(?![\w/.`-])", re.I)
 

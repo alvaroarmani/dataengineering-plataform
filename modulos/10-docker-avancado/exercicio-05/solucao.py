@@ -1,7 +1,19 @@
-"""Exercício 05 (M10) — Resolver variável de ambiente (${VAR:-default}). Implemente e rode `pytest -q`."""
+"""Exercício 05 (M10) — Interpolação de variáveis do Compose.
+
+Rode `pytest -q`. Detalhes no enunciado (exercicio-05.md).
+"""
+
+import re
+
+PADRAO = re.compile(r"\$\$|\$\{(?P<nome>[A-Za-z_][A-Za-z0-9_]*)(?:(?P<op>:-|-|:\?|\?)(?P<arg>[^}]*))?\}|\$(?P<simples>[A-Za-z_][A-Za-z0-9_]*)")
 
 
-def resolver(expr, ambiente):
-    """expr é 'VAR' ou 'VAR:-default'. Retorne o valor de VAR em `ambiente` se existir e não for vazio; senão o default (ou '' se não houver)."""
+def interpolar(texto: str, ambiente: dict) -> str:
+    """Substitua no texto:
+      $$              -> $
+      $VAR, ${VAR}    -> valor (ausente -> "")
+      ${VAR:-p}       -> p se VAR ausente OU vazia;       ${VAR-p}  -> p só se ausente
+      ${VAR:?msg}     -> ValueError(msg) se ausente OU vazia; ${VAR?msg} -> só se ausente
+    """
     # SEU CÓDIGO AQUI
     raise NotImplementedError

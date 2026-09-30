@@ -33,3 +33,26 @@ def test_top2_por_categoria(con):
         ("livros", 4, 150.0),
         ("livros", 5, 90.0),
     ]
+
+
+# ---------- armadilhas: empate de receita e categoria com menos de 2 produtos ----------
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO vendas VALUES (?,?,?)", [
+        (6, "eletronicos", 800.0),       # empata com o produto 2 (800): desempate pelo menor id
+        (7, "casa", 60.0),               # categoria com um produto só
+        (8, "livros", None),             # venda sem valor: SUM ignora, receita nula fica por último
+    ])
+    return con
+
+
+def test_empate_desempata_pelo_id(con_bordas):
+    r = con_bordas.execute(CONSULTA).fetchall()
+    assert [x for x in r if x[0] == "eletronicos"] == [("eletronicos", 1, 1500.0), ("eletronicos", 2, 800.0)]
+
+
+def test_categoria_pequena_e_nulos(con_bordas):
+    r = con_bordas.execute(CONSULTA).fetchall()
+    assert ("casa", 7, 60.0) in r
+    assert [x for x in r if x[0] == "livros"] == [("livros", 4, 150.0), ("livros", 5, 90.0)]
+    assert len(r) == 5
