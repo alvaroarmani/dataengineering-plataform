@@ -26,16 +26,16 @@ versionamento de dados e ambientes.
 
 **Unidade 1 — DataOps e fluxos de Git para dados**
 1. **Teoria:** [DataOps e Git para dados](teoria-01-dataops-git.md)
-2. **Exercícios:** [Pode fazer merge? (🟢)](exercicio-01.md) · [Ambiente do branch (🟢)](exercicio-02.md)
+2. **Exercícios:** [Proteção de branch: o PR pode entrar? (🟢)](exercicio-01.md) · [Branch → ambiente e schema (🟢)](exercicio-02.md)
 
 **Unidade 2 — CI/CD com GitHub Actions**
 1. **Teoria:** [CI/CD com GitHub Actions](teoria-02-cicd-github-actions.md)
 2. **Artefato real:** [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) — o CI deste repo (linter + build)
-3. **Exercícios:** [Rodar pipeline (🟢)](exercicio-03.md) · [Deve deployar? (🟢)](exercicio-04.md)
+3. **Exercícios:** [Workflow com dependências (needs) (🟢)](exercicio-03.md) · [Slim CI: o que rebuildar (🟢)](exercicio-04.md)
 
 **Unidade 3 — Introdução a Terraform (IaC)**
 1. **Teoria:** [Terraform e Infraestrutura como Código](teoria-03-terraform-iac.md)
-2. **Exercícios:** [Plano do Terraform / diff (🟢)](exercicio-05.md) · [Nº de mudanças (🟢)](exercicio-06.md)
+2. **Exercícios:** [Plano do Terraform: atualizar x substituir (🟢)](exercicio-05.md) · [Resumo do plano e drift (🟢)](exercicio-06.md)
 
 > **Módulo completo.** DataOps, CI/CD e IaC — a disciplina que leva dados a produção com segurança.
 
