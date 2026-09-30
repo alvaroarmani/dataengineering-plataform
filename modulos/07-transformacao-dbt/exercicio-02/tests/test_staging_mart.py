@@ -41,3 +41,22 @@ def test_mart_receita_por_estado(con):
         ("SP", 180.0),
         ("MG", 50.0),
     ]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Estado com espaços (' rj ': o staging precisa de TRIM além de UPPER) e valor ausente (NULL não quebra o CAST e a SUM o ignora).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO raw_pedidos VALUES (?,?,?,?)", [
+        ('5', 'eva', ' rj ', '70.5'),
+        ('6', 'fabio', 'mg', None),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [(1, 'ana', 'SP', 100.0), (2, 'bruno', 'RJ', 200.0), (3, 'caio', 'MG', 50.0), (4, 'ana', 'SP', 80.0), (5, 'eva', 'RJ', 70.5), (6, 'fabio', 'MG', None)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('RJ', 270.5), ('SP', 180.0), ('MG', 50.0)]

@@ -9,6 +9,7 @@ Tabelas (staging já limpo):
 
 # A) Receita por categoria (join stg_itens + stg_produtos por produto_id):
 # colunas (categoria, receita) = SUM(price), da maior para a menor.
+# Item cujo produto não está em stg_produtos entra como categoria 'Desconhecido'.
 CONSULTA_A = """
 -- SEU CÓDIGO AQUI
 """

@@ -38,3 +38,22 @@ def test_ticket_medio_por_categoria(con):
         ("casa", 80.0),
         ("eletronicos", 75.0),
     ]
+
+
+# ---------- armadilhas: as MESMAS queries numa base com casos de borda ----------
+# Item de produto que não está em stg_produtos (entra como 'Desconhecido', a receita não some) e item com preço NULL (AVG ignora).
+@pytest.fixture
+def con_bordas(con):
+    con.executemany("INSERT INTO stg_itens VALUES (?,?,?)", [
+        (5, 'p9', 40.0),
+        (6, 'p2', None),
+    ])
+    return con
+
+
+def test_a_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_A).fetchall() == [('livros', 200.0), ('eletronicos', 150.0), ('casa', 80.0), ('Desconhecido', 40.0)]
+
+
+def test_b_bordas(con_bordas):
+    assert con_bordas.execute(CONSULTA_B).fetchall() == [('livros', 200.0), ('casa', 80.0), ('eletronicos', 75.0), ('Desconhecido', 40.0)]

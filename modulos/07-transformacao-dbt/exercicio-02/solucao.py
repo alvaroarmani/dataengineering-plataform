@@ -6,7 +6,7 @@ duas queries e rode `pytest -q`.
 Tabela crua: raw_pedidos(id VARCHAR, cliente VARCHAR, uf VARCHAR, valor_str VARCHAR)
 """
 
-# A) STAGING: limpe raw_pedidos -> (pedido_id INT, cliente, estado=UPPER(uf), valor=DOUBLE),
+# A) STAGING: limpe raw_pedidos -> (pedido_id INT, cliente, estado=UPPER(TRIM(uf)), valor=DOUBLE),
 # ordenado por pedido_id.
 CONSULTA_A = """
 -- SEU CÓDIGO AQUI

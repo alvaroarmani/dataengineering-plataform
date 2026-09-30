@@ -20,9 +20,11 @@ cd modulos/07-transformacao-dbt/exercicio-02
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Estado com espaços (' rj ': o staging precisa de TRIM além de UPPER) e valor ausente (NULL não quebra o CAST e a SUM o ignora).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — staging
-`SELECT CAST(id AS INTEGER) AS pedido_id, cliente, UPPER(uf) AS estado, CAST(valor_str AS DOUBLE) AS valor FROM raw_pedidos ORDER BY pedido_id`.
+`SELECT CAST(id AS INTEGER) AS pedido_id, cliente, UPPER(TRIM(uf)) AS estado, CAST(valor_str AS DOUBLE) AS valor FROM raw_pedidos ORDER BY pedido_id`.
 :::
 :::{dropdown} Dica 2 — mart sobre o staging
 Use uma CTE com a lógica de staging e agregue por `estado`.
@@ -32,13 +34,13 @@ Use uma CTE com a lógica de staging e agregue por `estado`.
 :::{dropdown} Ver solução comentada
 ```sql
 -- CONSULTA_A (staging)
-SELECT CAST(id AS INTEGER) AS pedido_id, cliente, UPPER(uf) AS estado, CAST(valor_str AS DOUBLE) AS valor
+SELECT CAST(id AS INTEGER) AS pedido_id, cliente, UPPER(TRIM(uf)) AS estado, CAST(valor_str AS DOUBLE) AS valor
 FROM raw_pedidos
 ORDER BY pedido_id;
 
 -- CONSULTA_B (mart)
 WITH stg AS (
-    SELECT UPPER(uf) AS estado, CAST(valor_str AS DOUBLE) AS valor FROM raw_pedidos
+    SELECT UPPER(TRIM(uf)) AS estado, CAST(valor_str AS DOUBLE) AS valor FROM raw_pedidos
 )
 SELECT estado, SUM(valor) AS receita
 FROM stg

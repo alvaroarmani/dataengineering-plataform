@@ -19,6 +19,8 @@ cd modulos/07-transformacao-dbt/exercicio-04
 pytest -q
 ```
 
+> **Armadilhas nos testes:** além da base do enunciado, as mesmas queries rodam numa base com casos de borda. Item de produto que não está em stg_produtos (entra como 'Desconhecido', a receita não some) e item com preço NULL (AVG ignora).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — o join
 `FROM stg_itens i JOIN stg_produtos p ON i.produto_id = p.produto_id`.
@@ -31,13 +33,13 @@ Receita = `SUM(i.price)`; ticket médio = `AVG(i.price)`; agrupe por `p.categori
 :::{dropdown} Ver solução comentada
 ```sql
 -- CONSULTA_A
-SELECT p.categoria, SUM(i.price) AS receita
-FROM stg_itens i JOIN stg_produtos p ON i.produto_id = p.produto_id
+SELECT COALESCE(p.categoria, 'Desconhecido') AS categoria, SUM(i.price) AS receita
+FROM stg_itens i LEFT JOIN stg_produtos p ON i.produto_id = p.produto_id   -- LEFT: nada some
 GROUP BY p.categoria ORDER BY receita DESC;
 
 -- CONSULTA_B
-SELECT p.categoria, AVG(i.price) AS ticket_medio
-FROM stg_itens i JOIN stg_produtos p ON i.produto_id = p.produto_id
+SELECT COALESCE(p.categoria, 'Desconhecido') AS categoria, AVG(i.price) AS ticket_medio
+FROM stg_itens i LEFT JOIN stg_produtos p ON i.produto_id = p.produto_id
 GROUP BY p.categoria ORDER BY ticket_medio DESC;
 ```
 No dbt real, `stg_itens`/`stg_produtos` seriam `ref()` e este SELECT viraria o model
