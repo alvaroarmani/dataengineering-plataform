@@ -32,7 +32,8 @@ jobs:
         run: python scripts/verificar-conteudo.py
 
       - name: Build do Jupyter Book
-        run: jupyter-book build . --warningiserror=false
+        # warnings não reprovam o build por padrão (a flag -W ligaria isso; ela não aceita valor)
+        run: jupyter-book build .
 
       - name: Upload do artefato
         uses: actions/upload-pages-artifact@v3

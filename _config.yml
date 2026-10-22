@@ -18,6 +18,9 @@ sphinx:
       - custom.css
     html_js_files:
       - engajamento.js
+    # Pasta de config própria do JupyterLite: com a raiz do repo, ele varre tudo e tenta
+    # "corrigir" a cópia versionada em web/public/lite (e o build quebra).
+    jupyterlite_dir: _lite
     # Notebooks do curso embarcados na instância JupyterLite (rodam no navegador).
     jupyterlite_contents:
       - "modulos/**/*.ipynb"
@@ -36,6 +39,7 @@ exclude_patterns:
   - .claude/**
   - "**/exercicio-*/**"
   - gabaritos/**
+  - "**/.pytest_cache/**"
   - _build/**
   - .venv/**
   - "**/.venv/**"

@@ -7,7 +7,9 @@ O TCC recombina o curso inteiro; os recursos são os dos módulos que ele integr
 - **Regulamento e rubrica:** [Regulamento do TCC](../../ppc/regulamento-do-tcc.md).
 - **Scaffold inicial:** [`tcc/starter/`](../../tcc/starter/) — estrutura de repositório pronta.
 
-## Livros-âncora (registrados em [`referencias.yaml`](../../referencias.yaml))
+## Livros-âncora
+Todos registrados em [`referencias.yaml`](../../referencias.yaml).
+
 - **Kimball & Ross — The Data Warehouse Toolkit** (2013): modelagem dimensional e SCD.
 - **Reis & Housley — Fundamentals of Data Engineering** (2022): ciclo de vida e *undercurrents*.
 - **Kleppmann — Designing Data-Intensive Applications** (2017): confiabilidade e arquitetura.
