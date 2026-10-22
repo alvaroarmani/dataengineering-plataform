@@ -91,13 +91,13 @@ ORDER BY d.ano, d.mes;
 Saída:
 
 ```text
-┌───────┬───────┬───────────────┐
-│  ano  │  mes  │    receita    │
-│ int32 │ int32 │ decimal(38,2) │
-├───────┼───────┼───────────────┤
-│  2026 │     1 │         50.00 │
-│  2026 │     2 │         25.00 │
-└───────┴───────┴───────────────┘
++-------+-------+---------------+
+|  ano  |  mes  |    receita    |
+| int32 | int32 | decimal(38,2) |
++-------+-------+---------------+
+|  2026 |     1 |         50.00 |
+|  2026 |     2 |         25.00 |
++-------+-------+---------------+
 ```
 
 Repare no caminho da consulta: a **fato** dá os números (`valor`) e cada **dimensão** dá um jeito de filtrar ou agrupar. A venda do fone (eletrônicos) ficou de fora pelo filtro na `dim_produto`, sem a fato precisar saber o que é categoria.

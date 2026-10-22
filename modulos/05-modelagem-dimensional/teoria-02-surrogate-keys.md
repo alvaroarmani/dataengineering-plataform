@@ -92,13 +92,13 @@ ORDER BY v.venda_id;
 Saída:
 
 ```text
-┌──────────┬────────────┬───────────────┐
-│ venda_id │ sk_produto │     valor     │
-│  int32   │   int64    │ decimal(10,2) │
-├──────────┼────────────┼───────────────┤
-│        9 │          2 │       1500.00 │
-│       10 │         -1 │         80.00 │
-└──────────┴────────────┴───────────────┘
++----------+------------+---------------+
+| venda_id | sk_produto |     valor     |
+|  int32   |   int64    | decimal(10,2) |
++----------+------------+---------------+
+|        9 |          2 |       1500.00 |
+|       10 |         -1 |         80.00 |
++----------+------------+---------------+
 ```
 
 A venda 9 recebe `sk_produto = 2`, como na tabela acima. A venda 10 traz um código que a dimensão ainda não conhece: com `LEFT JOIN` e `COALESCE(..., -1)` ela aponta para o membro "Desconhecido" em vez de sumir da fato (um `INNER JOIN` a descartaria sem aviso).

@@ -113,12 +113,12 @@ FROM eventos;
 Saída:
 
 ```text
-┌─────────┬────────────┬──────────┐
-│  exato  │ aproximado │ erro_pct │
-│  int64  │   int64    │  double  │
-├─────────┼────────────┼──────────┤
-│ 1000000 │     962761 │    -3.72 │
-└─────────┴────────────┴──────────┘
++---------+------------+----------+
+|  exato  | aproximado | erro_pct |
+|  int64  |   int64    |  double  |
++---------+------------+----------+
+| 1000000 |     962761 |    -3.72 |
++---------+------------+----------+
 ```
 
 A versão aproximada (HyperLogLog) usa memória fixa e pequena, seja qual for o número de usuários, e por isso escala. O erro depende da implementação: aqui deu 3,7%; o BigQuery usa outra variante (HyperLogLog++), com erro próprio documentado. Para KPI de tendência isso basta; para faturar por usuário, não.

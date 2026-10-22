@@ -83,26 +83,26 @@ WHERE mes = '2025-01' AND categoria = 'livros';
 Trecho da saída (a caixa da leitura):
 
 ```text
-┌─────────────┴─────────────┐
-│         TABLE_SCAN        │
-│    ────────────────────   │
-│         Function:         │
-│        READ_PARQUET       │
-│                           │
-│     Projections: valor    │
-│                           │
-│          Filters:         │
-│   categoria='livros' AND  │
-│    categoria IS NOT NULL  │
-│                           │
-│       File Filters:       │
-│     (mes = '2025-01')     │
-│                           │
-│    Scanning Files: 1/24   │
-│                           │
-│         21204 Rows        │
-│          (0.00s)          │
-└───────────────────────────┘
++-------------+-------------+
+|         TABLE_SCAN        |
+|    --------------------   |
+|         Function:         |
+|        READ_PARQUET       |
+|                           |
+|     Projections: valor    |
+|                           |
+|          Filters:         |
+|   categoria='livros' AND  |
+|    categoria IS NOT NULL  |
+|                           |
+|       File Filters:       |
+|     (mes = '2025-01')     |
+|                           |
+|    Scanning Files: 1/24   |
+|                           |
+|         21204 Rows        |
+|          (0.00s)          |
++---------------------------+
 ```
 
 `Scanning Files: 1/24` é o particionamento: só a pasta de `2025-01` foi aberta. `Projections: valor` e o filtro em `categoria` são o colunar: a coluna `descricao`, a mais pesada, nem foi tocada. No BigQuery, partição e cluster são propriedades da tabela:

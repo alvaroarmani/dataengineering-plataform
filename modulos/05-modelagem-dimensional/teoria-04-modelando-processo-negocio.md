@@ -88,14 +88,14 @@ ORDER BY receita DESC;
 Saída:
 
 ```text
-┌──────────────┬─────────┬───────────────┬───────┐
-│  categoria   │ estado  │    receita    │ itens │
-│   varchar    │ varchar │ decimal(38,2) │ int64 │
-├──────────────┼─────────┼───────────────┼───────┤
-│ informatica  │ SP      │       1200.00 │     1 │
-│ beleza_saude │ SP      │        120.00 │     2 │
-│ beleza_saude │ RJ      │         45.00 │     1 │
-└──────────────┴─────────┴───────────────┴───────┘
++--------------+---------+---------------+-------+
+|  categoria   | estado  |    receita    | itens |
+|   varchar    | varchar | decimal(38,2) | int64 |
++--------------+---------+---------------+-------+
+| informatica  | SP      |       1200.00 |     1 |
+| beleza_saude | SP      |        120.00 |     2 |
+| beleza_saude | RJ      |         45.00 |     1 |
++--------------+---------+---------------+-------+
 ```
 
 Uma junção por dimensão e um `GROUP BY` pelos atributos que a pergunta pede. A mesma fato responde "receita por categoria", "por estado" ou "por mês" só trocando a dimensão. É por isso que se modela o **processo** (vendas), não o relatório.

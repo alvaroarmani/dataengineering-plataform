@@ -102,13 +102,13 @@ ORDER BY uf;
 Saída:
 
 ```text
-┌─────────┬───────────────┬───────────────┐
-│   uf    │    vendido    │   devolvido   │
-│ varchar │ decimal(38,1) │ decimal(38,1) │
-├─────────┼───────────────┼───────────────┤
-│ PE      │         250.0 │           0.0 │
-│ SP      │         140.0 │          40.0 │
-└─────────┴───────────────┴───────────────┘
++---------+---------------+---------------+
+|   uf    |    vendido    |   devolvido   |
+| varchar | decimal(38,1) | decimal(38,1) |
++---------+---------------+---------------+
+| PE      |         250.0 |           0.0 |
+| SP      |         140.0 |          40.0 |
++---------+---------------+---------------+
 ```
 
 As duas linhas de Ana (`' sp'` e `'SP'`) viraram **um** cliente no core, então nenhuma das fatos conta Ana em dobro. O padrão da última consulta se chama *drill-across*: cada fato é agregada no próprio grão e o resultado é juntado pelo atributo da dimensão comum. Ele só funciona porque as duas fatos usam a **mesma** dimensão.

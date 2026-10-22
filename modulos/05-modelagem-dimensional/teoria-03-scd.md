@@ -99,22 +99,22 @@ ORDER BY v.venda_id;
 Saída:
 
 ```text
-┌───────┬────────────┬───────────┬────────────┬────────────┬──────────┐
-│  sk   │ cliente_id │  cidade   │ valido_de  │ valido_ate │ corrente │
-│ int32 │   int32    │  varchar  │    date    │    date    │ boolean  │
-├───────┼────────────┼───────────┼────────────┼────────────┼──────────┤
-│     1 │        100 │ São Paulo │ 2024-01-01 │ 2025-03-01 │ false    │
-│     2 │        100 │ Campinas  │ 2025-03-01 │ 9999-12-31 │ true     │
-└───────┴────────────┴───────────┴────────────┴────────────┴──────────┘
++-------+------------+-----------+------------+------------+----------+
+|  sk   | cliente_id |  cidade   | valido_de  | valido_ate | corrente |
+| int32 |   int32    |  varchar  |    date    |    date    | boolean  |
++-------+------------+-----------+------------+------------+----------+
+|     1 |        100 | São Paulo | 2024-01-01 | 2025-03-01 | false    |
+|     2 |        100 | Campinas  | 2025-03-01 | 9999-12-31 | true     |
++-------+------------+-----------+------------+------------+----------+
 
-┌──────────┬────────────┬───────┬───────────┐
-│ venda_id │ data_venda │  sk   │  cidade   │
-│  int32   │    date    │ int32 │  varchar  │
-├──────────┼────────────┼───────┼───────────┤
-│        1 │ 2024-06-10 │     1 │ São Paulo │
-│        2 │ 2025-03-01 │     2 │ Campinas  │
-│        3 │ 2026-01-15 │     2 │ Campinas  │
-└──────────┴────────────┴───────┴───────────┘
++----------+------------+-------+-----------+
+| venda_id | data_venda |  sk   |  cidade   |
+|  int32   |    date    | int32 |  varchar  |
++----------+------------+-------+-----------+
+|        1 | 2024-06-10 |     1 | São Paulo |
+|        2 | 2025-03-01 |     2 | Campinas  |
+|        3 | 2026-01-15 |     2 | Campinas  |
++----------+------------+-------+-----------+
 ```
 
 A primeira saída é a tabela do exemplo. Na segunda, cada venda casa com a versão **vigente na data da venda**: o intervalo é meio-aberto (`>= valido_de` e `< valido_ate`), então a venda do próprio dia 2025-03-01 cai só em Campinas, sem duplicar. Os filtros `d.cidade <> s.cidade` e `NOT EXISTS` deixam o merge **idempotente**: rodar de novo com o mesmo lote não cria uma terceira linha.

@@ -78,15 +78,15 @@ ORDER BY mb DESC;
 Saída:
 
 ```text
-┌───────────┬────────┬────────┐
-│  coluna   │   mb   │  pct   │
-│  varchar  │ double │ double │
-├───────────┼────────┼────────┤
-│ descricao │   10.1 │   75.1 │
-│ data      │    1.9 │   14.4 │
-│ valor     │    1.2 │    9.0 │
-│ categoria │    0.2 │    1.4 │
-└───────────┴────────┴────────┘
++-----------+--------+--------+
+|  coluna   |   mb   |  pct   |
+|  varchar  | double | double |
++-----------+--------+--------+
+| descricao |   10.1 |   75.1 |
+| data      |    1.9 |   14.4 |
+| valor     |    1.2 |    9.0 |
+| categoria |    0.2 |    1.4 |
++-----------+--------+--------+
 ```
 
 `SELECT *` paga 100%; `SELECT categoria, valor` paga cerca de 10%, com o mesmo resultado para a pergunta. O BigQuery cobra pelos bytes **lógicos** (tamanho de cada tipo, sem compressão), então a proporção lá é outra, mas a regra é a mesma: só as colunas lidas entram na conta. Para saber o valor exato antes de pagar, use o dry run:
