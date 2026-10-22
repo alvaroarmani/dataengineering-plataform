@@ -22,6 +22,8 @@ pytest -q modulos/09-orquestracao-airflow/exercicio-05
 ✅ O grader roda sua solução **duas vezes** e confere que o dia fica correto **sem duplicar** e
 que `2026-08-09` permanece intacto.
 
+> **Armadilhas nos testes:** o dia já tem uma carga antiga e errada (precisa sumir), e um reprocessamento com o lote corrigido (o dia passa a refletir a fonte nova sem tocar em 2026-08-09).
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — apague o dia
 `DELETE FROM fato WHERE data = DATE '2026-08-10';`

@@ -18,6 +18,8 @@ pip install psycopg2-binary pytest
 pytest -q modulos/08-ingestao-integracao/exercicio-03
 ```
 
+> **Armadilhas nos testes:** reentrega **antiga** chegando por último (a ordem de inserção não vale, vale `carregado_em`) e cópias velhas de todos os ids: o grader confere o **valor** da versão mantida, não só um id por linha.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — numere as versões
 `ROW_NUMBER() OVER (PARTITION BY id ORDER BY carregado_em DESC) AS rn`.

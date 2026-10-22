@@ -41,3 +41,6 @@ target/
 dbt_packages/
 logs/
 .user.yml
+
+# grafo local do graphify
+graphify-out/

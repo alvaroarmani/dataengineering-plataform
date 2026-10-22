@@ -22,6 +22,8 @@ pytest -q modulos/08-ingestao-integracao/exercicio-01
 ✅ O grader roda sua solução **duas vezes** e confere que o resultado é
 `(1,ana),(2,bruno silva),(3,caio)` **sem duplicatas** — ou seja, idempotente.
 
+> **Armadilhas nos testes:** uma segunda carga com registro alterado e registro novo, e um dia de **lote vazio** depois de uma carga. Apagar o destino e recarregar (truncate-and-load) zera a tabela nesse dia.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — o padrão
 `INSERT INTO clientes (id, nome) SELECT id, nome FROM batch ON CONFLICT (id) DO UPDATE SET ...`.

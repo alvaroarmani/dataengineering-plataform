@@ -21,6 +21,8 @@ pytest -q modulos/11-spark-lakehouse/exercicio-09
 > O grader sobe um container Spark sob demanda, roda a sua `resumo_por_categoria` sobre um
 > DataFrame de teste e compara o resultado. **Fora da bancada, ele faz *skip*** (não falha).
 
+> **Armadilhas nos testes:** além do resultado no Spark (na bancada), checagens que rodam sem Docker: nenhuma ação (`collect`, `show`, `toPandas`) dentro da função, nenhuma UDF Python e as saídas nomeadas com `alias`.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — pense em SQL primeiro
 O resultado é um `SELECT categoria, SUM(preco * qtd) AS total_receita, COUNT(*) AS n_itens ... GROUP BY categoria ORDER BY total_receita DESC`. Traduzir para a API do DataFrame é trocar cada cláusula pelo método equivalente.

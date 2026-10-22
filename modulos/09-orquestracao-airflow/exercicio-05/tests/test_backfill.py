@@ -41,3 +41,24 @@ def test_sem_duplicatas_no_dia(pg):
     _rodar(pg)
     cur.execute("SELECT COUNT(*) FROM fato WHERE data = DATE '2026-08-10'")
     assert cur.fetchone()[0] == 2
+
+
+def test_dado_velho_do_dia_e_substituido(pg):
+    cur = pg.cursor()
+    cur.execute(DDL)
+    cur.execute("INSERT INTO fato (data, id, valor) VALUES ('2026-08-10', 9, 99)")   # carga antiga, errada
+    _rodar(pg)
+    cur.execute("SELECT id, valor FROM fato WHERE data = DATE '2026-08-10' ORDER BY id")
+    assert cur.fetchall() == [(2, 20), (3, 30)]                                       # o 9 sumiu
+
+
+def test_reprocessar_com_lote_corrigido(pg):
+    cur = pg.cursor()
+    cur.execute(DDL)
+    _rodar(pg)
+    cur.execute("UPDATE batch SET valor = valor * 10")                                 # a fonte foi corrigida
+    _rodar(pg)
+    cur.execute("SELECT id, valor FROM fato WHERE data = DATE '2026-08-10' ORDER BY id")
+    assert cur.fetchall() == [(2, 200), (3, 300)]
+    cur.execute("SELECT COUNT(*) FROM fato WHERE data = DATE '2026-08-09'")
+    assert cur.fetchone()[0] == 1

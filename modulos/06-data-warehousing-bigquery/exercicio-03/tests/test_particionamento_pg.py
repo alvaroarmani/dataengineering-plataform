@@ -40,3 +40,33 @@ def test_total_por_ano_desde_2024(pg):
     cur = _setup(pg)
     cur.execute(_sql("consulta_b.sql"))
     assert cur.fetchall() == [(2024, 300), (2025, 800)]
+
+
+# ---------- a poda precisa aparecer no PLANO, não só no resultado ----------
+def _tabelas_no_plano(cur, sql):
+    import json
+    # shortcut: divide por ';' após tirar linhas de comentário; ';' dentro de string quebraria
+    codigo = "\n".join(l for l in sql.splitlines() if not l.strip().startswith("--"))
+    *antes, ultimo = [c for c in codigo.split(";") if c.strip()]
+    for comando in antes:          # ex.: um SET antes do SELECT
+        cur.execute(comando)
+    cur.execute("EXPLAIN (FORMAT JSON) " + ultimo)
+    plano = cur.fetchone()[0]
+    plano = json.loads(plano) if isinstance(plano, str) else plano
+    nomes, pilha = set(), [plano[0]["Plan"]]
+    while pilha:
+        no = pilha.pop()
+        if "Relation Name" in no:
+            nomes.add(no["Relation Name"])
+        pilha += no.get("Plans", [])
+    return nomes
+
+
+def test_consulta_a_le_so_a_particao_de_2025(pg):
+    cur = _setup(pg)
+    assert _tabelas_no_plano(cur, _sql("consulta_a.sql")) == {"pedidos_2025"}
+
+
+def test_consulta_b_poda_2023(pg):
+    cur = _setup(pg)
+    assert _tabelas_no_plano(cur, _sql("consulta_b.sql")) == {"pedidos_2024", "pedidos_2025"}

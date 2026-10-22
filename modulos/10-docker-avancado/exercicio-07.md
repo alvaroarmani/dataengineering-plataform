@@ -16,6 +16,8 @@ pytest -q modulos/10-docker-avancado/exercicio-07
 > O grader faz `docker build` da sua imagem e `docker run`, e confere a saída. **Fora da bancada,
 > faz *skip*.**
 
+> **Armadilhas nos testes:** além do build e da execução (na bancada), checagens que rodam sem Docker: tag de imagem fixa (sem `latest`), `CMD` na forma exec (JSON) e nenhum comentário no fim de uma instrução.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — o que a imagem precisa ter
 Uma imagem de Python mínima precisa de três coisas: uma **base** com Python (prefira uma `-slim`), o **código** copiado para dentro e o **comando** que roda quando o container sobe. O grader faz `docker build` e depois `docker run` e procura a saída do script.
@@ -36,11 +38,17 @@ Se o build passar e a saída não aparecer, confira se o `CMD` aponta para o arq
 ## Solução comentada (abra só DEPOIS de passar)
 :::{dropdown} Ver solução comentada
 ```dockerfile
-FROM python:3.12-slim   # imagem base enxuta com Python
-WORKDIR /app            # diretório de trabalho dentro da imagem
-COPY app.py .           # leva o app para dentro da imagem
-CMD ["python", "app.py"]  # comando que roda quando o container sobe
+# imagem base enxuta com Python, com tag fixa (nunca latest)
+FROM python:3.12-slim
+# diretório de trabalho dentro da imagem
+WORKDIR /app
+# leva o app para dentro da imagem
+COPY app.py .
+# forma exec (JSON): o python vira o PID 1 e recebe o SIGTERM do docker stop
+CMD ["python", "app.py"]
 ```
+No Dockerfile, `#` só é comentário no **início** da linha. Escrito no fim de uma instrução,
+ele vira argumento e quebra o build.
 :::
 
 ---

@@ -26,6 +26,8 @@ pytest -q modulos/06-data-warehousing-bigquery/exercicio-03
 ```
 > A fixture faz rollback ao final — o banco não fica sujo. Fora da bancada, o teste faz *skip*.
 
+> **Armadilhas nos testes:** além do resultado, o grader lê o **plano** (`EXPLAIN`) e exige que a consulta A toque só `pedidos_2025` e a B só `pedidos_2024` e `pedidos_2025`. Filtre a coluna de partição com constante: `WHERE ano = (SELECT 2025)` dá o mesmo resultado, mas não poda no planejamento.
+
 ## Dicas progressivas
 :::{dropdown} Dica 1 — pruning por partição
 `SELECT mes, SUM(valor) AS receita FROM pedidos WHERE ano = 2025 GROUP BY mes ORDER BY mes`.
@@ -53,7 +55,7 @@ ORDER BY ano;
 ```
 No Postgres, `PARTITION BY RANGE (ano)` cria partições físicas; o filtro `WHERE ano = 2025`
 permite ao planejador **podar** (não ler) as partições 2023 e 2024 — o mesmo princípio do
-*partition pruning* do BigQuery, agora numa ferramenta real. Veja com `EXPLAIN` que só a
+*partition pruning* do BigQuery, agora numa ferramenta real. O grader confere no `EXPLAIN` que só a
 partição `pedidos_2025` é lida.
 :::
 
