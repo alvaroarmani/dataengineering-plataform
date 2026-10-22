@@ -13,8 +13,8 @@ export default function Trilha() {
 
       <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 26 }}>
         {curso.eixos.map((eixo) => (
-          <section key={eixo.id}>
-            <div style={{ fontFamily: 'var(--sora)', fontWeight: 600, fontSize: 13, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: 10 }}>Eixo {eixo.id} — {eixo.nome}</div>
+          <section key={eixo.id} id={`eixo-${eixo.id}`} style={{ scrollMarginTop: 90 }}>
+            <h2 style={{ fontSize: 18, marginBottom: 10 }}><span style={{ color: 'var(--green-d)' }}>Eixo {eixo.id}.</span> {eixo.nome}</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {eixo.modulos.map((mod) => {
                 const temTeoria = mod.unidades.some((u) => u.tipo === 'teoria');

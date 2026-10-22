@@ -17,6 +17,9 @@ drop policy if exists "progresso: dono insere" on public.progresso_usuario;
 create policy "progresso: dono insere" on public.progresso_usuario for insert with check (auth.uid() = user_id);
 drop policy if exists "progresso: dono apaga" on public.progresso_usuario;
 create policy "progresso: dono apaga"  on public.progresso_usuario for delete using (auth.uid() = user_id);
+-- upsert = INSERT ... ON CONFLICT DO UPDATE: sem esta policy, remarcar uma unidade já sincronizada falha no RLS.
+drop policy if exists "progresso: dono atualiza" on public.progresso_usuario;
+create policy "progresso: dono atualiza" on public.progresso_usuario for update using (auth.uid() = user_id) with check (auth.uid() = user_id);
 
 -- 2) Perfil / streak
 create table if not exists public.perfil_usuario (
@@ -33,4 +36,4 @@ create policy "perfil: dono lê"     on public.perfil_usuario for select using (
 drop policy if exists "perfil: dono grava" on public.perfil_usuario;
 create policy "perfil: dono grava"  on public.perfil_usuario for insert with check (auth.uid() = user_id);
 drop policy if exists "perfil: dono atualiza" on public.perfil_usuario;
-create policy "perfil: dono atualiza" on public.perfil_usuario for update using (auth.uid() = user_id);
+create policy "perfil: dono atualiza" on public.perfil_usuario for update using (auth.uid() = user_id) with check (auth.uid() = user_id);

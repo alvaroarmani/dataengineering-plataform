@@ -11,7 +11,6 @@ export default function Painel() {
   useEffect(() => { setHoje(new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })); }, []);
 
   const total = totais(curso);
-  const feitas = [...concluidas].filter((id) => total).length; // = concluidas.size (todas contam)
   const pct = pctTotal(concluidas, curso);
   const modsConcluidos = curso.eixos.reduce((n, e) => n + e.modulos.filter((m) => m.unidades.length && concluidasNoModulo(concluidas, m) === m.unidades.length).length, 0);
   const totalMods = curso.eixos.reduce((n, e) => n + e.modulos.length, 0);

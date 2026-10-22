@@ -51,7 +51,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[role=button]:focus-v
 .card-link{transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
 .card-link:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--green)}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--green-t);color:var(--green-d)}
-.lbl{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.lbl{font-size:13px;font-weight:600;color:var(--muted)}
 .bar{height:8px;border-radius:999px;background:var(--green-t);overflow:hidden}
 .bar>span{display:block;height:100%;background:var(--green);border-radius:999px}
 .muted{color:var(--muted)}
@@ -81,6 +81,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[role=button]:focus-v
 
 /* Grids */
 .grid{display:grid;gap:18px}
+/* item de grid não pode crescer além da coluna (texto nowrap interno estourava a tela no celular) */
+.grid>*{min-width:0}
 .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .grid-hero{grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}
 .grid-2{grid-template-columns:1fr 1fr}
@@ -89,6 +91,37 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[role=button]:focus-v
 .grid-painel{grid-template-columns:1.6fr 1fr}
 @media (max-width:900px){ .grid-3{grid-template-columns:1fr} .grid-hero{grid-template-columns:1fr} .grid-modulo{grid-template-columns:1fr} .grid-painel{grid-template-columns:1fr} }
 @media (max-width:680px){ .grid-2{grid-template-columns:1fr} .grid-stats{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
+/* Hero */
+.hero-h1{font-size:clamp(36px,5.6vw,58px);line-height:1.02;letter-spacing:-0.03em;margin:14px 0 18px;max-width:12ch}
+
+/* Trilha como pipeline: estações (eixos) ligadas por um duto que enche com o progresso */
+.pipe{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.pipe-st{position:relative;padding-right:14px}
+/* duto: trilho cinza até a próxima estação, com o preenchimento verde proporcional (--p) */
+.pipe-st::before,.pipe-st::after{content:"";position:absolute;top:21px;left:44px;height:6px;border-radius:6px}
+.pipe-st::before{right:4px;background:var(--border)}
+.pipe-st::after{width:calc((100% - 48px) * var(--p));background:var(--green);animation:pipe-fill .9s cubic-bezier(.2,.7,.2,1) both}
+.pipe-st:last-child::before,.pipe-st:last-child::after{display:none}
+@keyframes pipe-fill{from{width:0}}
+.pipe-link{display:flex;flex-direction:column;gap:2px;color:var(--ink);border-radius:12px;padding:0 0 4px}
+.pipe-link:hover .pipe-dot{border-color:var(--green)}
+.pipe-dot{position:relative;z-index:1;width:48px;height:48px;border-radius:999px;border:3px solid var(--border);background:var(--card);display:flex;align-items:center;justify-content:center;font-family:var(--sora);font-weight:700;font-size:18px;color:var(--muted);margin-bottom:12px;transition:border-color .15s ease}
+.pipe-st.on .pipe-dot{border-color:var(--green);color:var(--green-d)}
+.pipe-st.done .pipe-dot{border-color:var(--green);background:var(--green);color:#fff}
+.pipe-nome{font-family:var(--sora);font-weight:600;font-size:16px;line-height:1.25}
+.pipe-meta{font-size:13px;color:var(--muted)}
+/* no celular o duto fica vertical, descendo de estação em estação */
+@media (max-width:760px){
+  .pipe{grid-template-columns:1fr;gap:0}
+  .pipe-st{padding:0 0 22px 0}
+  .pipe-st::before,.pipe-st::after{top:48px;left:21px;width:6px;height:auto;bottom:0}
+  .pipe-st::before{right:auto}
+  .pipe-st::after{height:calc((100% - 48px) * var(--p));bottom:auto;animation:none}
+  .pipe-link{display:grid;grid-template-columns:48px 1fr;column-gap:14px}
+  .pipe-dot{grid-row:span 2;margin:0}
+  .pipe-nome{align-self:end}
+}
 
 /* Sidebar de conteúdo do módulo */
 .side-link{transition:background .12s ease}
