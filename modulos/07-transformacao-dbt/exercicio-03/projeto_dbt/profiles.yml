@@ -9,5 +9,5 @@ curso:
       user: "{{ env_var('POSTGRES_USER', 'curso') }}"
       password: "{{ env_var('POSTGRES_PASSWORD', 'curso') }}"
       dbname: "{{ env_var('POSTGRES_DB', 'curso') }}"
-      schema: public
+      schema: m7_ex03   # um schema por exercício: seeds e models de nomes iguais não se atropelam
       threads: 4

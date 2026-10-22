@@ -2,10 +2,10 @@
 -- Colunas finais esperadas:
 --   pedido_id (integer)  <- id
 --   cliente              <- cliente
---   estado               <- uf em MAIÚSCULA
+--   estado               <- uf sem espaços nas pontas e em MAIÚSCULA
 --   valor (numeric)      <- valor_str convertido
 --
--- Complete o SELECT e rode o build (ver enunciado). O source já está declarado em sources.yml.
+-- Complete o SELECT e rode o build (ver enunciado). A fonte crua é o seed raw_pedidos: leia com ref().
 
 select
     -- SEU CÓDIGO AQUI (pedido_id, cliente, estado, valor)

@@ -1,8 +1,9 @@
 {{ config(materialized='table') }}
 
 -- MART (você completa): receita por categoria.
--- Junte os DOIS staging models com ref() (nunca a fonte crua) por produto_id,
+-- Junte os DOIS staging models com ref() (nunca a fonte crua) por produto_id
 -- e some price por categoria. Colunas finais: categoria, receita.
+-- Item cujo produto não está no cadastro NÃO pode sumir: entra na categoria 'Desconhecido'.
 
 -- SEU CÓDIGO AQUI
 -- Dica: from {{ ref('stg_itens') }} i join {{ ref('stg_produtos') }} p on i.produto_id = p.produto_id

@@ -19,6 +19,9 @@ datasets/data/
 !datasets/**/exemplo*.csv
 # Amostras reais pequenas e versionadas (geradas por datasets/gerar_amostras.py)
 !datasets/amostras/*.csv
+# Seeds dos projetos dbt dos exercícios (sem eles o dbt build falha num clone novo)
+!modulos/**/seeds/*.csv
+!projetos/**/seeds/*.csv
 
 # Plataforma Next.js (web/) — NÃO usar comentário inline (quebra o padrão!)
 web/node_modules/
