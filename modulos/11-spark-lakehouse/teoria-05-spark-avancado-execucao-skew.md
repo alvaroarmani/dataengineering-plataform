@@ -77,6 +77,58 @@ optimization divide a partição gigante); (3) o DataFrame de eventos filtrado �
 um **`cache()`** evita relê-lo. Resultado: 40 min → 4 min, sem adicionar uma máquina — só removendo
 shuffle, skew e recomputação.
 
+**Rodando de verdade** (🐳 bancada, Spark 3.5): o skew do exemplo, medido. Contamos quantas linhas cada partição recebe quando o shuffle distribui por `cliente_id`.
+
+```python
+from pyspark.sql import SparkSession, functions as F
+
+spark = SparkSession.builder.appName("skew").getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
+
+# 1 milhão de eventos; 40% sem cliente_id (NULL) — o cenário do exemplo
+eventos = spark.range(1_000_000).select(
+    F.when(F.col("id") % 10 < 4, F.lit(None)).otherwise(F.col("id") % 5000).alias("cliente_id"),
+    F.lit(1).alias("qtd"))
+
+def linhas_por_particao(df, n=8):
+    # o shuffle de um groupBy manda cada chave para UMA partição: é isso que medimos
+    return (df.repartition(n, "cliente_id")
+              .groupBy(F.spark_partition_id().alias("particao")).count()
+              .orderBy(F.desc("count")).limit(3).collect())
+
+print("--- com os NULL juntos, todos caem na mesma partição")
+for r in linhas_por_particao(eventos):
+    print(f"particao {r['particao']}: {r['count']:>7} linhas")
+
+print("--- tratando o NULL à parte, o resto se distribui")
+for r in linhas_por_particao(eventos.filter(F.col("cliente_id").isNotNull())):
+    print(f"particao {r['particao']}: {r['count']:>7} linhas")
+print("sem cliente:", eventos.filter(F.col("cliente_id").isNull()).count(), "linhas (agregadas num passo separado)")
+```
+
+Salve o código como `exemplo.py` na raiz do repositório (no container ela é `/work`) e rode:
+
+```bash
+cd ambiente
+docker compose --profile spark run --rm spark /opt/spark/bin/spark-submit /work/exemplo.py
+```
+
+Saída:
+
+```text
+--- com os NULL juntos, todos caem na mesma partição
+particao 2:  471800 linhas
+particao 3:   81400 linhas
+particao 7:   80000 linhas
+--- tratando o NULL à parte, o resto se distribui
+particao 3:   81400 linhas
+particao 7:   80000 linhas
+particao 1:   79600 linhas
+sem cliente: 400000 linhas (agregadas num passo separado)
+```
+
+Com os NULL junto, uma partição recebe 471.800 linhas e as outras ficam perto de 80.000: é a tarefa travada do exemplo, que demora quase 6 vezes mais que as vizinhas. Separando o NULL (que nem é um cliente), o resto se distribui por igual e os 400.000 eventos sem cliente viram um agregado à parte, barato. O AQE resolve parte dos casos sozinho (`spark.sql.adaptive.skewJoin.enabled` divide partições gigantes **em joins**), mas a correção na origem do dado continua sendo a mais barata.
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Armbrust et al., no paper do Spark SQL, descrevem o **otimizador Catalyst** (plano lógico → otimizado →
@@ -158,4 +210,4 @@ diagnosticar e corrigir **data skew** (salting/AQE), usar **cache** com critéri
 *Acessado em: 2026-09-09.*
 
 ---
-**Revisado em:** 2026-09-09
+**Revisado em:** 2026-10-21

@@ -92,7 +92,8 @@ Saída:
 `SELECT *` paga 100%; `SELECT categoria, valor` paga cerca de 10%, com o mesmo resultado para a pergunta. O BigQuery cobra pelos bytes **lógicos** (tamanho de cada tipo, sem compressão), então a proporção lá é outra, mas a regra é a mesma: só as colunas lidas entram na conta. Para saber o valor exato antes de pagar, use o dry run:
 
 ```bash
-bq query --use_legacy_sql=false --dry_run \n  'SELECT categoria, valor FROM loja.vendas WHERE data BETWEEN "2025-01-01" AND "2025-01-31"'
+bq query --use_legacy_sql=false --dry_run \
+  'SELECT categoria, valor FROM loja.vendas WHERE data BETWEEN "2025-01-01" AND "2025-01-31"'
 ```
 
 Ele valida a consulta e informa quantos bytes ela vai processar, sem executar nem cobrar.

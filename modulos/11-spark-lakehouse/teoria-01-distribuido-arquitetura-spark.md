@@ -50,6 +50,64 @@ Ao chamar `.show()` (ação), o Spark otimiza (empurra o filtro de ano para a le
 as partições entre os executors, cada um agrega a sua parte, e o resultado é combinado. Se
 fossem TBs, isso rodaria em paralelo em dezenas de máquinas — inviável numa só.
 
+**Rodando de verdade** (🐳 bancada, Spark 3.5): o exemplo acima, com o plano impresso **antes** da ação.
+
+```python
+from pyspark.sql import SparkSession, functions as F
+
+spark = SparkSession.builder.appName("lazy").getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
+
+# 1) dados em Parquet: 3 anos de vendas
+(spark.range(300_000)
+      .select((2023 + F.col("id") % 3).alias("ano"),
+              F.element_at(F.array(F.lit("livros"), F.lit("casa"), F.lit("moda")), (F.floor(F.col("id") / 3) % 3 + 1).cast("int")).alias("categoria"),
+              (F.col("id") % 100).alias("valor"))
+      .write.mode("overwrite").parquet("/tmp/vendas"))
+
+# 2) transformações: NADA roda aqui, o Spark só monta o plano
+df = (spark.read.parquet("/tmp/vendas")
+           .filter(F.col("ano") == 2025)
+           .groupBy("categoria").agg(F.sum("valor").alias("receita")))
+
+# 3) o plano físico, antes de executar
+df.explain()
+
+# 4) a ação dispara o job
+df.orderBy("categoria").show()
+```
+
+Salve o código como `exemplo.py` na raiz do repositório (no container ela é `/work`) e rode:
+
+```bash
+cd ambiente
+docker compose --profile spark run --rm spark /opt/spark/bin/spark-submit /work/exemplo.py
+```
+
+Saída:
+
+```text
+== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[categoria#12], functions=[sum(valor#13L)])
+   +- Exchange hashpartitioning(categoria#12, 200), ENSURE_REQUIREMENTS, [plan_id=34]
+      +- HashAggregate(keys=[categoria#12], functions=[partial_sum(valor#13L)])
+         +- Project [categoria#12, valor#13L]
+            +- Filter (isnotnull(ano#11L) AND (ano#11L = 2025))
+               +- FileScan parquet [ano#11L,categoria#12,valor#13L] Batched: true, DataFilters: [isnotnull(ano#11L), (ano#11L = 2025)], Format: Parquet, Location: InMemoryFileIndex(1 paths)[file:/tmp/vendas], PartitionFilters: [], PushedFilters: [IsNotNull(ano), EqualTo(ano,2025)], ReadSchema: struct<ano:bigint,categoria:string,valor:bigint>
+
+
++---------+-------+
+|categoria|receita|
++---------+-------+
+|     casa|1649967|
+|   livros|1649967|
+|     moda|1650066|
++---------+-------+
+```
+
+Leia o plano de baixo para cima. O `FileScan` já traz `PushedFilters: [... EqualTo(ano,2025)]`: o otimizador empurrou o filtro para a leitura do Parquet, como o texto descreve. O `HashAggregate` aparece duas vezes, com o `Exchange` no meio: cada executor soma a sua parte (`partial_sum`), o shuffle reúne as categorias e a soma final fecha a conta. Até o `.show()` nenhum dado foi lido; o `explain()` só mostrou o plano.
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Dean & Ghemawat introduziram o **MapReduce** como modelo para processar grandes volumes em
@@ -130,4 +188,4 @@ perguntas de entrevista.
 *Acessado em: 2026-08-29.*
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-10-21

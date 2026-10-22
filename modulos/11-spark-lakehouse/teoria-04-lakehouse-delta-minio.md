@@ -44,6 +44,73 @@ Uma carga que falha no meio **não corrompe** a tabela (ACID). Amanhã, um `MERG
 mudanças do dia (upsert idempotente, M8/M9). Se alguém subir dado errado, você faz **time
 travel** para a versão anterior e corrige. Tudo sobre arquivos Parquet baratos — sem um DW caro.
 
+**Rodando de verdade** (🐳 bancada, Spark 3.5 + `delta-spark` 3.2.1): carga, um erro, time travel e `MERGE`, no disco do container. No MinIO, muda só o caminho (`s3a://...`) e as credenciais.
+
+```python
+from delta.tables import DeltaTable
+from pyspark.sql import SparkSession
+
+spark = (SparkSession.builder.appName("delta")
+         .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+         .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+         .getOrCreate())
+spark.sparkContext.setLogLevel("ERROR")
+caminho = "/tmp/lake/vendas"          # no MinIO seria s3a://lake/vendas (+ credenciais)
+
+# versão 0: carga inicial
+spark.createDataFrame([(1, "ana", 100), (2, "bruno", 200)], "id INT, cliente STRING, valor INT") \
+     .write.format("delta").mode("overwrite").save(caminho)
+
+# versão 1: alguém sobrescreve com dado errado
+spark.createDataFrame([(1, "ana", -1)], "id INT, cliente STRING, valor INT") \
+     .write.format("delta").mode("overwrite").save(caminho)
+
+# time travel: lê a versão boa e restaura
+boa = spark.read.format("delta").option("versionAsOf", 0).load(caminho)
+boa.write.format("delta").mode("overwrite").save(caminho)                      # versão 2
+
+# versão 3: MERGE com as mudanças do dia (upsert idempotente)
+mudancas = spark.createDataFrame([(2, "bruno", 250), (3, "caio", 80)], "id INT, cliente STRING, valor INT")
+(DeltaTable.forPath(spark, caminho).alias("t")
+   .merge(mudancas.alias("m"), "t.id = m.id")
+   .whenMatchedUpdateAll().whenNotMatchedInsertAll().execute())
+
+spark.read.format("delta").load(caminho).orderBy("id").show()
+(DeltaTable.forPath(spark, caminho).history()
+   .select("version", "operation").orderBy("version").show())
+```
+
+Salve o código como `exemplo.py` na raiz do repositório (no container ela é `/work`) e rode:
+
+```bash
+cd ambiente
+docker compose --profile spark run --rm spark /opt/spark/bin/spark-submit \
+  --packages io.delta:delta-spark_2.12:3.2.1 --conf spark.jars.ivy=/tmp/.ivy2 /work/exemplo.py
+```
+
+Saída:
+
+```text
++---+-------+-----+
+| id|cliente|valor|
++---+-------+-----+
+|  1|    ana|  100|
+|  2|  bruno|  250|
+|  3|   caio|   80|
++---+-------+-----+
+
++-------+---------+
+|version|operation|
++-------+---------+
+|      0|    WRITE|
+|      1|    WRITE|
+|      2|    WRITE|
+|      3|    MERGE|
++-------+---------+
+```
+
+A tabela final tem Ana com o valor certo (a versão 1, errada, foi desfeita lendo a versão 0), Bruno atualizado e Caio inserido pelo `MERGE`. O histórico guarda cada operação como uma versão nova: nada foi apagado, só ficou para trás no log de transações. É esse log (`_delta_log/`) que dá ACID e time travel a arquivos Parquet comuns.
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Armbrust et al. descrevem o **Delta Lake**: uma camada de armazenamento de tabelas ACID sobre
@@ -124,4 +191,4 @@ visão de arquitetura moderna.
 *Acessado em: 2026-08-29.*
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-10-21

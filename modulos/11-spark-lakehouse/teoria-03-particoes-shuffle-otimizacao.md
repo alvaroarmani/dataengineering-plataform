@@ -49,6 +49,73 @@ shuffle. Se `pequena` cabe na memória, um **broadcast join** evita embaralhar a
 (economia enorme). Filtrar a `grande` **antes** do join reduz o que é embaralhado. `filter`
 sozinho seria narrow (sem shuffle).
 
+**Rodando de verdade** (🐳 bancada, Spark 3.5): o mesmo join planejado duas vezes, com e sem broadcast.
+
+```python
+from pyspark.sql import SparkSession, functions as F
+
+spark = SparkSession.builder.appName("joins").getOrCreate()
+spark.sparkContext.setLogLevel("ERROR")
+
+grande  = spark.range(1_000_000).select((F.col("id") % 1000).alias("id"), (F.col("id") % 7).alias("v"))
+pequena = spark.range(1000).select(F.col("id"), (F.col("id") % 10).cast("string").alias("cat"))
+
+def consulta():
+    return grande.join(pequena, "id").groupBy("cat").agg(F.sum("v").alias("total"))
+
+consulta().explain()       # padrão: a pequena cabe no limite de broadcast (10 MB)
+
+spark.conf.set("spark.sql.autoBroadcastJoinThreshold", -1)   # desliga o broadcast automático
+consulta().explain()       # agora as duas tabelas são embaralhadas
+
+# para forçar o broadcast mesmo acima do limite: grande.join(F.broadcast(pequena), "id")
+```
+
+Salve o código como `exemplo.py` na raiz do repositório (no container ela é `/work`) e rode:
+
+```bash
+cd ambiente
+docker compose --profile spark run --rm spark /opt/spark/bin/spark-submit /work/exemplo.py
+```
+
+Saída:
+
+```text
+== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[cat#8], functions=[sum(v#3L)])
+   +- Exchange hashpartitioning(cat#8, 200), ENSURE_REQUIREMENTS, [plan_id=40]
+      +- HashAggregate(keys=[cat#8], functions=[partial_sum(v#3L)])
+         +- Project [v#3L, cat#8]
+            +- BroadcastHashJoin [id#2L], [id#6L], Inner, BuildRight, false
+               :- Project [(id#0L % 1000) AS id#2L, (id#0L % 7) AS v#3L]
+               :  +- Filter isnotnull((id#0L % 1000))
+               :     +- Range (0, 1000000, step=1, splits=12)
+               +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, bigint, false]),false), [plan_id=35]
+                  +- Project [id#6L, cast((id#6L % 10) as string) AS cat#8]
+                     +- Range (0, 1000, step=1, splits=12)
+
+
+== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[cat#8], functions=[sum(v#3L)])
+   +- Exchange hashpartitioning(cat#8, 200), ENSURE_REQUIREMENTS, [plan_id=86]
+      +- HashAggregate(keys=[cat#8], functions=[partial_sum(v#3L)])
+         +- Project [v#3L, cat#8]
+            +- SortMergeJoin [id#2L], [id#6L], Inner
+               :- Sort [id#2L ASC NULLS FIRST], false, 0
+               :  +- Exchange hashpartitioning(id#2L, 200), ENSURE_REQUIREMENTS, [plan_id=78]
+               :     +- Project [(id#0L % 1000) AS id#2L, (id#0L % 7) AS v#3L]
+               :        +- Filter isnotnull((id#0L % 1000))
+               :           +- Range (0, 1000000, step=1, splits=12)
+               +- Sort [id#6L ASC NULLS FIRST], false, 0
+                  +- Exchange hashpartitioning(id#6L, 200), ENSURE_REQUIREMENTS, [plan_id=79]
+                     +- Project [id#6L, cast((id#6L % 10) as string) AS cat#8]
+                        +- Range (0, 1000, step=1, splits=12)
+```
+
+No primeiro plano há **um** `Exchange` (o do `groupBy`) e o join é `BroadcastHashJoin`: a pequena foi copiada inteira para cada executor e a grande ficou onde estava. No segundo, o join virou `SortMergeJoin` e ganhou **dois** `Exchange hashpartitioning(id...)` a mais: as duas tabelas atravessam a rede para que as chaves iguais se encontrem. Contar os `Exchange` do plano é o jeito mais rápido de achar o custo de um job.
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Kleppmann descreve o custo do **particionamento e da redistribuição (shuffle)** em
@@ -128,4 +195,4 @@ Spark, não só escrever.
 *Acessado em: 2026-08-29.*
 
 ---
-**Revisado em:** 2026-08-29
+**Revisado em:** 2026-10-21
