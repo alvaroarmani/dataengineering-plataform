@@ -2,46 +2,45 @@
 import Link from 'next/link';
 import { usePlataforma } from './Plataforma.jsx';
 
-const ICON = {
-  teoria: 'M4 19V5a1 1 0 0 1 1-1h11l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z',
-  lab: 'M4 4h16v12H4zM8 20h8M12 16v4',
-  exercicio: 'M7 4l12 8-12 8z',
-  flashcards: 'M6 4h12v16l-6-3-6 3z',
-  recursos: 'M4 5h16M4 12h16M4 19h10',
-};
-const ROTULO = { teoria: 'Teoria', lab: 'Lab', exercicio: 'Exercício', flashcards: 'Flashcards', recursos: 'Recursos' };
+const ROTULO = { teoria: 'Teoria', lab: 'Lab no navegador', exercicio: 'Exercício', flashcards: 'Flashcards', recursos: 'Recursos' };
 
+// Unidades do módulo como estações de um duto: cada unidade concluída enche o trecho até a próxima.
 export default function TocModulo({ pasta, unidades }) {
   const plat = usePlataforma() || {};
-  const feita = (base) => plat.estaConcluida ? plat.estaConcluida(`${pasta}/${base}`) : false;
+  const feita = (base) => (plat.estaConcluida ? plat.estaConcluida(`${pasta}/${base}`) : false);
   const nFeitas = unidades.filter((u) => feita(u.base)).length;
-  const pct = unidades.length ? Math.round((nFeitas / unidades.length) * 100) : 0;
+  const proxima = unidades.find((u) => !feita(u.base));
+  const cta = !nFeitas
+    ? { href: unidades[0] && `/aula/${pasta}/${unidades[0].base}`, txt: 'Começar o módulo' }
+    : proxima
+      ? { href: `/aula/${pasta}/${proxima.base}`, txt: 'Continuar de onde parei' }
+      : { href: unidades[0] && `/aula/${pasta}/${unidades[0].base}`, txt: 'Revisar o módulo' };
 
   return (
-    <aside className="card side-toc" style={{ padding: 8, position: 'sticky', top: 90 }}>
-      <div style={{ padding: '12px 12px 6px' }}>
-        <div className="lbl">Conteúdo do módulo</div>
-        <div className="bar" style={{ margin: '10px 0 4px', background: 'var(--border)' }}><span style={{ width: pct + '%' }} /></div>
-        <div className="muted" style={{ fontSize: 12 }}>{nFeitas} de {unidades.length} concluídas · {pct}%</div>
+    <aside className="side-toc" style={{ position: 'sticky', top: 90 }}>
+      <div style={{ padding: '0 4px 14px' }}>
+        <h2 style={{ fontSize: 16 }}>Conteúdo do módulo</h2>
+        <p className="muted" style={{ fontSize: 13.5, margin: '4px 0 14px' }}>
+          {nFeitas} de {unidades.length} unidades concluídas{proxima && nFeitas ? `. A próxima é ${proxima.titulo}.` : '.'}
+        </p>
+        {cta.href && <Link className="btn btn-p" href={cta.href} style={{ width: '100%', justifyContent: 'center' }}>{cta.txt}</Link>}
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <ol className="duto" style={{ borderTop: '1px solid var(--border)', paddingTop: 8 }}>
         {unidades.map((u) => {
           const ok = feita(u.base);
           return (
-            <Link key={u.base} href={`/aula/${pasta}/${u.base}`} className="side-link" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '11px 12px', borderRadius: 10, color: 'var(--ink)' }}>
-              <span style={{ width: 28, height: 28, borderRadius: 8, background: ok ? 'var(--green)' : 'var(--green-t)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                {ok
-                  ? <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.6"><path d="M20 6 9 17l-5-5" /></svg>
-                  : <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green-d)" strokeWidth="2"><path d={ICON[u.tipo] || ICON.recursos} /></svg>}
-              </span>
-              <span style={{ minWidth: 0 }}>
-                <span style={{ display: 'block', fontWeight: 600, fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{u.titulo}</span>
-                <span className="muted" style={{ fontSize: 12 }}>{ROTULO[u.tipo] || u.tipo}</span>
-              </span>
-            </Link>
+            <li key={u.base} className={`duto-st ${ok ? 'feito' : ''}`} style={{ '--p': ok ? 1 : 0 }}>
+              <Link href={`/aula/${pasta}/${u.base}`} className="duto-link" style={{ padding: '9px 10px 9px 44px' }}>
+                <span className="duto-no" aria-hidden="true" style={{ top: 14 }} />
+                <span className="duto-corpo">
+                  <span className="duto-titulo" style={{ fontSize: 14, fontFamily: 'var(--man)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{u.titulo}</span>
+                  <span className="duto-meta" style={{ fontSize: 12.5 }}>{ROTULO[u.tipo] || u.tipo}{ok ? ', concluída' : ''}</span>
+                </span>
+              </Link>
+            </li>
           );
         })}
-      </div>
+      </ol>
     </aside>
   );
 }

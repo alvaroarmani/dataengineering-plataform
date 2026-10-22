@@ -29,7 +29,7 @@ export default function Flashcards({ cards = [] }) {
           <div className="fc-face fc-front">
             <span className="fc-tag">Pergunta</span>
             <p className="fc-text">{card.p}</p>
-            <span className="fc-hint">clique para revelar ↻</span>
+            <span className="fc-hint">Clique ou aperte espaço para ver a resposta</span>
           </div>
           <div className="fc-face fc-back">
             <span className="fc-tag fc-tag-r">Resposta</span>
@@ -39,9 +39,9 @@ export default function Flashcards({ cards = [] }) {
       </div>
 
       <div className="fc-nav">
-        <button className="btn btn-s" type="button" onClick={() => ir(-1)}>← Anterior</button>
-        <button className="btn btn-s" type="button" onClick={virar}>Virar ↻</button>
-        <button className="btn btn-p" type="button" onClick={() => ir(1)}>Próximo →</button>
+        <button className="btn btn-s" type="button" onClick={() => ir(-1)}>Anterior</button>
+        <button className="btn btn-s" type="button" onClick={virar}>{flip ? 'Ver a pergunta' : 'Ver a resposta'}</button>
+        <button className="btn btn-p" type="button" onClick={() => ir(1)}>Próximo cartão</button>
       </div>
     </div>
   );

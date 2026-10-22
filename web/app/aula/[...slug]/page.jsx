@@ -38,7 +38,7 @@ export default function Aula({ params }) {
           <Link href={`/modulo/${mod.pasta}`} className="icon-btn" style={{ width: 34, height: 34 }} aria-label="Voltar ao módulo">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 6l-6 6 6 6" /></svg>
           </Link>
-          <div className="muted" style={{ fontSize: 13, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>Eixo {eixo.id} · {mod.id} <span style={{ opacity: .5 }}>/</span> <span style={{ color: 'var(--ink)', fontWeight: 600 }}>{ROTULO[u.tipo] || u.tipo}</span></div>
+          <div className="muted" style={{ fontSize: 13, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}><span className="codigo">{mod.id}</span> {mod.nome} <span style={{ opacity: .5 }}>/</span> <span style={{ color: 'var(--ink)', fontWeight: 600 }}>{ROTULO[u.tipo] || u.tipo}</span></div>
         </div>
         <div className="lesson-progress" style={{ display: 'flex', alignItems: 'center', gap: 9, width: 170 }}>
           <div className="bar" style={{ flexGrow: 1, background: 'var(--border)' }}><span style={{ width: pct + '%' }} /></div>

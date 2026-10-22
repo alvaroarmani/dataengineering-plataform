@@ -18,7 +18,7 @@ export default function ContinuarCard() {
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--green-d)" strokeWidth="2"><path d="M4 4h16v12H4z" /><path d="M8 20h8M12 16v4" /></svg>
         </div>
         <div style={{ minWidth: 0 }}>
-          <div style={{ fontFamily: 'var(--sora)', fontWeight: 600, fontSize: 16 }}>{alvo.mod.id} · {alvo.mod.nome}</div>
+          <div style={{ fontFamily: 'var(--sora)', fontWeight: 600, fontSize: 16 }}><span className="codigo">{alvo.mod.id}</span> {alvo.mod.nome}</div>
           <div className="muted" style={{ fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{prox ? alvo.unidade.titulo : 'Tudo concluído! 🎉'}</div>
         </div>
       </div>
