@@ -66,6 +66,7 @@ Passo a passo:
 ## Padrão de correção
 
 - **Exercício sério:** pasta com `enunciado.md`, `solucao.py` (com `# SEU CÓDIGO AQUI`) e `tests/test_*.py`. Meta: `pytest -q` verde.
+- **Grader verificado:** `python scripts/verificar-graders.py <trecho-do-caminho>` precisa sair OK — o template vazio **reprova** e a "Solução comentada" do `.md` **aprova** (roda no CI). Se a solução publicada não puder ser extraída automaticamente, ponha o gabarito em `gabaritos/` (ver o README de lá).
 - **Checagem rápida no browser:** função `verificar(resposta)` que imprime ✅/❌ + dica (roda no JupyterLite).
 - **Dicas progressivas:** ofereça *hint ladders* (dica 1 → dica 2 → solução) em `<details>`.
 - **Solução comentada:** liberada **depois** de passar, explicando o raciocínio.

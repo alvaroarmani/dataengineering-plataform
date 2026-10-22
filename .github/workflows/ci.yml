@@ -1,6 +1,7 @@
 # CI do curso (exemplo real do M13 — DataOps/CI-CD).
-# A cada push/PR: (1) linter de conteúdo (referências, seções, fluência) e
-# (2) build da plataforma Next. Barra o merge se algo quebrar (branch protegida).
+# A cada push/PR: (1) linter de conteúdo (referências, seções, fluência),
+# (2) graders: o template vazio reprova e a "Solução comentada" aprova, e
+# (3) build da plataforma Next. Barra o merge se algo quebrar (branch protegida).
 name: ci
 
 on:
@@ -20,6 +21,33 @@ jobs:
       - run: pip install pyyaml
       - name: Verificar padrão de conteúdo
         run: python scripts/verificar-conteudo.py
+
+  graders:
+    name: Graders (template reprova, gabarito aprova)
+    runs-on: ubuntu-latest
+    services:
+      postgres:   # o mesmo Postgres da bancada (credenciais padrão do conftest dos exercícios)
+        image: postgres:16
+        env:
+          POSTGRES_USER: curso
+          POSTGRES_PASSWORD: curso
+          POSTGRES_DB: curso
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U curso" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar só as libs dos graders (versões de requirements.txt)
+        run: |
+          grep -E '^(pandas|numpy|duckdb|pyarrow|requests|pytest|psycopg2-binary|kafka-python|PyYAML)==' requirements.txt > req-graders.txt
+          pip install -r req-graders.txt
+      - name: Verificar graders
+        env:
+          EXIGIR_POSTGRES: "1"
+        run: python scripts/verificar-graders.py
 
   build-web:
     name: Build da plataforma (Next)

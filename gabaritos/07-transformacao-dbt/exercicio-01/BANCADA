@@ -1,0 +1,3 @@
+Verificação só na bancada: este grader lê a tabela que o `dbt build` construiu no Postgres,
+não os arquivos do aluno. Para verificar o gabarito: aplique a "Solução comentada" do enunciado,
+rode `dbt build` no projeto_dbt (bancada de pé) e depois `pytest -q` nesta pasta.

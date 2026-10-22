@@ -35,6 +35,7 @@ exclude_patterns:
   - templates/**
   - .claude/**
   - "**/exercicio-*/**"
+  - gabaritos/**
   - _build/**
   - .venv/**
   - "**/.venv/**"
