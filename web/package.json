@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Plataforma de estudos (Next.js) — deploy na Vercel.",
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "scripts": {
     "sync": "node scripts/sync-conteudo.mjs",
