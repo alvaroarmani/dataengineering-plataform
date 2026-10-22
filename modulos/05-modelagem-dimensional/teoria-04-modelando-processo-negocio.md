@@ -65,6 +65,41 @@ junte `fato_item_pedido` a `dim_produto` (categoria) e `dim_cliente` (estado), a
 categoria e estado, some `price`. Sem o star, seriam vários JOINs sobre as tabelas cruas do
 Olist e uma query bem mais difícil de ler.
 
+**Rodando de verdade** (DuckDB): um recorte mínimo do star do Olist e a pergunta de negócio.
+
+```sql
+CREATE TABLE dim_produto (sk_produto INT, categoria TEXT);
+CREATE TABLE dim_cliente (sk_cliente INT, estado TEXT);
+CREATE TABLE fato_item_pedido (pedido_id TEXT, sk_produto INT, sk_cliente INT, price DECIMAL(10,2));
+INSERT INTO dim_produto VALUES (1, 'beleza_saude'), (2, 'informatica');
+INSERT INTO dim_cliente VALUES (10, 'SP'), (11, 'RJ');
+INSERT INTO fato_item_pedido VALUES
+  ('a1', 1, 10, 89.90), ('a1', 2, 10, 1200.00), ('b2', 1, 11, 45.00), ('c3', 1, 10, 30.10);
+
+-- "receita por categoria de produto por estado do cliente": uma junção por dimensão, e só
+SELECT p.categoria, c.estado, SUM(f.price) AS receita, COUNT(*) AS itens
+FROM fato_item_pedido f
+JOIN dim_produto p ON p.sk_produto = f.sk_produto
+JOIN dim_cliente c ON c.sk_cliente = f.sk_cliente
+GROUP BY p.categoria, c.estado
+ORDER BY receita DESC;
+```
+
+Saída:
+
+```text
+┌──────────────┬─────────┬───────────────┬───────┐
+│  categoria   │ estado  │    receita    │ itens │
+│   varchar    │ varchar │ decimal(38,2) │ int64 │
+├──────────────┼─────────┼───────────────┼───────┤
+│ informatica  │ SP      │       1200.00 │     1 │
+│ beleza_saude │ SP      │        120.00 │     2 │
+│ beleza_saude │ RJ      │         45.00 │     1 │
+└──────────────┴─────────┴───────────────┴───────┘
+```
+
+Uma junção por dimensão e um `GROUP BY` pelos atributos que a pergunta pede. A mesma fato responde "receita por categoria", "por estado" ou "por mês" só trocando a dimensão. É por isso que se modela o **processo** (vendas), não o relatório.
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Kimball insiste que a modelagem começa pelo **processo de negócio**, não pelos relatórios que
@@ -151,4 +186,4 @@ entrega no TCC e no que os times de Analytics Engineering trabalham no dia a dia
 *Acessado em: 2026-08-23.*
 
 ---
-**Revisado em:** 2026-08-23
+**Revisado em:** 2026-10-21

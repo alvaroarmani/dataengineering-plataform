@@ -60,6 +60,65 @@ Ana (chave natural `cliente_id = 100`) muda de São Paulo para Campinas em 01/03
 A venda de Ana em 2024 aponta para `sk = 1` (São Paulo); a de hoje, para `sk = 2` (Campinas).
 O relatório histórico continua certo — nada do passado foi reescrito.
 
+**Rodando de verdade** (DuckDB): o *merge* do SCD Tipo 2 em dois passos (encerrar a versão corrente, inserir a nova) e a junção que escolhe a versão certa para cada venda.
+
+```sql
+CREATE TABLE dim_cliente (sk INT, cliente_id INT, cidade TEXT, valido_de DATE, valido_ate DATE, corrente BOOLEAN);
+INSERT INTO dim_cliente VALUES (1, 100, 'São Paulo', '2024-01-01', '9999-12-31', true);
+
+-- chega a mudança: Ana (100) mora em Campinas desde 2025-03-01
+CREATE TABLE stg_cliente (cliente_id INT, cidade TEXT, data_mudanca DATE);
+INSERT INTO stg_cliente VALUES (100, 'Campinas', '2025-03-01');
+
+-- passo 1: encerra a versão corrente, só se algo mudou
+UPDATE dim_cliente d SET valido_ate = s.data_mudanca, corrente = false
+FROM stg_cliente s
+WHERE d.cliente_id = s.cliente_id AND d.corrente AND d.cidade <> s.cidade;
+
+-- passo 2: insere a nova versão, com sk nova
+INSERT INTO dim_cliente
+SELECT (SELECT MAX(sk) FROM dim_cliente) + ROW_NUMBER() OVER (), s.cliente_id, s.cidade,
+       s.data_mudanca, DATE '9999-12-31', true
+FROM stg_cliente s
+WHERE NOT EXISTS (SELECT 1 FROM dim_cliente d
+                  WHERE d.cliente_id = s.cliente_id AND d.corrente AND d.cidade = s.cidade);
+
+SELECT * FROM dim_cliente ORDER BY sk;
+
+-- cada venda pega a versão vigente NA DATA da venda (intervalo meio-aberto: [de, ate) )
+CREATE TABLE vendas (venda_id INT, cliente_id INT, data_venda DATE);
+INSERT INTO vendas VALUES (1, 100, '2024-06-10'), (2, 100, '2025-03-01'), (3, 100, '2026-01-15');
+
+SELECT v.venda_id, v.data_venda, d.sk, d.cidade
+FROM vendas v
+JOIN dim_cliente d ON d.cliente_id = v.cliente_id
+                  AND v.data_venda >= d.valido_de AND v.data_venda < d.valido_ate
+ORDER BY v.venda_id;
+```
+
+Saída:
+
+```text
+┌───────┬────────────┬───────────┬────────────┬────────────┬──────────┐
+│  sk   │ cliente_id │  cidade   │ valido_de  │ valido_ate │ corrente │
+│ int32 │   int32    │  varchar  │    date    │    date    │ boolean  │
+├───────┼────────────┼───────────┼────────────┼────────────┼──────────┤
+│     1 │        100 │ São Paulo │ 2024-01-01 │ 2025-03-01 │ false    │
+│     2 │        100 │ Campinas  │ 2025-03-01 │ 9999-12-31 │ true     │
+└───────┴────────────┴───────────┴────────────┴────────────┴──────────┘
+
+┌──────────┬────────────┬───────┬───────────┐
+│ venda_id │ data_venda │  sk   │  cidade   │
+│  int32   │    date    │ int32 │  varchar  │
+├──────────┼────────────┼───────┼───────────┤
+│        1 │ 2024-06-10 │     1 │ São Paulo │
+│        2 │ 2025-03-01 │     2 │ Campinas  │
+│        3 │ 2026-01-15 │     2 │ Campinas  │
+└──────────┴────────────┴───────┴───────────┘
+```
+
+A primeira saída é a tabela do exemplo. Na segunda, cada venda casa com a versão **vigente na data da venda**: o intervalo é meio-aberto (`>= valido_de` e `< valido_ate`), então a venda do próprio dia 2025-03-01 cai só em Campinas, sem duplicar. Os filtros `d.cidade <> s.cidade` e `NOT EXISTS` deixam o merge **idempotente**: rodar de novo com o mesmo lote não cria uma terceira linha.
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Kimball trata as SCDs como técnica central da modelagem dimensional e descreve o **Tipo 2**
@@ -151,4 +210,4 @@ escrever o *merge* de SCD2 na carga — e justificar quando cada tipo se aplica.
 *Acessado em: 2026-08-23.*
 
 ---
-**Revisado em:** 2026-08-23
+**Revisado em:** 2026-10-21

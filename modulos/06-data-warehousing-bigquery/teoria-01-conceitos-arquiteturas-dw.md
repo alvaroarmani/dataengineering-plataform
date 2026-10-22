@@ -66,6 +66,53 @@ dimensional (o star `fato_item_pedido` + dims) serve os dashboards de vendas. Se
 surgir um mart de **devoluções**, ele reaproveita a **mesma `dim_cliente` e `dim_produto`**
 (conformadas) — os números batem entre os dois.
 
+**Rodando de verdade** (DuckDB, roda no navegador): as três camadas como três schemas, e uma `dim_cliente` conformada servindo duas fatos.
+
+```sql
+CREATE SCHEMA staging; CREATE SCHEMA core; CREATE SCHEMA mart;
+
+-- STAGING: chega como veio da origem (texto, duplicado, sujo)
+CREATE TABLE staging.clientes AS SELECT * FROM (VALUES
+  ('c1', 'ana', ' sp'), ('c1', 'ana', 'SP'), ('c2', 'bruno', 'pe')) t(id, nome, uf);
+CREATE TABLE staging.pedidos    AS SELECT * FROM (VALUES ('p1','c1',100.0), ('p2','c2',250.0), ('p3','c1',40.0)) t(id, cliente, valor);
+CREATE TABLE staging.devolucoes AS SELECT * FROM (VALUES ('d1','c1',40.0)) t(id, cliente, valor);
+
+-- CORE: integra e padroniza uma vez (um cliente = uma linha)
+CREATE TABLE core.clientes AS
+SELECT DISTINCT id AS cliente_id, nome, UPPER(TRIM(uf)) AS uf FROM staging.clientes;
+
+-- MART: uma dim_cliente CONFORMADA, usada pelas duas fatos
+CREATE TABLE mart.dim_cliente AS SELECT ROW_NUMBER() OVER (ORDER BY cliente_id) AS sk_cliente, * FROM core.clientes;
+CREATE TABLE mart.fato_vendas AS
+SELECT d.sk_cliente, p.valor FROM staging.pedidos p JOIN mart.dim_cliente d ON d.cliente_id = p.cliente;
+CREATE TABLE mart.fato_devolucoes AS
+SELECT d.sk_cliente, v.valor FROM staging.devolucoes v JOIN mart.dim_cliente d ON d.cliente_id = v.cliente;
+
+-- drill-across: agrega cada fato separadamente e junta pelo atributo da dimensão conformada
+WITH vendas AS (
+  SELECT d.uf, SUM(f.valor) AS vendido FROM mart.fato_vendas f JOIN mart.dim_cliente d USING (sk_cliente) GROUP BY d.uf
+), devolucoes AS (
+  SELECT d.uf, SUM(f.valor) AS devolvido FROM mart.fato_devolucoes f JOIN mart.dim_cliente d USING (sk_cliente) GROUP BY d.uf
+)
+SELECT uf, vendido, COALESCE(devolvido, 0) AS devolvido
+FROM vendas LEFT JOIN devolucoes USING (uf)
+ORDER BY uf;
+```
+
+Saída:
+
+```text
+┌─────────┬───────────────┬───────────────┐
+│   uf    │    vendido    │   devolvido   │
+│ varchar │ decimal(38,1) │ decimal(38,1) │
+├─────────┼───────────────┼───────────────┤
+│ PE      │         250.0 │           0.0 │
+│ SP      │         140.0 │          40.0 │
+└─────────┴───────────────┴───────────────┘
+```
+
+As duas linhas de Ana (`' sp'` e `'SP'`) viraram **um** cliente no core, então nenhuma das fatos conta Ana em dobro. O padrão da última consulta se chama *drill-across*: cada fato é agregada no próprio grão e o resultado é juntado pelo atributo da dimensão comum. Ele só funciona porque as duas fatos usam a **mesma** dimensão.
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Reis & Housley resumem o debate: a abordagem **top-down de Inmon** constrói um Enterprise Data
@@ -153,4 +200,4 @@ ou bronze/prata/ouro) o tempo todo — é o vocabulário do dia a dia.
 *Acessado em: 2026-08-23.*
 
 ---
-**Revisado em:** 2026-08-23
+**Revisado em:** 2026-10-21

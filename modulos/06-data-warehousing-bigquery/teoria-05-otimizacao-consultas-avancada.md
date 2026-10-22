@@ -75,6 +75,54 @@ data** e **clusterizada por regiao**. Os KPIs fixos viram uma **materialized vie
 "usuários únicos" usa `APPROX_COUNT_DISTINCT`. Mesmo dado, mesma pergunta — custo e latência despencam
 por **design físico**, não por sorte.
 
+**No BigQuery** (GoogleSQL; não roda sem uma conta): o redesenho do exemplo em DDL.
+
+```sql
+-- tabela: partição por dia + cluster pela coluna dos filtros
+CREATE TABLE loja.eventos (data DATE, regiao STRING, usuario_id STRING, valor NUMERIC)
+PARTITION BY data
+CLUSTER BY regiao;
+
+-- KPIs fixos do dashboard: pré-agregados e mantidos pelo próprio BigQuery
+CREATE MATERIALIZED VIEW loja.kpi_diario AS
+SELECT data, regiao, SUM(valor) AS receita, COUNT(*) AS eventos
+FROM loja.eventos
+GROUP BY data, regiao;
+
+-- "usuários únicos" aproximado: memória fixa em vez de guardar todos os ids
+SELECT regiao, APPROX_COUNT_DISTINCT(usuario_id) AS usuarios
+FROM loja.eventos
+WHERE data >= DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY)
+GROUP BY regiao;
+```
+
+**Rodando de verdade** (DuckDB): o preço da contagem aproximada, medido.
+
+```sql
+-- 5 milhões de eventos de 1 milhão de usuários: exato x aproximado (HyperLogLog)
+CREATE TABLE eventos AS
+SELECT (i * 2654435761) % 1000000 AS usuario_id FROM range(5000000) t(i);
+
+SELECT COUNT(DISTINCT usuario_id)        AS exato,
+       approx_count_distinct(usuario_id) AS aproximado,
+       round(100 * (approx_count_distinct(usuario_id) - COUNT(DISTINCT usuario_id))
+             / COUNT(DISTINCT usuario_id), 2) AS erro_pct
+FROM eventos;
+```
+
+Saída:
+
+```text
+┌─────────┬────────────┬──────────┐
+│  exato  │ aproximado │ erro_pct │
+│  int64  │   int64    │  double  │
+├─────────┼────────────┼──────────┤
+│ 1000000 │     962761 │    -3.72 │
+└─────────┴────────────┴──────────┘
+```
+
+A versão aproximada (HyperLogLog) usa memória fixa e pequena, seja qual for o número de usuários, e por isso escala. O erro depende da implementação: aqui deu 3,7%; o BigQuery usa outra variante (HyperLogLog++), com erro próprio documentado. Para KPI de tendência isso basta; para faturar por usuário, não.
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Kleppmann detalha o armazenamento colunar, compressão e a mecânica de execução de consultas
@@ -158,4 +206,4 @@ faz?" é pergunta certa de pleno/sênior.
 *Acessado em: 2026-09-09.*
 
 ---
-**Revisado em:** 2026-09-09
+**Revisado em:** 2026-10-21

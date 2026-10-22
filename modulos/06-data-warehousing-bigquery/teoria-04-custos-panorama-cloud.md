@@ -54,6 +54,49 @@ categoria":
   poucos GB → **centenas de vezes mais barato**, mesmo resultado.
 A diferença não é de correção — é de **custo e latência**. É isso que o dry run revela antes.
 
+**Rodando de verdade** (DuckDB local): quanto cada coluna pesa num arquivo Parquet, a mesma conta que decide a fatura de um motor colunar.
+
+```sql
+-- as mesmas 2 milhões de vendas, agora num arquivo Parquet só
+COPY (
+  SELECT DATE '2024-01-01' + INTERVAL (i % 731) DAY AS data,
+         ['livros', 'casa', 'moda', 'esporte'][1 + i % 4] AS categoria,
+         round(10 + (i * 7919) % 500, 2) AS valor,
+         'descrição longa do item número ' || i AS descricao
+  FROM range(2000000) t(i)
+) TO 'vendas.parquet' (FORMAT PARQUET);
+
+-- quanto cada coluna ocupa: é isso que um motor colunar lê (ou não)
+SELECT path_in_schema AS coluna,
+       round(SUM(total_compressed_size) / 1e6, 1) AS mb,
+       round(100 * SUM(total_compressed_size) / SUM(SUM(total_compressed_size)) OVER (), 1) AS pct
+FROM parquet_metadata('vendas.parquet')
+GROUP BY coluna
+ORDER BY mb DESC;
+```
+
+Saída:
+
+```text
+┌───────────┬────────┬────────┐
+│  coluna   │   mb   │  pct   │
+│  varchar  │ double │ double │
+├───────────┼────────┼────────┤
+│ descricao │   10.1 │   75.1 │
+│ data      │    1.9 │   14.4 │
+│ valor     │    1.2 │    9.0 │
+│ categoria │    0.2 │    1.4 │
+└───────────┴────────┴────────┘
+```
+
+`SELECT *` paga 100%; `SELECT categoria, valor` paga cerca de 10%, com o mesmo resultado para a pergunta. O BigQuery cobra pelos bytes **lógicos** (tamanho de cada tipo, sem compressão), então a proporção lá é outra, mas a regra é a mesma: só as colunas lidas entram na conta. Para saber o valor exato antes de pagar, use o dry run:
+
+```bash
+bq query --use_legacy_sql=false --dry_run \n  'SELECT categoria, valor FROM loja.vendas WHERE data BETWEEN "2025-01-01" AND "2025-01-31"'
+```
+
+Ele valida a consulta e informa quantos bytes ela vai processar, sem executar nem cobrar.
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Reis & Housley descrevem a era dos DWs cloud como a separação de armazenamento e computação
@@ -135,4 +178,4 @@ custo e operação diferencia candidatos plenos.
 *Acessado em: 2026-08-24.*
 
 ---
-**Revisado em:** 2026-08-24
+**Revisado em:** 2026-10-21

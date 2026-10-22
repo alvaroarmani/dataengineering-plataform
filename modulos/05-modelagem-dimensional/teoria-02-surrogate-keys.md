@@ -66,6 +66,43 @@ Vira a dimensão com surrogate key:
 Uma venda chega como `(venda_id=9, codigo_produto='P-100', valor=1500)`. O *lookup* junta com
 `dim_produto` por `codigo` e grava no fato `sk_produto = 2` — a fato nunca guarda 'P-100'.
 
+**Rodando de verdade** (DuckDB): a dimensão ganha a surrogate key e o *lookup* troca o código de negócio por ela na carga da fato.
+
+```sql
+CREATE TABLE stg_produtos (codigo TEXT, categoria TEXT);
+INSERT INTO stg_produtos VALUES ('P-100', 'eletronicos'), ('P-050', 'livros');
+
+-- a surrogate key é um inteiro sem significado, atribuído pelo DW
+CREATE TABLE dim_produto AS
+SELECT ROW_NUMBER() OVER (ORDER BY codigo) AS sk_produto, codigo, categoria
+FROM stg_produtos;
+
+-- lookup na carga da fato: troca o código de negócio pela sk
+CREATE TABLE stg_vendas (venda_id INT, codigo_produto TEXT, valor DECIMAL(10,2));
+INSERT INTO stg_vendas VALUES (9, 'P-100', 1500), (10, 'P-999', 80);   -- P-999 ainda não chegou na dimensão
+
+SELECT v.venda_id,
+       COALESCE(d.sk_produto, -1) AS sk_produto,   -- -1 = membro "Desconhecido": a venda não some
+       v.valor
+FROM stg_vendas v
+LEFT JOIN dim_produto d ON d.codigo = v.codigo_produto
+ORDER BY v.venda_id;
+```
+
+Saída:
+
+```text
+┌──────────┬────────────┬───────────────┐
+│ venda_id │ sk_produto │     valor     │
+│  int32   │   int64    │ decimal(10,2) │
+├──────────┼────────────┼───────────────┤
+│        9 │          2 │       1500.00 │
+│       10 │         -1 │         80.00 │
+└──────────┴────────────┴───────────────┘
+```
+
+A venda 9 recebe `sk_produto = 2`, como na tabela acima. A venda 10 traz um código que a dimensão ainda não conhece: com `LEFT JOIN` e `COALESCE(..., -1)` ela aponta para o membro "Desconhecido" em vez de sumir da fato (um `INNER JOIN` a descartaria sem aviso).
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Kimball é enfático: **toda tabela de dimensão deve ter uma surrogate key** como chave
@@ -154,4 +191,4 @@ escrever o *surrogate key lookup* ao carregar fatos — é rotina no dia a dia.
 *Acessado em: 2026-08-23.*
 
 ---
-**Revisado em:** 2026-08-23
+**Revisado em:** 2026-10-21

@@ -60,6 +60,48 @@ Do pedido "ana comprou 2 livros por R$ 25 em 05/01 em SP", o modelo dimensional 
 A pergunta "receita de livros por mês" vira: junte fato + dim_produto + dim_data, filtre
 categoria, agrupe por mês, some o valor.
 
+**Rodando de verdade** (DuckDB, o mesmo motor do navegador): o star do exemplo, com mais dois itens, e a pergunta em SQL.
+
+```sql
+-- As três dimensões e a fato do pedido "ana comprou 2 livros por R$ 25 em 05/01 em SP" (e mais dois)
+CREATE TABLE dim_cliente (cliente_id INT, nome TEXT, cidade TEXT);
+CREATE TABLE dim_produto (produto_id INT, nome TEXT, categoria TEXT);
+CREATE TABLE dim_data    (data_id INT, data DATE, ano INT, mes INT);
+CREATE TABLE fato_vendas (cliente_id INT, produto_id INT, data_id INT, quantidade INT, valor DECIMAL(10,2));
+
+INSERT INTO dim_cliente VALUES (1, 'ana', 'São Paulo'), (2, 'bruno', 'Recife');
+INSERT INTO dim_produto VALUES (7, 'livro X', 'livros'), (8, 'fone Y', 'eletronicos');
+INSERT INTO dim_data    VALUES (20260105, '2026-01-05', 2026, 1), (20260210, '2026-02-10', 2026, 2);
+-- grão: UMA linha por item de pedido
+INSERT INTO fato_vendas VALUES
+  (1, 7, 20260105, 2, 50.00),
+  (2, 7, 20260210, 1, 25.00),
+  (2, 8, 20260210, 1, 199.90);
+
+-- "receita de livros por mês": fato + dim_produto (filtro) + dim_data (agrupamento)
+SELECT d.ano, d.mes, SUM(f.valor) AS receita
+FROM fato_vendas f
+JOIN dim_produto p ON p.produto_id = f.produto_id
+JOIN dim_data    d ON d.data_id    = f.data_id
+WHERE p.categoria = 'livros'
+GROUP BY d.ano, d.mes
+ORDER BY d.ano, d.mes;
+```
+
+Saída:
+
+```text
+┌───────┬───────┬───────────────┐
+│  ano  │  mes  │    receita    │
+│ int32 │ int32 │ decimal(38,2) │
+├───────┼───────┼───────────────┤
+│  2026 │     1 │         50.00 │
+│  2026 │     2 │         25.00 │
+└───────┴───────┴───────────────┘
+```
+
+Repare no caminho da consulta: a **fato** dá os números (`valor`) e cada **dimensão** dá um jeito de filtrar ou agrupar. A venda do fone (eletrônicos) ficou de fora pelo filtro na `dim_produto`, sem a fato precisar saber o que é categoria.
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Kimball resume o processo em quatro passos: (1) escolher o **processo de negócio**, (2)
@@ -138,4 +180,4 @@ para o dbt (M07) e para o TCC.
 *Acessado em: 2026-08-22.*
 
 ---
-**Revisado em:** 2026-08-22
+**Revisado em:** 2026-10-21

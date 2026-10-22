@@ -60,6 +60,62 @@ query "receita de livros em jan/2025": o particionamento descarta 59 dos 60 mese
 clustering descarta os blocos sem 'livros'; o colunar lê só `valor`. Resultado: varre uma
 fração ínfima dos dados — rápido e barato — em vez da tabela inteira.
 
+**Rodando de verdade** (DuckDB local, `pip install duckdb`, porque grava arquivos): a mesma ideia em Parquet particionado por mês, com o plano medido pelo `EXPLAIN ANALYZE`.
+
+```sql
+-- 2 milhões de vendas em 24 meses, gravadas em Parquet particionado por mês (uma pasta por mês)
+COPY (
+  SELECT DATE '2024-01-01' + INTERVAL (i % 731) DAY AS data,
+         strftime(DATE '2024-01-01' + INTERVAL (i % 731) DAY, '%Y-%m') AS mes,
+         ['livros', 'casa', 'moda', 'esporte'][1 + i % 4] AS categoria,
+         round(10 + (i * 7919) % 500, 2) AS valor,
+         'descrição longa do item número ' || i AS descricao
+  FROM range(2000000) t(i)
+) TO 'vendas' (FORMAT PARQUET, PARTITION_BY (mes));
+
+-- "receita de livros em jan/2025", medindo o que foi lido
+EXPLAIN ANALYZE
+SELECT SUM(valor)
+FROM read_parquet('vendas/*/*.parquet', hive_partitioning = true)
+WHERE mes = '2025-01' AND categoria = 'livros';
+```
+
+Trecho da saída (a caixa da leitura):
+
+```text
+┌─────────────┴─────────────┐
+│         TABLE_SCAN        │
+│    ────────────────────   │
+│         Function:         │
+│        READ_PARQUET       │
+│                           │
+│     Projections: valor    │
+│                           │
+│          Filters:         │
+│   categoria='livros' AND  │
+│    categoria IS NOT NULL  │
+│                           │
+│       File Filters:       │
+│     (mes = '2025-01')     │
+│                           │
+│    Scanning Files: 1/24   │
+│                           │
+│         21204 Rows        │
+│          (0.00s)          │
+└───────────────────────────┘
+```
+
+`Scanning Files: 1/24` é o particionamento: só a pasta de `2025-01` foi aberta. `Projections: valor` e o filtro em `categoria` são o colunar: a coluna `descricao`, a mais pesada, nem foi tocada. No BigQuery, partição e cluster são propriedades da tabela:
+
+```sql
+-- BigQuery (GoogleSQL); não roda sem uma conta, confira com o dry run
+CREATE TABLE loja.vendas
+PARTITION BY DATE_TRUNC(data, MONTH)
+CLUSTER BY categoria
+OPTIONS (require_partition_filter = TRUE)   -- recusa consulta sem filtro de data
+AS SELECT * FROM loja.stg_vendas;
+```
+
 :::{admonition} 📖 Da literatura
 :class: seealso
 Kleppmann dedica uma seção ao armazenamento orientado a colunas: separar as colunas permite
@@ -148,4 +204,4 @@ das habilidades mais valorizadas em quem trabalha com DW cloud.
 *Acessado em: 2026-08-23.*
 
 ---
-**Revisado em:** 2026-08-23
+**Revisado em:** 2026-10-21
